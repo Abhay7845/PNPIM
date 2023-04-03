@@ -1,0 +1,23 @@
+.DeleteButton {
+    color: #d10c0c9d;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.DeleteButton:hover {
+    color: #cb5641;
+    height: 30px;
+    width: 30px;
+}
+
+.EditButton {
+    color: #1010c69d;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.EditButton:hover {
+    color: green;
+    height: 20px;
+    width: 20px;
+}
