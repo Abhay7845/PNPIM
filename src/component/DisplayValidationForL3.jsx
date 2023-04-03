@@ -75,7 +75,7 @@ export default function DisplayValidationComponent(props) {
 
   useEffect(() => {
     setOption(tagsOptions);
-  }, []);
+  }, [itemCode]);
 
   useEffect(() => {
     axios
