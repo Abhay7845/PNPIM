@@ -206,13 +206,13 @@ const LazyLoadindDataGrid = (props) => {
                     size={16}
                     className="EditButton"
                   />
-                  {/* <DeleteRoundedIcon
+                  <DeleteRoundedIcon
                     size={16}
                     className="DeleteButton"
                     onClick={() => {
                       DeleteRowData(params.row);
                     }}
-                  /> */}
+                  />
                 </div>
               ) : (
                 ""
