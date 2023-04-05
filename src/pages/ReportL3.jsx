@@ -414,7 +414,7 @@ const ReportL3 = () => {
     DisplayValidationRunner();
     const inputFiled = {
       itemCode: event.itemCode,
-      strCode: "NAT1",
+      strCode: storeCode,
       saleable: "",
       size: "0",
       uom: "0",
@@ -429,7 +429,7 @@ const ReportL3 = () => {
       rsoName: "6",
       npimEventNo: "",
       IndentLevelType: "",
-      exSize: "",
+      exSize: event.size,
       exUOM: "",
       exIndCategory: event.indCategory,
       exStonequality: "STDUCP",
