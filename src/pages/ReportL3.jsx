@@ -173,12 +173,10 @@ const ReportL3 = () => {
       setLoading(true);
       setShowInfo(false);
     });
-
     DisplayValidationRunner();
     setImmediate(() => {
       setReportLabel(input);
     });
-
     setImmediate(() => {
       setLoading(false);
     });
@@ -194,7 +192,6 @@ const ReportL3 = () => {
           setImmediate(() => {
             setSizeOption(response.data.data);
           });
-          console.log(sizeOption);
         },
         (error) => {
           console.log("error==>", error);
@@ -225,115 +222,7 @@ const ReportL3 = () => {
       setSizeState([]);
     }
   }, [dataRowInformation.itemCode]);
-  function NewDisplayValidation() {
-    let digitt = dataRowInformation?.itemCode[6];
-    if (
-      digitt === "B" ||
-      digitt === "C" ||
-      digitt === "F" ||
-      digitt === "R" ||
-      digitt === "V" ||
-      digitt === "Y"
-    ) {
-      let sizeUomQuantity, sizeQuantity;
-      if (digitt === "V" && dataRowInformation?.category === "BANGLE") {
-        sizeUomQuantity = true;
-      } else if (
-        (digitt === "V" ||
-          digitt === "C" ||
-          digitt === "Y" ||
-          digitt === "B") &&
-        stoneQualityCheck(dataRowInformation)
-      ) {
-        sizeQuantity = true;
-      } else if (
-        (digitt === "C" ||
-          digitt === "F" ||
-          digitt === "Y" ||
-          digitt === "B") &&
-        !stoneQualityCheck(dataRowInformation)
-      ) {
-        sizeQuantity = true;
-      }
-      return {
-        sizeUomQuantityRes: sizeUomQuantity && SizeState[0] ? true : false,
-        sizeQuantityRes: sizeQuantity && SizeState[0] ? true : false,
-        stoneQualityRes: stoneQualityCheck(dataRowInformation) ? true : false,
-      };
-    } else if (
-      digitt === "E" ||
-      digitt === "N" ||
-      digitt === "P" ||
-      digitt === "2" ||
-      digitt === "3" ||
-      digitt === "0" ||
-      digitt === "1" ||
-      digitt === "3" ||
-      digitt === "4" ||
-      digitt === "5" ||
-      digitt === "6" ||
-      digitt === "7"
-    ) {
-      let tegQuantity, TypeSet2, Quantity, tegSelect, setSelect;
-      if (
-        digitt === "0" ||
-        digitt === "1" ||
-        digitt === "2" ||
-        digitt === "P" ||
-        digitt === "E" ||
-        digitt === "N"
-      ) {
-        //CHECK THE CONDITION AND CHILD CODE ABD ADD THE DATA IN DROPDOWN
-        createTegOfItems(dataRowInformation)
-          ? (tegQuantity = true)
-          : (Quantity = true);
-      }
-      if (
-        (digitt === "N" || digitt === "E" || digitt === "2") &&
-        !stoneQualityCheck(dataRowInformation)
-      ) {
-        TypeSet2 = true;
-      }
 
-      if (
-        digitt === "3" ||
-        digitt === "4" ||
-        digitt === "5" ||
-        digitt === "6" ||
-        digitt === "7"
-      ) {
-        tegSelect = true;
-        setSelect = true;
-        Quantity = false;
-        // stoneQuality = false;
-      }
-
-      return {
-        tagSelect: tegSelect ? true : false,
-        setSelect: setSelect && setSelectState[0] ? true : false,
-        Quantity: Quantity ? true : false,
-        tegQuantityRes: tegQuantity ? true : false,
-        typeSet2Res: TypeSet2 ? true : false,
-        // findingsRes:findings?true:false,
-        stoneQuality: stoneQualityCheck(dataRowInformation) ? true : false,
-      };
-    } else {
-      let findings, stoneQuality, Quantity;
-      if (digitt === "D" || digitt === "J") {
-        findings = true;
-      }
-      if (stoneQualityCheck(dataRowInformation)) {
-        stoneQuality = true;
-      }
-
-      Quantity = true;
-      return {
-        quantityRes: Quantity ? true : false,
-        findingsRes: findings ? true : false,
-        stoneQualityRes: stoneQualityCheck(dataRowInformation) ? true : false,
-      };
-    }
-  }
   const onClickSubmitBtnHandler = (event) => {
     let msg = {};
     // const data = NewDisplayValidation();
@@ -501,6 +390,7 @@ const ReportL3 = () => {
   };
 
   const rowDataHandler = (input) => {
+    console.log("inputCancel==>", input);
     setImmediate(() => {
       setLoading(true);
       setDataRowInformation(input);
@@ -520,27 +410,29 @@ const ReportL3 = () => {
     console.log("event==>", event);
     setImmediate(() => {
       setLoading(true);
-      setDataRowInformation(event);
     });
+    DisplayValidationRunner();
     const inputFiled = {
-      exIndCategory: event.category,
-      exSize: "",
-      exStonequality: event.stoneQuality,
-      exUOM: "",
-      findings: "",
-      indCategory: "0",
-      indQty: "",
       itemCode: event.itemCode,
-      reasons: "",
-      rsoName: "6",
+      strCode: "NAT1",
       saleable: "",
-      set2Type: "",
       size: "0",
+      uom: "0",
+      reasons: "",
+      findings: "",
+      indQty: "0",
+      indCategory: "0",
+      submitStatus: "report",
+      set2Type: "",
       stoneQuality: "0",
       stoneQualityVal: "0",
-      strCode: "NAT1",
-      submitStatus: "report",
-      uom: "0",
+      rsoName: "6",
+      npimEventNo: "",
+      IndentLevelType: "",
+      exSize: "",
+      exUOM: "",
+      exIndCategory: event.indCategory,
+      exStonequality: "STDUCP",
     };
     console.log("inputFiled==>", inputFiled);
     axios

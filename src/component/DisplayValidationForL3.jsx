@@ -719,7 +719,7 @@ export default function DisplayValidationComponent(props) {
           </Grid>
         ) : null}
         {Quantity ? (
-          <Grid xs={12} sm={12}>
+          <Grid item xs={12} sm={12}>
             <InputFieldMaterialUI
               labelName="Quantity"
               typeName="number"
