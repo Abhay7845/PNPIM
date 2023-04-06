@@ -47,13 +47,13 @@ export default function DisplayValidationComponent(props) {
   const onlyNeckWearOrPendent = digit === "1" ? "Only_Mangalsutra" : "";
   const earingForSet1 = digit === "1" ? "Only_EARRING" : "";
   const SetTOption = digit === "T" ? "Only_Neckwear_or_Pendant" : "";
-  const finger = !props.feedShowState.childNodeF ? "" : "Only_Finger_Ring";
-  const harm = !props.feedShowState.childNodeH ? "" : "Only_HARAM";
-  const Tikka = !props.feedShowState.childNodeK ? "" : "Only_TIKKA";
-  const other = !props.feedShowState.childNodeO ? "" : "Only_OTHER";
-  const bangle = !props.feedShowState.childNodeV ? "" : "Only_BANGLE";
-  const earing = !props.feedShowState.childNodesE ? "" : "Only_EARRING";
-  const neckwear = !props.feedShowState.childNodesN ? "" : "Only_NECKWEAR";
+  const finger = !feedShowState.childNodeF ? "" : "Only_Finger_Ring";
+  const harm = !feedShowState.childNodeH ? "" : "Only_HARAM";
+  const Tikka = !feedShowState.childNodeK ? "" : "Only_TIKKA";
+  const other = !feedShowState.childNodeO ? "" : "Only_OTHER";
+  const bangle = !feedShowState.childNodeV ? "" : "Only_BANGLE";
+  const earing = !feedShowState.childNodesE ? "" : "Only_EARRING";
+  const neckwear = !feedShowState.childNodesN ? "" : "Only_NECKWEAR";
 
   const optionForOtherAllSet = [
     "Single_Tag",
@@ -72,6 +72,7 @@ export default function DisplayValidationComponent(props) {
     SetTOption,
   ];
   console.log("optionForOtherAllSet==>", optionForOtherAllSet);
+  console.log("props==>", props.feedShowState);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
 
   useEffect(() => {

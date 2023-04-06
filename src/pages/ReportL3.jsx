@@ -377,11 +377,12 @@ const ReportL3 = () => {
     });
   };
 
-  const rowDataHandler = (input) => {
-    console.log("inputCancel==>", input);
+  console.log("dataRowInformation==>", dataRowInformation);
+  const rowDataHandler = (EditData) => {
+    console.log("editData==>", EditData);
     setImmediate(() => {
       setLoading(true);
-      setDataRowInformation(input);
+      setDataRowInformation(EditData);
       setShowInfo(true);
       setSwitchEnable(false);
     });
@@ -623,7 +624,6 @@ const ReportL3 = () => {
           },
           (error) => {
             console.log(error);
-            alert(error);
           }
         );
     } else if (tegSelectionData.target.value === "Set") {

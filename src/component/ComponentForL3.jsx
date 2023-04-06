@@ -1295,7 +1295,6 @@ function MultiSelectAndInput(props) {
 
 function ProductDetailsTabularL3(props) {
   const classes = useStyles();
-  console.log("props-IND==>", props);
   return (
     <>
       <h5 className="text-center my-1">
@@ -1605,13 +1604,10 @@ function DynamicMultiSelectAndInput(props) {
           onSelect={onInternalSelectChange}
           onRemove={onInternalRemoveChange}
           showCheckbox={true}
-          // style={cssdata}
-          // selectedValues={[]}
           closeOnSelect={true}
           // selectionLimit={3}
           placeholder="Choose Options"
           disablePreSelectedValues={true}
-          // ref={multiselectRef}
         />
         <table style={{ width: "100%", padding: 1, margin: 0 }}>
           <tbody>
@@ -1681,7 +1677,7 @@ function AlertForL3(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
+          Use Google's location service?
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
