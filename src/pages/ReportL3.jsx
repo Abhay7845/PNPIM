@@ -171,7 +171,7 @@ const ReportL3 = () => {
   const reportDropHandler = (input) => {
     setImmediate(() => {
       setLoading(true);
-      setShowInfo(false);
+      setShowInfo(true);
     });
     DisplayValidationRunner();
     setImmediate(() => {
@@ -403,7 +403,7 @@ const ReportL3 = () => {
       setImmediate(() => {
         setLoading(false);
       });
-    }, 1500);
+    });
   };
 
   const DeleteRowData = (event) => {
@@ -430,9 +430,9 @@ const ReportL3 = () => {
       npimEventNo: "",
       IndentLevelType: "",
       exSize: event.size,
-      exUOM: "",
+      exUOM: event.uom,
       exIndCategory: event.indCategory,
-      exStonequality: "STDUCP",
+      exStonequality: event.stoneQuality,
     };
     console.log("inputFiled==>", inputFiled);
     axios
@@ -655,7 +655,6 @@ const ReportL3 = () => {
             console.log("error==>", error);
           }
         );
-    } else {
     }
   }
 
@@ -704,7 +703,7 @@ const ReportL3 = () => {
           return dataRes;
         } else {
           return {
-            alert: "indent Quantity Required ",
+            alert: "indent Quantity Required",
             status: false,
           };
         }

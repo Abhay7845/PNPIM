@@ -41,10 +41,12 @@ export default function DisplayValidationComponent(props) {
     feedShowState,
     findingsResHandler,
   } = props;
-  console.log("props.feedShowState==>", props.feedShowState);
+  console.log("props.feedShowState==>", option);
 
   const chainWidthPendent = digit === "0" ? "Only_CHAIN_WITH_PENDANT" : "";
+  const earingForSet0 = digit === "0" ? "Only_EARRING" : "";
   const onlyNeckWearOrPendent = digit === "1" ? "Only_Mangalsutra" : "";
+  const earingForSet1 = digit === "1" ? "Only_EARRING" : "";
   const SetTOption = digit === "T" ? "Only_Neckwear_or_Pendant" : "";
   const finger = !props.feedShowState.childNodeF ? "" : "Only_Finger_Ring";
   const harm = !props.feedShowState.childNodeH ? "" : "Only_HARAM";
@@ -57,6 +59,8 @@ export default function DisplayValidationComponent(props) {
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
+    earingForSet0,
+    earingForSet1,
     chainWidthPendent,
     onlyNeckWearOrPendent,
     finger,
@@ -69,13 +73,12 @@ export default function DisplayValidationComponent(props) {
     SetTOption,
   ];
   console.log("optionForOtherAllSet==>", optionForOtherAllSet);
-
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
   console.log("tagsOptions==>", tagsOptions);
 
   useEffect(() => {
     setOption(tagsOptions);
-  }, [itemCode]);
+  }, []);
 
   useEffect(() => {
     axios

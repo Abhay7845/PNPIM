@@ -434,7 +434,6 @@ function MultiselectUomAndSize(props) {
 
   const findings = CategoryData.findings;
   const findingsOptions = !findings ? "" : findings.split(",");
-
   const optionsOnlyM = ["Only_Mangalsutra"];
   const optionM = optionsOnlyM.map((element) => {
     return {
