@@ -14,6 +14,7 @@ import {
 import useStyles from "../Style/ComponentForL3";
 
 export default function DisplayValidationComponent(props) {
+  const classes = useStyles();
   const [SizeState, setSizeState] = useState([]);
   const [ChildNodeV, setChildNodeV] = useState([]);
   const [ChildNodeF, setChildNodeF] = useState([]);
@@ -21,7 +22,6 @@ export default function DisplayValidationComponent(props) {
   const [option, setOption] = useState([]);
   // const [selectedValue, setSelectedValue] = useState("");
 
-  const classes = useStyles();
   const {
     digit,
     cond,
@@ -41,7 +41,6 @@ export default function DisplayValidationComponent(props) {
     feedShowState,
     findingsResHandler,
   } = props;
-  console.log("props.feedShowState==>", option);
 
   const chainWidthPendent = digit === "0" ? "Only_CHAIN_WITH_PENDANT" : "";
   const earingForSet0 = digit === "0" ? "Only_EARRING" : "";
@@ -74,11 +73,18 @@ export default function DisplayValidationComponent(props) {
   ];
   console.log("optionForOtherAllSet==>", optionForOtherAllSet);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
-  console.log("tagsOptions==>", tagsOptions);
 
   useEffect(() => {
     setOption(tagsOptions);
   }, []);
+
+  const options = option.map((element) => {
+    return {
+      valueData: element,
+      lableValue: element,
+    };
+  });
+  console.log("options==>", options);
 
   useEffect(() => {
     axios
@@ -246,13 +252,6 @@ export default function DisplayValidationComponent(props) {
       Quantity = false;
       // stoneQuality = false;
     }
-
-    const options = option.map((element) => {
-      return {
-        valueData: element,
-        lableValue: element,
-      };
-    });
 
     const optionsOnlyE = ["Only_EARRING"];
     const optionE = optionsOnlyE.map((element) => {

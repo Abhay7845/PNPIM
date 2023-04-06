@@ -27,7 +27,6 @@ import useStyle from "../Style/ReportL3";
 
 const ReportL3 = () => {
   const { storeCode, rsoName } = useParams();
-  const [SizeState, setSizeState] = useState([]);
   const classes = useStyle();
   const [col, setCol] = useState([]);
   const [rows, setRows] = useState([]);
@@ -57,7 +56,6 @@ const ReportL3 = () => {
     quantityRes: "",
     findingsRes: "",
   });
-  let seventhDigits;
   const [popupOpen, setPopupOpen] = useState(false);
   const [isConfirmed, setsConfirmed] = useState(false);
   const handelOpen = () => {
@@ -204,22 +202,13 @@ const ReportL3 = () => {
   }
   useEffect(() => {
     if (dataRowInformation.itemCode !== "") {
-      try {
-        const response = axios.get(
+      axios
+        .get(
           `${HostManager.mainHostL3}/npim/size/dropdown/${dataRowInformation.itemCode}`
-        );
-        if (response.status === 200) {
-          if (response.data.code !== "1001") {
-            setSizeState(response.data.value);
-          } else {
-            setSizeState([]);
-          }
-        }
-      } catch (err) {
-        setSizeState([]);
-      }
-    } else {
-      setSizeState([]);
+        )
+        .then((res) => res)
+        .then((response) => console.log("response==>", response))
+        .catch((error) => console.log("error=>", error));
     }
   }, [dataRowInformation.itemCode]);
 
@@ -243,7 +232,6 @@ const ReportL3 = () => {
     //     }
     //   }
     // }
-    seventhDigits = dataRowInformation.itemCode[6];
     let displayData = { status: true };
     let stdUcpNotSeletData;
 
@@ -656,231 +644,6 @@ const ReportL3 = () => {
           }
         );
     }
-  }
-
-  function displayPresentValidation(input) {
-    if (
-      seventhDigits === "B" ||
-      seventhDigits === "C" ||
-      seventhDigits === "F" ||
-      seventhDigits === "R" ||
-      seventhDigits === "V" ||
-      seventhDigits === "W" ||
-      seventhDigits === "Y"
-    ) {
-      let sizeUomQuantity, sizeQuantity, stoneQuality;
-      sizeUomQuantity = allDataFromValidation.sizeUomQuantityRes;
-      sizeQuantity = allDataFromValidation.sizeQuantityRes;
-      stoneQuality = allDataFromValidation.stoneQualityRes;
-
-      if (seventhDigits === "V" && !stoneQualityCheck(dataRowInformation)) {
-        if (sizeUomQuantity.length > 0) {
-          for (const element of sizeUomQuantity) {
-            let condData =
-              element.size &&
-              (element.uom8 ||
-                element.uom6 ||
-                element.uom4 ||
-                element.uom2 ||
-                element.uom1)
-                ? console.log("fine")
-                : element.size;
-
-            if (condData) {
-              return {
-                alert: "indent Quantity Required for size: " + condData,
-                status: false,
-              };
-            }
-          }
-
-          let dataRes = {
-            status: true,
-            alert: "success",
-            data: 0,
-          };
-
-          return dataRes;
-        } else {
-          return {
-            alert: "indent Quantity Required",
-            status: false,
-          };
-        }
-      } else if (
-        (seventhDigits === "V" ||
-          seventhDigits === "C" ||
-          seventhDigits === "F" ||
-          seventhDigits === "Y" ||
-          seventhDigits === "B") &&
-        stoneQualityCheck(dataRowInformation)
-      ) {
-        if (sizeQuantity.length > 0 && stoneQualityCheck(dataRowInformation)) {
-          for (const element of sizeQuantity) {
-            let condData =
-              element.size && element.quantity
-                ? console.log("fine")
-                : element.size;
-
-            if (condData) {
-              return {
-                alert: "indent Quantity Required for size: " + condData,
-                status: false,
-              };
-            }
-          }
-
-          if (!stoneQuality) {
-            let dataRes = {
-              status: true,
-              alert: "success",
-              data: input,
-            };
-            return dataRes;
-          }
-        } else {
-          return {
-            alert: "indent Quantity Require",
-            status: false,
-          };
-        }
-      } else if (
-        (digit === "C" || digit === "F" || digit === "Y" || digit === "B") &&
-        !stoneQualityCheck(dataRowInformation)
-      ) {
-        if (sizeQuantity.length > 0 && !stoneQualityCheck(dataRowInformation)) {
-          for (const element of sizeQuantity) {
-            let condData =
-              element.size && element.quantity
-                ? console.log("fine")
-                : element.size;
-
-            if (condData) {
-              return {
-                alert: "indent Quantity Required for size: " + condData,
-                status: false,
-              };
-            }
-          }
-        } else {
-          return {
-            alert: "indent Quantity Require",
-            status: false,
-          };
-        }
-      }
-    } else if (
-      seventhDigits === "E" ||
-      seventhDigits === "N" ||
-      seventhDigits === "P" ||
-      seventhDigits === "2" ||
-      seventhDigits === "3" ||
-      seventhDigits === "0" ||
-      seventhDigits === "1" ||
-      seventhDigits === "4" ||
-      seventhDigits === "5" ||
-      seventhDigits === "6" ||
-      seventhDigits === "7"
-    ) {
-      let tegQuantity, TypeSet2, Quantity, stoneQuality;
-      tegQuantity = allDataFromValidation.tegQuantityRes;
-      TypeSet2 = allDataFromValidation.typeSet2Res;
-      Quantity = allDataFromValidation.quantityRes;
-      stoneQuality = allDataFromValidation.stoneQualityRes;
-
-      if (
-        seventhDigits === "0" ||
-        seventhDigits === "1" ||
-        seventhDigits === "2" ||
-        seventhDigits === "3" ||
-        seventhDigits === "P" ||
-        seventhDigits === "E" ||
-        seventhDigits === "N" ||
-        seventhDigits === "4" ||
-        seventhDigits === "5" ||
-        seventhDigits === "6" ||
-        seventhDigits === "7"
-      ) {
-        //CHECK THE CONDITION AND CHILD CODE ABD ADD THE DATA IN DROPDOWN
-
-        if (tegQuantity.length > 0) {
-          for (const element of tegQuantity) {
-            let condData =
-              element.tag && element.quantity
-                ? console.log("fine")
-                : element.tag;
-
-            if (condData) {
-              return {
-                alert: "indent Quantity Required for teg: " + condData,
-                status: false,
-              };
-            }
-          }
-        } else if (!Quantity) {
-          return {
-            alert: "indent Quantity Required",
-            status: false,
-          };
-        }
-        if (!stoneQuality) {
-          let dataRes = {
-            status: true,
-            alert: "success",
-            data: input,
-          };
-
-          return dataRes;
-        }
-      }
-
-      if (
-        (seventhDigits === "N" ||
-          seventhDigits === "E" ||
-          seventhDigits === "2") &&
-        !stoneQualityCheck(dataRowInformation)
-      ) {
-        if (!TypeSet2) {
-          return {
-            alert: "indent TypeSet2 Required",
-            status: false,
-          };
-        }
-      }
-    } else {
-      let findings, stoneQuality, Quantity;
-      findings = allDataFromValidation.findingsRes;
-      stoneQuality = allDataFromValidation.stoneQualityRes;
-      Quantity = allDataFromValidation.quantityRes;
-
-      if (seventhDigits === "D" || seventhDigits === "J") {
-        if (!findings) {
-          return {
-            alert: "indent Findings Required",
-            status: false,
-          };
-        }
-      }
-      if (!Quantity) {
-        return {
-          alert: "indent Quantity Required",
-          status: false,
-        };
-      }
-      if (!stoneQuality) {
-        let dataRes = {
-          status: true,
-          alert: "success",
-          data: input,
-        };
-        return dataRes;
-      }
-    }
-
-    return {
-      alert: "success",
-      status: true,
-    };
   }
 
   function DisplayValidationRunner() {
