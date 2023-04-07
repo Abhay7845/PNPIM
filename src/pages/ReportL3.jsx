@@ -42,6 +42,7 @@ const ReportL3 = () => {
   const [modification, setModification] = useState(true);
   const [switchEnable, setSwitchEnable] = useState(false);
   const [setSelectState, setSetSelectState] = useState([]);
+
   const [alertPopupStatus, setAlertPopupStatus] = useState({
     status: false,
     main: "",
@@ -64,6 +65,8 @@ const ReportL3 = () => {
   const handelClose = () => {
     setPopupOpen(false);
   };
+
+  console.log("digit212==>", dataRowInformation);
 
   const handelYes = async () => {
     let confirmURL = `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/item/wise/rpt/edr/L3//${storeCode}`;
@@ -378,33 +381,21 @@ const ReportL3 = () => {
     });
   };
 
-  useEffect(() => {
-    const inputData = {
-      storeCode: "NAT1",
-      collection: "ALL",
-      consumerBase: "ALL",
-      group: "ALL",
-      category: "ALL",
-      itemCode: "51W2SA7CY1BAP3",
-    };
-    axios
-      .post(
-        "https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIM/npim/get/product/details",
-        inputData
-      )
-      .then((res) => res)
-      .then((response) => console.log("response==>", response))
-      .catch((error) => console.log(error));
-  });
-  const rowDataHandler = (editData) => {
-    console.log("editData==>", editData);
-    setLoading(true);
-    setDataRowInformation(editData);
-    setShowInfo(true);
-    setSwitchEnable(false);
+  const rowDataHandler = (input) => {
+    console.log("input==>", input);
+    setImmediate(() => {
+      setLoading(true);
+      setDataRowInformation(input);
+      setShowInfo(true);
+      setSwitchEnable(false);
+    });
     DisplayValidationRunner();
     scrollTop();
-    setLoading(false);
+    setTimeout(() => {
+      setImmediate(() => {
+        setLoading(false);
+      });
+    });
   };
 
   const DeleteRowData = (event) => {
@@ -661,7 +652,6 @@ const ReportL3 = () => {
   function DisplayValidationRunner() {
     setImmediate(() => {
       setDigit(false);
-
       setAllDataFromValidation({
         sizeUomQuantityRes: [],
         sizeQuantityRes: [],
