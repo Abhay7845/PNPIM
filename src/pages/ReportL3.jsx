@@ -378,20 +378,33 @@ const ReportL3 = () => {
     });
   };
 
+  useEffect(() => {
+    const inputData = {
+      storeCode: "NAT1",
+      collection: "ALL",
+      consumerBase: "ALL",
+      group: "ALL",
+      category: "ALL",
+      itemCode: "51W2SA7CY1BAP3",
+    };
+    axios
+      .post(
+        "https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIM/npim/get/product/details",
+        inputData
+      )
+      .then((res) => res)
+      .then((response) => console.log("response==>", response))
+      .catch((error) => console.log(error));
+  });
   const rowDataHandler = (editData) => {
-    setImmediate(() => {
-      setLoading(true);
-      setDataRowInformation(editData);
-      setShowInfo(true);
-      setSwitchEnable(false);
-    });
+    console.log("editData==>", editData);
+    setLoading(true);
+    setDataRowInformation(editData);
+    setShowInfo(true);
+    setSwitchEnable(false);
     DisplayValidationRunner();
     scrollTop();
-    setTimeout(() => {
-      setImmediate(() => {
-        setLoading(false);
-      });
-    });
+    setLoading(false);
   };
 
   const DeleteRowData = (event) => {
