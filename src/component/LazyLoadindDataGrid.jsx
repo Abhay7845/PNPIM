@@ -185,7 +185,6 @@ const LazyLoadindDataGrid = (props) => {
     DeleteRowData,
   } = props;
   const [searchValue, setSearchValue] = useState("");
-
   const column = col.map((element) => {
     let fieldRes;
     if (element === "Action") {

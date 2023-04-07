@@ -54,7 +54,6 @@ export default function DisplayValidationComponent(props) {
   const bangle = !feedShowState.childNodeV ? "" : "Only_BANGLE";
   const earing = !feedShowState.childNodesE ? "" : "Only_EARRING";
   const neckwear = !feedShowState.childNodesN ? "" : "Only_NECKWEAR";
-
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
@@ -72,7 +71,7 @@ export default function DisplayValidationComponent(props) {
     SetTOption,
   ];
   console.log("optionForOtherAllSet==>", optionForOtherAllSet);
-  console.log("props==>", props.feedShowState);
+  console.log("feedShowState==>", feedShowState);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
 
   useEffect(() => {

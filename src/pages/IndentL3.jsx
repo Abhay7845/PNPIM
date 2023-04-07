@@ -25,7 +25,7 @@ const IndentL3 = () => {
     ...NpimDataDisplay,
     strCode: storeCode,
   });
-
+  console.log("feedShowStateIndent==>", feedShowState);
   const [loading, setLoading] = useState(false);
   const [resetDrop, SetResetDrop] = useState(true);
   const [alertPopupStatus, setAlertPopupStatus] = useState({

@@ -272,6 +272,7 @@ const ReportL3 = () => {
         sizeQuantitys: allDataFromValidation.sizeQuantityRes,
         tagQuantitys: allDataFromValidation.tegQuantityRes,
       };
+      console.log("inputData==>", inputData);
       setImmediate(() => {
         setLoading(true);
       });
@@ -377,12 +378,10 @@ const ReportL3 = () => {
     });
   };
 
-  console.log("dataRowInformation==>", dataRowInformation);
-  const rowDataHandler = (EditData) => {
-    console.log("editData==>", EditData);
+  const rowDataHandler = (editData) => {
     setImmediate(() => {
       setLoading(true);
-      setDataRowInformation(EditData);
+      setDataRowInformation(editData);
       setShowInfo(true);
       setSwitchEnable(false);
     });
