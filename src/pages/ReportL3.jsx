@@ -27,6 +27,7 @@ import useStyle from "../Style/ReportL3";
 
 const ReportL3 = () => {
   const { storeCode, rsoName } = useParams();
+  const [SizeState, setSizeState] = useState([]);
   const classes = useStyle();
   const [col, setCol] = useState([]);
   const [rows, setRows] = useState([]);
@@ -42,7 +43,6 @@ const ReportL3 = () => {
   const [modification, setModification] = useState(true);
   const [switchEnable, setSwitchEnable] = useState(false);
   const [setSelectState, setSetSelectState] = useState([]);
-
   const [alertPopupStatus, setAlertPopupStatus] = useState({
     status: false,
     main: "",
@@ -57,6 +57,7 @@ const ReportL3 = () => {
     quantityRes: "",
     findingsRes: "",
   });
+  let seventhDigits;
   const [popupOpen, setPopupOpen] = useState(false);
   const [isConfirmed, setsConfirmed] = useState(false);
   const handelOpen = () => {
@@ -65,8 +66,6 @@ const ReportL3 = () => {
   const handelClose = () => {
     setPopupOpen(false);
   };
-
-  console.log("digit212==>", dataRowInformation);
 
   const handelYes = async () => {
     let confirmURL = `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/item/wise/rpt/edr/L3//${storeCode}`;
@@ -172,12 +171,14 @@ const ReportL3 = () => {
   const reportDropHandler = (input) => {
     setImmediate(() => {
       setLoading(true);
-      setShowInfo(true);
+      setShowInfo(false);
     });
+
     DisplayValidationRunner();
     setImmediate(() => {
       setReportLabel(input);
     });
+
     setImmediate(() => {
       setLoading(false);
     });
@@ -193,6 +194,7 @@ const ReportL3 = () => {
           setImmediate(() => {
             setSizeOption(response.data.data);
           });
+          console.log(sizeOption);
         },
         (error) => {
           console.log("error==>", error);
@@ -205,16 +207,133 @@ const ReportL3 = () => {
   }
   useEffect(() => {
     if (dataRowInformation.itemCode !== "") {
-      axios
-        .get(
+      try {
+        const response = axios.get(
           `${HostManager.mainHostL3}/npim/size/dropdown/${dataRowInformation.itemCode}`
-        )
-        .then((res) => res)
-        .then((response) => console.log("response==>", response))
-        .catch((error) => console.log("error=>", error));
+        );
+        if (response.status === 200) {
+          if (response.data.code !== "1001") {
+            setSizeState(response.data.value);
+          } else {
+            setSizeState([]);
+          }
+        }
+      } catch (err) {
+        setSizeState([]);
+      }
+    } else {
+      setSizeState([]);
     }
   }, [dataRowInformation.itemCode]);
+  function NewDisplayValidation() {
+    let digitt = dataRowInformation?.itemCode[6];
+    if (
+      digitt === "B" ||
+      digitt === "C" ||
+      digitt === "F" ||
+      digitt === "R" ||
+      digitt === "V" ||
+      digitt === "Y"
+    ) {
+      let sizeUomQuantity, sizeQuantity;
+      if (digitt === "V" && dataRowInformation?.category === "BANGLE") {
+        sizeUomQuantity = true;
+      } else if (
+        (digitt === "V" ||
+          digitt === "C" ||
+          digitt === "Y" ||
+          digitt === "B") &&
+        stoneQualityCheck(dataRowInformation)
+      ) {
+        sizeQuantity = true;
+      } else if (
+        (digitt === "C" ||
+          digitt === "F" ||
+          digitt === "Y" ||
+          digitt === "B") &&
+        !stoneQualityCheck(dataRowInformation)
+      ) {
+        sizeQuantity = true;
+      }
+      return {
+        sizeUomQuantityRes: sizeUomQuantity && SizeState[0] ? true : false,
+        sizeQuantityRes: sizeQuantity && SizeState[0] ? true : false,
+        stoneQualityRes: stoneQualityCheck(dataRowInformation) ? true : false,
+      };
+    } else if (
+      digitt === "E" ||
+      digitt === "N" ||
+      digitt === "P" ||
+      digitt === "2" ||
+      digitt === "3" ||
+      digitt === "0" ||
+      digitt === "1" ||
+      digitt === "3" ||
+      digitt === "4" ||
+      digitt === "5" ||
+      digitt === "6" ||
+      digitt === "7"
+    ) {
+      let tegQuantity, TypeSet2, Quantity, tegSelect, setSelect;
+      if (
+        digitt === "0" ||
+        digitt === "1" ||
+        digitt === "2" ||
+        digitt === "P" ||
+        digitt === "E" ||
+        digitt === "N"
+      ) {
+        //CHECK THE CONDITION AND CHILD CODE ABD ADD THE DATA IN DROPDOWN
+        createTegOfItems(dataRowInformation)
+          ? (tegQuantity = true)
+          : (Quantity = true);
+      }
+      if (
+        (digitt === "N" || digitt === "E" || digitt === "2") &&
+        !stoneQualityCheck(dataRowInformation)
+      ) {
+        TypeSet2 = true;
+      }
 
+      if (
+        digitt === "3" ||
+        digitt === "4" ||
+        digitt === "5" ||
+        digitt === "6" ||
+        digitt === "7"
+      ) {
+        tegSelect = true;
+        setSelect = true;
+        Quantity = false;
+        // stoneQuality = false;
+      }
+
+      return {
+        tagSelect: tegSelect ? true : false,
+        setSelect: setSelect && setSelectState[0] ? true : false,
+        Quantity: Quantity ? true : false,
+        tegQuantityRes: tegQuantity ? true : false,
+        typeSet2Res: TypeSet2 ? true : false,
+        // findingsRes:findings?true:false,
+        stoneQuality: stoneQualityCheck(dataRowInformation) ? true : false,
+      };
+    } else {
+      let findings, stoneQuality, Quantity;
+      if (digitt === "D" || digitt === "J") {
+        findings = true;
+      }
+      if (stoneQualityCheck(dataRowInformation)) {
+        stoneQuality = true;
+      }
+
+      Quantity = true;
+      return {
+        quantityRes: Quantity ? true : false,
+        findingsRes: findings ? true : false,
+        stoneQualityRes: stoneQualityCheck(dataRowInformation) ? true : false,
+      };
+    }
+  }
   const onClickSubmitBtnHandler = (event) => {
     let msg = {};
     // const data = NewDisplayValidation();
@@ -235,6 +354,7 @@ const ReportL3 = () => {
     //     }
     //   }
     // }
+    seventhDigits = dataRowInformation.itemCode[6];
     let displayData = { status: true };
     let stdUcpNotSeletData;
 
@@ -275,7 +395,6 @@ const ReportL3 = () => {
         sizeQuantitys: allDataFromValidation.sizeQuantityRes,
         tagQuantitys: allDataFromValidation.tegQuantityRes,
       };
-      console.log("inputData==>", inputData);
       setImmediate(() => {
         setLoading(true);
       });
@@ -382,7 +501,6 @@ const ReportL3 = () => {
   };
 
   const rowDataHandler = (input) => {
-    console.log("input==>", input);
     setImmediate(() => {
       setLoading(true);
       setDataRowInformation(input);
@@ -395,7 +513,7 @@ const ReportL3 = () => {
       setImmediate(() => {
         setLoading(false);
       });
-    });
+    }, 1500);
   };
 
   const DeleteRowData = (event) => {
@@ -404,7 +522,6 @@ const ReportL3 = () => {
       setLoading(true);
     });
     DisplayValidationRunner();
-    setDataRowInformation(event);
     const inputFiled = {
       itemCode: event.itemCode,
       strCode: storeCode,
@@ -628,6 +745,7 @@ const ReportL3 = () => {
           },
           (error) => {
             console.log(error);
+            alert(error);
           }
         );
     } else if (tegSelectionData.target.value === "Set") {
@@ -647,12 +765,239 @@ const ReportL3 = () => {
             console.log("error==>", error);
           }
         );
+    } else {
     }
+  }
+
+  function displayPresentValidation(input) {
+    if (
+      seventhDigits === "B" ||
+      seventhDigits === "C" ||
+      seventhDigits === "F" ||
+      seventhDigits === "R" ||
+      seventhDigits === "V" ||
+      seventhDigits === "W" ||
+      seventhDigits === "Y"
+    ) {
+      let sizeUomQuantity, sizeQuantity, stoneQuality;
+      sizeUomQuantity = allDataFromValidation.sizeUomQuantityRes;
+      sizeQuantity = allDataFromValidation.sizeQuantityRes;
+      stoneQuality = allDataFromValidation.stoneQualityRes;
+
+      if (seventhDigits === "V" && !stoneQualityCheck(dataRowInformation)) {
+        if (sizeUomQuantity.length > 0) {
+          for (const element of sizeUomQuantity) {
+            let condData =
+              element.size &&
+              (element.uom8 ||
+                element.uom6 ||
+                element.uom4 ||
+                element.uom2 ||
+                element.uom1)
+                ? console.log("fine")
+                : element.size;
+
+            if (condData) {
+              return {
+                alert: "indent Quantity Required for size: " + condData,
+                status: false,
+              };
+            }
+          }
+
+          let dataRes = {
+            status: true,
+            alert: "success",
+            data: 0,
+          };
+
+          return dataRes;
+        } else {
+          return {
+            alert: "indent Quantity Required ",
+            status: false,
+          };
+        }
+      } else if (
+        (seventhDigits === "V" ||
+          seventhDigits === "C" ||
+          seventhDigits === "F" ||
+          seventhDigits === "Y" ||
+          seventhDigits === "B") &&
+        stoneQualityCheck(dataRowInformation)
+      ) {
+        if (sizeQuantity.length > 0 && stoneQualityCheck(dataRowInformation)) {
+          for (const element of sizeQuantity) {
+            let condData =
+              element.size && element.quantity
+                ? console.log("fine")
+                : element.size;
+
+            if (condData) {
+              return {
+                alert: "indent Quantity Required for size: " + condData,
+                status: false,
+              };
+            }
+          }
+
+          if (!stoneQuality) {
+            let dataRes = {
+              status: true,
+              alert: "success",
+              data: input,
+            };
+            return dataRes;
+          }
+        } else {
+          return {
+            alert: "indent Quantity Require",
+            status: false,
+          };
+        }
+      } else if (
+        (digit === "C" || digit === "F" || digit === "Y" || digit === "B") &&
+        !stoneQualityCheck(dataRowInformation)
+      ) {
+        if (sizeQuantity.length > 0 && !stoneQualityCheck(dataRowInformation)) {
+          for (const element of sizeQuantity) {
+            let condData =
+              element.size && element.quantity
+                ? console.log("fine")
+                : element.size;
+
+            if (condData) {
+              return {
+                alert: "indent Quantity Required for size: " + condData,
+                status: false,
+              };
+            }
+          }
+        } else {
+          return {
+            alert: "indent Quantity Require",
+            status: false,
+          };
+        }
+      }
+    } else if (
+      seventhDigits === "E" ||
+      seventhDigits === "N" ||
+      seventhDigits === "P" ||
+      seventhDigits === "2" ||
+      seventhDigits === "3" ||
+      seventhDigits === "0" ||
+      seventhDigits === "1" ||
+      seventhDigits === "4" ||
+      seventhDigits === "5" ||
+      seventhDigits === "6" ||
+      seventhDigits === "7"
+    ) {
+      let tegQuantity, TypeSet2, Quantity, stoneQuality;
+      tegQuantity = allDataFromValidation.tegQuantityRes;
+      TypeSet2 = allDataFromValidation.typeSet2Res;
+      Quantity = allDataFromValidation.quantityRes;
+      stoneQuality = allDataFromValidation.stoneQualityRes;
+
+      if (
+        seventhDigits === "0" ||
+        seventhDigits === "1" ||
+        seventhDigits === "2" ||
+        seventhDigits === "3" ||
+        seventhDigits === "P" ||
+        seventhDigits === "E" ||
+        seventhDigits === "N" ||
+        seventhDigits === "4" ||
+        seventhDigits === "5" ||
+        seventhDigits === "6" ||
+        seventhDigits === "7"
+      ) {
+        //CHECK THE CONDITION AND CHILD CODE ABD ADD THE DATA IN DROPDOWN
+
+        if (tegQuantity.length > 0) {
+          for (const element of tegQuantity) {
+            let condData =
+              element.tag && element.quantity
+                ? console.log("fine")
+                : element.tag;
+
+            if (condData) {
+              return {
+                alert: "indent Quantity Required for teg: " + condData,
+                status: false,
+              };
+            }
+          }
+        } else if (!Quantity) {
+          return {
+            alert: "indent Quantity Required",
+            status: false,
+          };
+        }
+        if (!stoneQuality) {
+          let dataRes = {
+            status: true,
+            alert: "success",
+            data: input,
+          };
+
+          return dataRes;
+        }
+      }
+
+      if (
+        (seventhDigits === "N" ||
+          seventhDigits === "E" ||
+          seventhDigits === "2") &&
+        !stoneQualityCheck(dataRowInformation)
+      ) {
+        if (!TypeSet2) {
+          return {
+            alert: "indent TypeSet2 Required",
+            status: false,
+          };
+        }
+      }
+    } else {
+      let findings, stoneQuality, Quantity;
+      findings = allDataFromValidation.findingsRes;
+      stoneQuality = allDataFromValidation.stoneQualityRes;
+      Quantity = allDataFromValidation.quantityRes;
+
+      if (seventhDigits === "D" || seventhDigits === "J") {
+        if (!findings) {
+          return {
+            alert: "indent Findings Required",
+            status: false,
+          };
+        }
+      }
+      if (!Quantity) {
+        return {
+          alert: "indent Quantity Required",
+          status: false,
+        };
+      }
+      if (!stoneQuality) {
+        let dataRes = {
+          status: true,
+          alert: "success",
+          data: input,
+        };
+        return dataRes;
+      }
+    }
+
+    return {
+      alert: "success",
+      status: true,
+    };
   }
 
   function DisplayValidationRunner() {
     setImmediate(() => {
       setDigit(false);
+
       setAllDataFromValidation({
         sizeUomQuantityRes: [],
         sizeQuantityRes: [],
