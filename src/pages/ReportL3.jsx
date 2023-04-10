@@ -404,6 +404,7 @@ const ReportL3 = () => {
       setLoading(true);
     });
     DisplayValidationRunner();
+    setDataRowInformation(event);
     const inputFiled = {
       itemCode: event.itemCode,
       strCode: storeCode,
