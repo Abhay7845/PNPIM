@@ -536,7 +536,7 @@ const ReportL3 = () => {
       set2Type: "",
       stoneQuality: "0",
       stoneQualityVal: "0",
-      rsoName: "6",
+      rsoName: rsoName,
       npimEventNo: "",
       IndentLevelType: "",
       exSize: event.size,

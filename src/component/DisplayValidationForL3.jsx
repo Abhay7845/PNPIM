@@ -42,11 +42,11 @@ export default function DisplayValidationComponent(props) {
     findingsResHandler,
   } = props;
 
-  const chainWidthPendent = digit === "0" ? "Only_CHAIN_WITH_PENDANT" : "";
-  const earingForSet0 = digit === "0" ? "Only_EARRING" : "";
-  const onlyNeckWearOrPendent = digit === "1" ? "Only_Mangalsutra" : "";
-  const earingForSet1 = digit === "1" ? "Only_EARRING" : "";
-  const SetTOption = digit === "T" ? "Only_Neckwear_or_Pendant" : "";
+  // const chainWidthPendent = digit === "0" ? "Only_CHAIN_WITH_PENDANT" : "";
+  // const earingForSet0 = digit === "0" ? "Only_EARRING" : "";
+  // const onlyNeckWearOrPendent = digit === "1" ? "Only_Mangalsutra" : "";
+  // const earingForSet1 = digit === "1" ? "Only_EARRING" : "";
+  // const SetTOption = digit === "T" ? "Only_Neckwear_or_Pendant" : "";
   const finger = !feedShowState.childNodeF ? "" : "Only_Finger_Ring";
   const harm = !feedShowState.childNodeH ? "" : "Only_HARAM";
   const Tikka = !feedShowState.childNodeK ? "" : "Only_TIKKA";
@@ -57,10 +57,6 @@ export default function DisplayValidationComponent(props) {
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
-    earingForSet0,
-    earingForSet1,
-    chainWidthPendent,
-    onlyNeckWearOrPendent,
     finger,
     earing,
     neckwear,
@@ -68,7 +64,6 @@ export default function DisplayValidationComponent(props) {
     harm,
     Tikka,
     other,
-    SetTOption,
   ];
   console.log("optionForOtherAllSet==>", optionForOtherAllSet);
   console.log("feedShowState==>", feedShowState);

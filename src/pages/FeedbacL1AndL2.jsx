@@ -176,9 +176,6 @@ const FeedbacL1AndL2 = () => {
     });
   }
   const onClickSubmitBtnHandler = (event) => {
-    setImmediate(() => {
-      setLoading(true);
-    });
     if (!switchData && multiSelectDrop.toString().length === 0) {
       alert("Please Select Reason for NO!");
       return;
@@ -214,6 +211,9 @@ const FeedbacL1AndL2 = () => {
       old.quality_Reasons = multiSelectQltyfeed.toString();
       old.quality_Rating = value.toString();
       return old;
+    });
+    setImmediate(() => {
+      setLoading(true);
     });
     axios
       .post(`${HostManager.mainHost}/npim/insert/responses`, feedShowState)
