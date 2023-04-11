@@ -44,7 +44,7 @@ const ProductInfo = (props) => {
   };
 
   const onClickSubmitBtnHandler = (event) => {
-    props.getResponceFormChild({
+    props.getResponseFormChild({
       switchData: switchData,
       multiSelectDrop: multiSelectDrop,
       multiSelectQtyFeed: multiSelectQtyFeed,

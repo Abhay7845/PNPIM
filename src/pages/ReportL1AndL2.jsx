@@ -173,7 +173,8 @@ const ReportL1AndL2 = (props) => {
     setStatusCloserOpener(!statusCloserOpener);
   };
 
-  const getResponceFormChild = (input) => {
+  const getResponseFormChild = (input) => {
+    console.log("input==>", input);
     setImmediate(() => {
       setLoading(true);
     });
@@ -183,13 +184,13 @@ const ReportL1AndL2 = (props) => {
       return;
     }
     if (input.qualityRating === 0) {
-      alert("Please select Quality Rating  !");
+      alert("Please select Quality Rating");
       return;
     }
     if (
       input.qualityRating > 0 &&
       input.qualityRating <= 4 &&
-      input.multiSelectQltyfeed.toString().length === 0
+      input.multiSelectQtyFeed.toString().length === 0
     ) {
       alert("Please Select Reason for Low Quality Rating");
       return;
@@ -208,8 +209,8 @@ const ReportL1AndL2 = (props) => {
       }
       old.submitStatus = "report";
       old.strCode = storeCode;
-      old.reasons = input.multiSelectQltyfeed.toString();
-      old.quality_Reasons = input.multiSelectQltyfeed.toString();
+      old.reasons = input.multiSelectQtyFeed.toString();
+      old.quality_Reasons = input.multiSelectQtyFeed.toString();
       old.quality_Rating = input.qualityRating.toString();
       return old;
     });
@@ -289,7 +290,7 @@ const ReportL1AndL2 = (props) => {
           {report.length > 0 && column.length > 0 ? (
             <ProductInfo
               productInfo={productInfo}
-              getResponceFormChild={getResponceFormChild}
+              getResponseFormChild={getResponseFormChild}
               showInfo={showInfo}
             />
           ) : (
