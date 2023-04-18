@@ -105,7 +105,6 @@ const ReportL1AndL2 = (props) => {
             let data = response.data;
             setReport(data.value);
             setColumn(data.coloum);
-            console.log(data, "report l1 and L2");
           } else {
             console.log("response.data.value==>", response.data.value);
           }
@@ -308,7 +307,8 @@ const ReportL1AndL2 = (props) => {
             />
           ) : (
             <div className="text-center">
-              <img src={gifLoading} alt="loading" />
+              {/* <img src={gifLoading} alt="loading" /> */}
+              <p>No Data Available</p>
             </div>
           )}
         </Grid>
