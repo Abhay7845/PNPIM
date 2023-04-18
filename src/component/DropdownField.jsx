@@ -37,7 +37,7 @@ const DropdownField = (props) => {
           <option className={classes.selectDrop} value="ALL">
             ALL
           </option>
-          {generateOptions(!props.dropList ? [""] : props.dropList)}
+          {generateOptions(props.dropList)}
         </select>
       </div>
     </>

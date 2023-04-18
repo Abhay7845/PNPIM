@@ -32,28 +32,31 @@ function ReportsAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <DropdownField
-            name="Report"
-            labelName="Report"
-            bigSmall={false}
-            dropList={reportOptions}
-            myChangeHandler={(event) => {
-              reportDropHandler(event.target.value);
-            }}
-          />
+
           {showInformationHandler ? (
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={showInfo}
-                  onChange={showInformationHandler}
-                  name="feedbackSwitch"
-                  color="secondary"
-                  disabled={switchEnable}
-                />
-              }
-              label="Product Description"
-            />
+            <>
+              <DropdownField
+                name="Report"
+                labelName="Report"
+                bigSmall={false}
+                dropList={reportOptions}
+                myChangeHandler={(event) => {
+                  reportDropHandler(event.target.value);
+                }}
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={showInfo}
+                    onChange={showInformationHandler}
+                    name="feedbackSwitch"
+                    color="secondary"
+                    disabled={switchEnable}
+                  />
+                }
+                label="Product Description"
+              />
+            </>
           ) : (
             ""
           )}
