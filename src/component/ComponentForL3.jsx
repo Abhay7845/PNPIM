@@ -1417,7 +1417,9 @@ function ProductDetailsTabularL3(props) {
 
 function SmallDataTable(props) {
   let digit = props.itemCode[6];
-  console.log("propsTable==>", props);
+  console.log("propsTable1==>", props);
+  console.log("propsTable2==>", props.stdWtN);
+  console.log("propsTable3==>", props.stdWtE);
 
   if (digit) {
     if (
@@ -1446,7 +1448,7 @@ function SmallDataTable(props) {
                 </tr>
               </thead>
               <tbody>
-                {props.stdWtF === "" || props.stdUcpF === "" ? (
+                {props.childNodeF === "" ? (
                   ""
                 ) : (
                   <tr>
@@ -1455,7 +1457,7 @@ function SmallDataTable(props) {
                     <td>{props.stdUcpF}</td>
                   </tr>
                 )}
-                {props.stdWtE === "" || props.stdUcpE === "" ? (
+                {props.childNodesE === "" ? (
                   ""
                 ) : (
                   <tr>
@@ -1465,7 +1467,7 @@ function SmallDataTable(props) {
                   </tr>
                 )}
 
-                {props.stdWtN === "" || props.stdUcpN === "" ? (
+                {props.childNodesN === "" ? (
                   ""
                 ) : (
                   <tr>
@@ -1474,7 +1476,7 @@ function SmallDataTable(props) {
                     <td>{props.stdUcpN}</td>
                   </tr>
                 )}
-                {props.stdWtH === "" || props.stdUcpH === "" ? (
+                {props.childNodeH === "" ? (
                   ""
                 ) : (
                   <tr>
@@ -1483,7 +1485,7 @@ function SmallDataTable(props) {
                     <td>{props.stdUcpH}</td>
                   </tr>
                 )}
-                {props.stdWtK === "" || props.stdUcpK === "" ? (
+                {props.childNodeK === "" ? (
                   ""
                 ) : (
                   <tr>
@@ -1492,7 +1494,7 @@ function SmallDataTable(props) {
                     <td>{props.stdUcpK}</td>
                   </tr>
                 )}
-                {props.stdWtV === "" || props.stdUcpV === "" ? (
+                {props.childNodeV === "" ? (
                   ""
                 ) : (
                   <tr>
@@ -1501,7 +1503,7 @@ function SmallDataTable(props) {
                     <td>{props.stdUcpV}</td>
                   </tr>
                 )}
-                {props.stdWtO === "" || props.stdUcpO === "" ? (
+                {props.childNodeO === "" ? (
                   ""
                 ) : (
                   <tr>
