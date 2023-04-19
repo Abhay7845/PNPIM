@@ -460,7 +460,7 @@ function MultiselectUomAndSize(props) {
         showCheckbox={true}
         closeOnSelect={true}
         placeholder={
-          digit === "V" || digit === "T" ? "Choose Tag" : "Choose Size"
+          digit === "V" || digit === "T" ? "Choose Size" : "Choose Tag"
         }
         disablePreSelectedValues={true}
       />

@@ -54,6 +54,7 @@ const ImgShow = (props) => {
 
   const imageCode = props.itemCode !== "" && props.itemCode.substring(2, 9);
   const combineImage = `${props.imgLink}${imageCode}`;
+  console.log("combineImage==>", combineImage);
   return (
     <>
       <section className={classes.root}>
