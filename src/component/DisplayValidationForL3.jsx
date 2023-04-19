@@ -704,7 +704,6 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-
         {setSelect && setSelectOptions[0] ? (
           <Grid item xs={12} sm={12}>
             <DynamicMultiSelectAndInput

@@ -77,8 +77,9 @@ function CustomToolbar(props) {
     try {
       const response = await axios.get(`${UrlManager.sendMail}${storeCode}`);
       if (response.status === 200) {
+        console.log("responseMail==>", response);
         if (response.data.code === "1000") {
-          const success = `Thankyou for completing the Indent Confirmation Process  successfully `;
+          const success = `Thankyou for completing the Indent Confirmation Process successfully`;
           const error = `There was an error in Triggering email please try again ..`;
           const msg =
             response?.data?.value?.storeNPIMStatus === "LOCKED"
