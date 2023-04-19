@@ -168,7 +168,7 @@ export default function DisplayValidationComponent(props) {
 
     return (
       <>
-        {feedShowState.category === "BANGLE" ? (
+        {digit === "V" ? (
           <Grid item xs={12} sm={12}>
             <MultiselectUomAndSize
               labelName="Size/UOM/Quantity"

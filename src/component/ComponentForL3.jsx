@@ -171,7 +171,8 @@ function MultiselectUomAndSize(props) {
     findingsResHandler,
     tegQuantityRes,
   } = props;
-
+  const digit = CategoryData.itemCode[6];
+  console.log("digit==>", digit);
   const options = optionsList.map((element, index) => {
     return {
       valueData: element,
@@ -459,19 +460,16 @@ function MultiselectUomAndSize(props) {
         showCheckbox={true}
         closeOnSelect={true}
         placeholder={
-          CategoryData.category === "BANGLE" ||
-          CategoryData.category === "T Category"
-            ? "Choose Tag"
-            : "Choose Size"
+          digit === "V" || digit === "T" ? "Choose Tag" : "Choose Size"
         }
         disablePreSelectedValues={true}
       />
-      {CategoryData.category === "BANGLE" ||
-      CategoryData.category === "SET3" ||
-      CategoryData.category === "SET4" ||
-      CategoryData.category === "SET5" ||
-      CategoryData.category === "SET6" ||
-      CategoryData.category === "SET7" ? (
+      {digit === "V" ||
+      digit === "3" ||
+      digit === "4" ||
+      digit === "5" ||
+      digit === "6" ||
+      digit === "7" ? (
         <table style={{ width: "100%", padding: 1, margin: 0 }}>
           <tbody>
             {options.map((row, index) => (
@@ -570,7 +568,7 @@ function MultiselectUomAndSize(props) {
       ) : (
         ""
       )}
-      {CategoryData.category === "T Category" ? (
+      {digit === "T" ? (
         <>
           <table style={{ width: "100%", margin: 0 }}>
             <tbody className="d-flex">
@@ -784,6 +782,8 @@ function MultiSelectAndInput(props) {
   const classes = useStyles();
 
   const { CategoryData, optionsList, onChangeHandler } = props;
+  const digit = CategoryData.itemCode[6];
+
   const [sizeRow, setSizeRow] = useState({
     A: false,
     B: false,
@@ -1109,10 +1109,7 @@ function MultiSelectAndInput(props) {
 
   return (
     <>
-      {CategoryData.category === "FINGER RING" ||
-      CategoryData.category === "BRACELET" ||
-      CategoryData.category === "MANGALSUTRA" ||
-      CategoryData.category === "CHAIN" ? (
+      {digit === "F" || digit === "B" || digit === "M" || digit === "C" ? (
         <div className={classes.drop_multi}>
           <Typography align="center" color="primary">
             {props.labelName}
@@ -1156,7 +1153,7 @@ function MultiSelectAndInput(props) {
         ""
       )}
       <br />
-      {CategoryData.category === "COUPLE BAND" ? (
+      {digit === "F" ? (
         <div className="my-2">
           <DropDownMaterialUI
             labelName="Choose Tag"
