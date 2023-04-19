@@ -297,7 +297,6 @@ const IndentL3 = () => {
       Error(msg.message);
     } else {
       stdUcpNotSelectData = `stdUcp-${0}`;
-      console.log("loading1==>", loading);
       const inputData = {
         category: productDetails.category,
         childNodesE: feedShowState.childNodesE,
@@ -395,7 +394,6 @@ const IndentL3 = () => {
           .catch((error) => {
             console.log("error==>", error);
           });
-        console.log("loading3==>", loading);
         setLoading(false);
       }, 1000);
     }
