@@ -54,7 +54,6 @@ const ImgShow = (props) => {
 
   const imageCode = props.itemCode !== "" && props.itemCode.substring(2, 9);
   const combineImage = `${props.imgLink}${imageCode}`;
-  console.log("combineImage==>", combineImage);
   return (
     <>
       <section className={classes.root}>
@@ -71,7 +70,7 @@ const ImgShow = (props) => {
               <ReactImageMagnify
                 {...{
                   smallImage: {
-                    src: ImgLoad ? loadingGif : combineImage,
+                    src: ImgLoad ? loadingGif : `${combineImage}.jpg`,
                     height: 472,
                     width: window.innerWidth * (40.41145833 / 100),
                     alt: "Image is not available",
@@ -113,7 +112,7 @@ const ImgShow = (props) => {
             <Tab style={{ minWidth: "1%" }} icon={<PlayCircleOutlineIcon />} />
             <Tab
               style={{ minWidth: "1%" }}
-              icon={<Avatar variant="square" src={combineImage} />}
+              icon={<Avatar variant="square" src={`${combineImage}.jpg`} />}
             />
             <Tab
               style={{ minWidth: "1%" }}
