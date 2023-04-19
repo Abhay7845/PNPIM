@@ -97,7 +97,6 @@ export default function DisplayValidationComponent(props) {
   }, [itemCode]);
 
   //FETCH CHILD NODE ITEM CODE
-
   const childNodeV = feedShowState.childNodeV;
   const childNodeF = feedShowState.childNodeF;
 
