@@ -1418,8 +1418,6 @@ function ProductDetailsTabularL3(props) {
 function SmallDataTable(props) {
   let digit = props.itemCode[6];
   console.log("propsTable1==>", props);
-  console.log("propsTable2==>", props.stdWtN);
-  console.log("propsTable3==>", props.stdWtE);
 
   if (digit) {
     if (
