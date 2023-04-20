@@ -21,7 +21,7 @@ import NpimDataDisplay from "../component/NpimDataDisplay";
 import HostManager from "../HostManager/HostManager";
 import StatusTabular from "../component/StatusTabular";
 import Loading from "../component/Loading";
-import gifLoading from "../images/Loading_icon.gif";
+// import gifLoading from "../images/Loading_icon.gif";
 
 const useStyles = makeStyles({
   root: {

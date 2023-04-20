@@ -40,7 +40,7 @@ const MuliSelectDropdownField = (props) => {
 
   return (
     <>
-      <label>Choose reasons for No</label>
+      <label>Choose Reasons for No</label>
       <div className="drop_multi">
         <Multiselect
           options={data}

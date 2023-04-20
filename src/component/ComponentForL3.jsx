@@ -459,9 +459,7 @@ function MultiselectUomAndSize(props) {
         onRemove={onInternalRemoveChange}
         showCheckbox={true}
         closeOnSelect={true}
-        placeholder={
-          digit === "V" || digit === "T" ? "Choose Size" : "Choose Tag"
-        }
+        placeholder={digit === "V" ? "Choose Size" : "Choose Tag"}
         disablePreSelectedValues={true}
       />
       {digit === "V" ||
@@ -1429,7 +1427,8 @@ function SmallDataTable(props) {
       digit === "5" ||
       digit === "6" ||
       digit === "7" ||
-      digit === "N"
+      digit === "N" ||
+      digit === "G"
     ) {
       if (props.childNodesE || props.childNodesN) {
         return (

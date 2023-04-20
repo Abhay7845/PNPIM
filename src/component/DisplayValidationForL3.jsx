@@ -42,11 +42,6 @@ export default function DisplayValidationComponent(props) {
     findingsResHandler,
   } = props;
 
-  // const chainWidthPendent = digit === "0" ? "Only_CHAIN_WITH_PENDANT" : "";
-  // const earingForSet0 = digit === "0" ? "Only_EARRING" : "";
-  // const onlyNeckWearOrPendent = digit === "1" ? "Only_Mangalsutra" : "";
-  // const earingForSet1 = digit === "1" ? "Only_EARRING" : "";
-  // const SetTOption = digit === "T" ? "Only_Neckwear_or_Pendant" : "";
   const finger = !feedShowState.childNodeF ? "" : "Only_Finger_Ring";
   const harm = !feedShowState.childNodeH ? "" : "Only_HARAM";
   const Tikka = !feedShowState.childNodeK ? "" : "Only_TIKKA";
@@ -54,6 +49,7 @@ export default function DisplayValidationComponent(props) {
   const bangle = !feedShowState.childNodeV ? "" : "Only_BANGLE";
   const earing = !feedShowState.childNodesE ? "" : "Only_EARRING";
   const neckwear = !feedShowState.childNodesN ? "" : "Only_NECKWEAR";
+
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
@@ -68,9 +64,44 @@ export default function DisplayValidationComponent(props) {
   console.log("optionForOtherAllSet==>", optionForOtherAllSet);
   console.log("feedShowState==>", feedShowState);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
-
+  const optionForSet0 = [
+    "Single_Tag",
+    "Separate_Tag",
+    "Only_EARRING",
+    "Only_CHAIN_WITH_PENDANT",
+  ];
+  const optionForSet1 = [
+    "Single_Tag",
+    "Separate_Tag",
+    "Only_EARRING",
+    "Only_NECKWEAR_OR_PENDANT",
+  ];
+  const tagsTCategory = [
+    "Single_Tag",
+    "Separate_Tag",
+    "Only_Mangalsutra",
+    "Only_EARRING",
+  ];
   useEffect(() => {
-    setOption(tagsOptions);
+    if (digit === "0" || digit === "G") {
+      setOption(optionForSet0);
+    }
+    if (digit === "1") {
+      setOption(optionForSet1);
+    }
+    if (digit === "T") {
+      setOption(tagsTCategory);
+    }
+    if (
+      digit === "2" ||
+      digit === "3" ||
+      digit === "4" ||
+      digit === "5" ||
+      digit === "6" ||
+      digit === "7"
+    ) {
+      setOption(tagsOptions);
+    }
   }, []);
 
   const options = option.map((element) => {
@@ -204,6 +235,7 @@ export default function DisplayValidationComponent(props) {
   } else if (
     digit === "E" ||
     digit === "N" ||
+    digit === "G" ||
     digit === "P" ||
     digit === "2" ||
     digit === "3" ||
@@ -216,13 +248,13 @@ export default function DisplayValidationComponent(props) {
     digit === "7"
   ) {
     let tegQuantity, TypeSet2, Quantity, tegSelect, setSelect;
-
     if (
       digit === "0" ||
       digit === "1" ||
       digit === "2" ||
       digit === "P" ||
       digit === "E" ||
+      digit === "G" ||
       digit === "N"
     ) {
       //CHECK THE CONDITION AND CHILD CODE ABD ADD THE DATA IN DROPDOWN
@@ -239,7 +271,8 @@ export default function DisplayValidationComponent(props) {
       digit === "4" ||
       digit === "5" ||
       digit === "6" ||
-      digit === "7"
+      digit === "7" ||
+      digit === "G"
     ) {
       tegSelect = true;
       setSelect = true;
@@ -758,7 +791,7 @@ export default function DisplayValidationComponent(props) {
     const findingsOptions = !finding ? "" : finding.split(",");
     return (
       <>
-        {feedShowState.category === "T Category" ? (
+        {digit === "T" ? (
           <Grid sx={12} sm={12} className="w-100">
             <MultiselectUomAndSize
               optionsList={option}
@@ -814,7 +847,7 @@ export default function DisplayValidationComponent(props) {
             />
           </Grid>
         ) : null}
-        {feedShowState.category === "T Category" ? (
+        {digit === "T" ? (
           <table class="table table-bordered ml-0">
             <thead>
               <tr>
