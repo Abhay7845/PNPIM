@@ -1221,8 +1221,8 @@ function MultiSelectAndInput(props) {
             placeholder="For Gents"
             disablePreSelectedValues={true}
           />
-          <table style={{ width: "100%", padding: 1, margin: 0 }}>
-            <tbody>
+          <table style={{ width: "100%", margin: 0 }}>
+            <tbody className="d-flex">
               {GentsSize.map((row, index) => (
                 <tr
                   key={index}
@@ -1260,8 +1260,8 @@ function MultiSelectAndInput(props) {
             placeholder="For Ladies"
             disablePreSelectedValues={true}
           />
-          <table style={{ width: "100%", padding: 1, margin: 0 }}>
-            <tbody>
+          <table style={{ width: "100%", margin: 0 }}>
+            <tbody className="d-flex">
               {LadiesSize.map((row, index) => (
                 <tr
                   key={index}
