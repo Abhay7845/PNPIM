@@ -1193,7 +1193,7 @@ const ReportL3 = () => {
                                 className={classes.btnSub}
                                 onClick={onClickSubmitBtnHandler}
                               >
-                                Submit here
+                                Submit
                               </Button>
                             </Grid>
                           </Grid>
