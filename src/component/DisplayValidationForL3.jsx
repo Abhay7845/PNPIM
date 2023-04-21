@@ -61,7 +61,6 @@ export default function DisplayValidationComponent(props) {
     Tikka,
     other,
   ];
-  console.log("optionForOtherAllSet==>", optionForOtherAllSet);
   console.log("feedShowState==>", feedShowState);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
   const optionForSet0 = [

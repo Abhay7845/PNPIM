@@ -1107,7 +1107,10 @@ function MultiSelectAndInput(props) {
 
   return (
     <>
-      {digit === "F" || digit === "B" || digit === "M" || digit === "C" ? (
+      {CategoryData.category === "FINGER RING" ||
+      digit === "B" ||
+      digit === "M" ||
+      digit === "C" ? (
         <div className={classes.drop_multi}>
           <Typography align="center" color="primary">
             {props.labelName}
@@ -1151,7 +1154,7 @@ function MultiSelectAndInput(props) {
         ""
       )}
       <br />
-      {digit === "F" ? (
+      {CategoryData.category === "COUPLE BAND" ? (
         <div className="my-2">
           <DropDownMaterialUI
             labelName="Choose Tag"
