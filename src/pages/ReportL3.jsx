@@ -371,6 +371,11 @@ const ReportL3 = () => {
         reasons: "",
         childNodesE: dataRowInformation.childNodesE,
         childNodesN: dataRowInformation.childNodesN,
+        childNodeF: dataRowInformation.childNodeF,
+        childNodeH: dataRowInformation.childNodeH,
+        childNodeK: dataRowInformation.childNodeK,
+        childNodeV: dataRowInformation.childNodeV,
+        childNodeO: dataRowInformation.childNodeO,
         findings: allDataFromValidation.findingsRes,
         indQty: allDataFromValidation.quantityRes,
         indCategory: dataRowInformation.category,
@@ -395,6 +400,8 @@ const ReportL3 = () => {
         sizeQuantitys: allDataFromValidation.sizeQuantityRes,
         tagQuantitys: allDataFromValidation.tegQuantityRes,
       };
+
+      console.log("inputDataReports==>", inputData);
       setImmediate(() => {
         setLoading(true);
       });
@@ -501,6 +508,7 @@ const ReportL3 = () => {
   };
 
   const rowDataHandler = (input) => {
+    console.log("input==>", input);
     setImmediate(() => {
       setLoading(true);
       setDataRowInformation(input);
@@ -1185,7 +1193,7 @@ const ReportL3 = () => {
                                 className={classes.btnSub}
                                 onClick={onClickSubmitBtnHandler}
                               >
-                                Submit
+                                Submit here
                               </Button>
                             </Grid>
                           </Grid>
