@@ -747,12 +747,12 @@ function InputFieldMaterialUI(props) {
         setHelper(0);
       }
     }
-  }, [allDataFromValidation?.quantityRes]);
+  }, [allDataFromValidation.quantityRes]);
 
   return (
     <>
       <div className={classes.inputField}>
-        <b>Indent Quantity</b>
+        <b>Indent Quantity here</b>
         <OTPInput
           inputClassName="otp"
           value={allDataFromValidation?.quantityRes}
@@ -774,14 +774,12 @@ function InputFieldMaterialUI(props) {
 }
 
 function MultiSelectAndInput(props) {
+  const classes = useStyles();
   const [tagOption, setTagOption] = useState("");
   const [CoupleGentsSize, setCoupleGentsSize] = useState([]);
   const [CoupleLadiesSize, setCoupleLadiesSize] = useState([]);
-  const classes = useStyles();
-
   const { CategoryData, optionsList, onChangeHandler } = props;
   const digit = CategoryData.itemCode[6];
-
   const [sizeRow, setSizeRow] = useState({
     A: false,
     B: false,

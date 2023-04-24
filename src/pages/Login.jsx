@@ -29,7 +29,6 @@ const Login = () => {
     rso: "",
   });
   const [flag, setFlag] = useState(false);
-  console.log("ValidUser==>", ValidUser);
   const [level, setLevel] = useState("");
   const OnChangeInput = (event) => {
     const { name, value } = event.target;

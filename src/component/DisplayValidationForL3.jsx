@@ -170,13 +170,11 @@ export default function DisplayValidationComponent(props) {
   if (
     digit === "B" ||
     digit === "C" ||
-    digit === "F" ||
     digit === "R" ||
     digit === "V" ||
     digit === "Y"
   ) {
     let sizeUomQuantity, sizeQuantity;
-
     if (digit === "V" && !cond) {
       sizeUomQuantity = true;
     } else if (
@@ -788,6 +786,8 @@ export default function DisplayValidationComponent(props) {
     Quantity = true;
     const finding = feedShowState.findings;
     const findingsOptions = !finding ? "" : finding.split(",");
+    console.log("digit==>", digit);
+
     return (
       <>
         {digit === "T" ? (
@@ -805,7 +805,6 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-
         {digit === "D" ||
         digit === "J" ||
         digit === "H" ||
@@ -814,6 +813,7 @@ export default function DisplayValidationComponent(props) {
         digit === "X" ||
         digit === "G" ||
         digit === "W" ||
+        digit === "F" ||
         digit === "K" ? (
           <Grid item xs={12} sm={12} className="my-3">
             <InputFieldMaterialUI
