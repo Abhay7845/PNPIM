@@ -167,13 +167,7 @@ export default function DisplayValidationComponent(props) {
     };
   });
 
-  if (
-    digit === "B" ||
-    digit === "C" ||
-    digit === "R" ||
-    digit === "V" ||
-    digit === "Y"
-  ) {
+  if (digit === "B" || digit === "C" || digit === "R" || digit === "V") {
     let sizeUomQuantity, sizeQuantity;
     if (digit === "V" && !cond) {
       sizeUomQuantity = true;
@@ -814,6 +808,7 @@ export default function DisplayValidationComponent(props) {
         digit === "G" ||
         digit === "W" ||
         digit === "F" ||
+        digit === "Y" ||
         digit === "K" ? (
           <Grid item xs={12} sm={12} className="my-3">
             <InputFieldMaterialUI
@@ -846,31 +841,6 @@ export default function DisplayValidationComponent(props) {
             />
           </Grid>
         ) : null}
-        {digit === "T" ? (
-          <table class="table table-bordered ml-0">
-            <thead>
-              <tr>
-                <th scope="col">CATEGORY</th>
-                <th scope="col">StdWt</th>
-                <th scope="col">UCP</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>MANGALSUTRA</td>
-                <td>{feedShowState.stdWtN}</td>
-                <td>{feedShowState.stdUcpN}</td>
-              </tr>
-              <tr>
-                <td>EARRING</td>
-                <td>{feedShowState.stdWtE}</td>
-                <td>{feedShowState.stdUcpE}</td>
-              </tr>
-            </tbody>
-          </table>
-        ) : (
-          ""
-        )}
       </>
     );
   }

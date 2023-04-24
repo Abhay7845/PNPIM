@@ -1429,6 +1429,7 @@ function SmallDataTable(props) {
       digit === "6" ||
       digit === "7" ||
       digit === "N" ||
+      digit === "T" ||
       digit === "G"
     ) {
       if (props.childNodesE || props.childNodesN) {
