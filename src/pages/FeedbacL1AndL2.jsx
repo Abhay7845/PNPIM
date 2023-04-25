@@ -355,12 +355,11 @@ const FeedbacL1AndL2 = () => {
                 <Typography className={classes.headingColor} align="center">
                   {feedShowState.itemCode}
                 </Typography>
-
                 <div className="row mx-0">
                   <div className=" col-md-7">
                     <div>
                       <h5 className="text-center my-1">
-                        <b>Product Details</b>
+                        <b>PRODUCT DETAILS</b>
                       </h5>
                       <table>
                         <tbody>

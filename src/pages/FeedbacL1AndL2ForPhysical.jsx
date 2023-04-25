@@ -337,7 +337,7 @@ const FeedbacL1AndL2ForPhysical = () => {
                   >
                     <div className="pro_info ">
                       <h5 className="text-center my-1">
-                        <b>Product Details</b>
+                        <b>PRODUCT DETAILS</b>
                       </h5>
                       <table
                         style={{
@@ -424,14 +424,11 @@ const FeedbacL1AndL2ForPhysical = () => {
                       </table>
                     </div>
                   </div>
-                  <div
-                    className="col-md-6 border"
-                    style={{ margin: "0%", padding: "0%" }}
-                  >
+                  <div className="col-md-6">
                     <div className="feed_info">
-                      <Typography className={classes.headingCss} align="center">
-                        Feedback
-                      </Typography>
+                      <h5 className="text-center my-1">
+                        <b>FEEDBACK</b>
+                      </h5>
                       <div className="text-lg-center">
                         <FormGroup row className={classes.feedbackSwitch}>
                           <FormControlLabel

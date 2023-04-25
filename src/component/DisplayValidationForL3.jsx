@@ -109,7 +109,6 @@ export default function DisplayValidationComponent(props) {
       lableValue: element,
     };
   });
-  console.log("options==>", options);
 
   useEffect(() => {
     axios

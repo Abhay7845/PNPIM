@@ -687,7 +687,6 @@ function MultiSelectDropDownForAll(props) {
   const options = optionsList.map((element, index) => {
     return { valueData: element, lableValue: element };
   });
-  console.log("options==>", options);
   const onInternalSelectChange = (selectedList, selectedItem) => {
     let selectedData = selectedList.map((data) => {
       return data.valueData;
@@ -752,7 +751,7 @@ function InputFieldMaterialUI(props) {
   return (
     <>
       <div className={classes.inputField}>
-        <b>Indent Quantity here</b>
+        <b>Indent Quantity</b>
         <OTPInput
           inputClassName="otp"
           value={allDataFromValidation?.quantityRes}
