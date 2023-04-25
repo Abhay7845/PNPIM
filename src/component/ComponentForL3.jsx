@@ -1464,7 +1464,6 @@ function SmallDataTable(props) {
                     <td>{props.stdUcpE}</td>
                   </tr>
                 )}
-
                 {props.childNodesN === "" ? (
                   ""
                 ) : (

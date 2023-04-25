@@ -66,7 +66,6 @@ const ReportL3 = () => {
   const handelClose = () => {
     setPopupOpen(false);
   };
-
   const handelYes = async () => {
     let confirmURL = `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/item/wise/rpt/edr/L3//${storeCode}`;
     try {
@@ -112,6 +111,7 @@ const ReportL3 = () => {
 
       axios.get(urlReport).then(
         (response) => {
+          console.log("responseReport==>", response);
           setImmediate(() => {
             if (response.data.code === "1000") {
               setCol(response.data.coloum);
