@@ -81,7 +81,7 @@ const ImgShow = (props) => {
                     },
                   },
                   largeImage: {
-                    src: ImgLoad ? loadingGif : `${combineImage}_${value}.jpg`,
+                    src: ImgLoad ? loadingGif : `${combineImage}.jpg`,
                     width: 1000,
                     height: 900,
                     alt: "Image is not available",
