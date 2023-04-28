@@ -175,6 +175,7 @@ const FeedbacL1AndL2 = () => {
       SetResetDrop(true);
     });
   }
+
   const onClickSubmitBtnHandler = (event) => {
     if (!switchData && multiSelectDrop.toString().length === 0) {
       alert("Please Select Reason for NO!");
@@ -218,6 +219,7 @@ const FeedbacL1AndL2 = () => {
     axios
       .post(`${HostManager.mainHost}/npim/insert/responses`, feedShowState)
       .then((response) => {
+        console.log("responseL1L2==>", response);
         let mailSms = "";
         if (response.data.code === "1001") {
           setMultiSelectDrop([]);
@@ -230,7 +232,7 @@ const FeedbacL1AndL2 = () => {
             productDetails.group === "ALL" ||
             productDetails.category === "ALL"
           ) {
-            mailSms = "You have successfully completed the Indented. Thankyou.";
+            mailSms = "You have successfully completed the Indented. Thankyou";
           } else if (
             productDetails.collection !== "ALL" ||
             productDetails.consumerBase !== "ALL" ||
@@ -241,7 +243,6 @@ const FeedbacL1AndL2 = () => {
           } else {
             mailSms = response.data.value;
           }
-
           setImmediate(() => {
             setAlertPopupStatus({
               status: true,
@@ -266,18 +267,17 @@ const FeedbacL1AndL2 = () => {
               });
             });
           }
+          setValue(0);
           setMultiSelectDrop([]);
           setMultiSelectQualityFeedback([]);
-          setValue(0);
           setFeedShowState(response.data.value);
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.log("error==>", error);
         setMultiSelectDrop([]);
         setMultiSelectQualityFeedback([]);
         setValue(0);
-        alert(error, "3");
       });
     setSwitchData(true);
     setImmediate(() => {
