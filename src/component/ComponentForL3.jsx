@@ -1436,7 +1436,7 @@ function SmallDataTable(props) {
           <>
             <table
               className="table table-bordered"
-              style={{ marginLeft: "0px" }}
+              style={{ marginLeft: "-5px" }}
             >
               <thead>
                 <tr>
