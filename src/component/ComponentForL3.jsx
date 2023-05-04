@@ -81,7 +81,6 @@ function DataGridReport(props) {
         <Typography align="center" variant="h5" color="secondary">
           {reportLable}
         </Typography>
-
         <DataGrid
           rows={rows}
           columns={column}
@@ -172,7 +171,6 @@ function MultiselectUomAndSize(props) {
     tegQuantityRes,
   } = props;
   const digit = CategoryData.itemCode[6];
-  console.log("digit==>", digit);
   const options = optionsList.map((element, index) => {
     return {
       valueData: element,

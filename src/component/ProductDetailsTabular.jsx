@@ -17,6 +17,7 @@ const useStyles = makeStyles({
 });
 
 const ProductDetailsTabular = (props) => {
+  console.log("propsInfo==>", props.information);
   const classes = useStyles();
   return (
     <>

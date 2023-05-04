@@ -779,7 +779,6 @@ export default function DisplayValidationComponent(props) {
     Quantity = true;
     const finding = feedShowState.findings;
     const findingsOptions = !finding ? "" : finding.split(",");
-    console.log("digit==>", digit);
 
     return (
       <>
@@ -806,7 +805,6 @@ export default function DisplayValidationComponent(props) {
         digit === "X" ||
         digit === "G" ||
         digit === "W" ||
-        digit === "F" ||
         digit === "Y" ||
         digit === "K" ? (
           <Grid item xs={12} sm={12} className="my-3">
