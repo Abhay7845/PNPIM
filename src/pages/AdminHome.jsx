@@ -303,7 +303,7 @@ function AdminHome(props) {
       axios
         .get(`${HostManager.mailHostAdmin}/npim/get/sku/master`)
         .then((responce) => {
-          console.log(responce.data);
+          console.log("responseMaster==>", responce.data);
           if (responce.data.code === "1000") {
             setImmediate(() => {
               setmasterExcels({
@@ -330,7 +330,6 @@ function AdminHome(props) {
               alertMessage: error,
             });
           });
-          // alert(error);
         });
     } else if (triggerFrom === "status") {
       if (adminDeskboardInput.level && adminDeskboardInput.status) {
@@ -394,7 +393,6 @@ function AdminHome(props) {
   return (
     <>
       <CssBaseline />
-
       <Drawer
         anchor="left"
         open={barOpener}
