@@ -150,6 +150,7 @@ export default function DisplayValidationComponent(props) {
       .then((res) => res)
       .then((result) => {
         if (result.data.code === "1000") {
+          console.log("result.data.value==>", result.data);
           setChildNodeF(result.data.value);
         }
         if (result.data.code === "1001") {
@@ -165,7 +166,7 @@ export default function DisplayValidationComponent(props) {
       lableValue: element,
     };
   });
-
+  console.log("ChildNodeFOptions==>", ChildNodeFOptions);
   if (digit === "B" || digit === "C" || digit === "R" || digit === "V") {
     let sizeUomQuantity, sizeQuantity;
     if (digit === "V" && !cond) {
@@ -667,65 +668,6 @@ export default function DisplayValidationComponent(props) {
           ""
         )}
 
-        {childNodeF ? (
-          <table style={{ width: "100%", padding: 1, margin: 0 }}>
-            <tbody>
-              {optionF.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChange}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue)
-                      ? classes.showDropdown
-                      : classes.hide
-                  }
-                >
-                  <Grid item xs={12} sm={12} className="my-1">
-                    <Multiselect
-                      options={ChildNodeFOptions}
-                      displayValue="lableValue"
-                      onSelect={selectFingerSize}
-                      onRemove={onInternalRemoveChange}
-                      showCheckbox={true}
-                      closeOnSelect={true}
-                      placeholder="Choose Size"
-                      disablePreSelectedValues={true}
-                    />
-                    <table style={{ width: "100%", margin: 5 }}>
-                      <tbody className="d-flex">
-                        {ChildNodeFOptions.map((row, index) => (
-                          <tr
-                            key={index}
-                            onChange={rowHandlerChange}
-                            id={row.lableValue}
-                            className={
-                              enableRow(row.lableValue)
-                                ? classes.show
-                                : classes.hide
-                            }
-                          >
-                            <b style={{ fontSize: "12px" }}>Quantity</b>
-                            <input
-                              type="text"
-                              maxlength="1"
-                              id={`${row.lableValue}sq`}
-                              name={`${row.lableValue}sq`}
-                              className={classes.inputField}
-                              placeholder={row.lableValue}
-                            />
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </Grid>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          ""
-        )}
         {setSelect && setSelectOptions[0] ? (
           <Grid item xs={12} sm={12}>
             <DynamicMultiSelectAndInput
@@ -797,6 +739,31 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
+
+        {feedShowState.category === "FINGER RING" ? (
+          <Grid item xs={12} sm={12} className="my-3">
+            <MultiSelectAndInput
+              optionsList={SizeState}
+              onChangeHandler={sizeQuantityResHandler}
+              CategoryData={feedShowState}
+            />
+            {feedShowState.findings ? (
+              <Grid item xs={12} sm={12}>
+                <DropDownMaterialUI
+                  labelName="Findings"
+                  onChangeHandler={findingsResHandler}
+                  optionsList={findingsOptions}
+                  // valueData=""
+                />
+              </Grid>
+            ) : (
+              ""
+            )}
+          </Grid>
+        ) : (
+          ""
+        )}
+
         {digit === "D" ||
         digit === "J" ||
         digit === "H" ||
