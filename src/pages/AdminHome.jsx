@@ -39,7 +39,7 @@ function AdminHome(props) {
   const classes = useStyle();
   const { storeCode, rsoName } = useParams();
   const [barOpener, setBarOpener] = useState(false);
-  const [adminDeskboardInput, setAdminDeskboardInput] = useState({
+  const [adminDeskBoardInput, setAdminDeskBoardInput] = useState({
     fromDate: "",
     fromStoreCode: "",
     toStoreCode: "",
@@ -48,6 +48,7 @@ function AdminHome(props) {
   });
 
   const [masterFile, setMasterFile] = useState("");
+  const [labelValue, setLabelValue] = useState("");
   const [alertState, setAlertState] = useState({
     alertFlag1: false,
     alertFlag2: false,
@@ -64,10 +65,10 @@ function AdminHome(props) {
   });
 
   useEffect(() => {
-    if (adminDeskboardInput.fromDate) {
+    if (adminDeskBoardInput.fromDate) {
       restServicesCaller("storeList");
     }
-  }, [adminDeskboardInput.fromDate]);
+  }, [adminDeskBoardInput.fromDate]);
 
   const navBarList = [
     {
@@ -92,10 +93,9 @@ function AdminHome(props) {
 
   function onChangeInputHandler(event) {
     let { name, value } = event.target;
-
     if (name === "fromDate") {
       setImmediate(() => {
-        setAdminDeskboardInput({
+        setAdminDeskBoardInput({
           fromDate: value,
           fromStoreCode: "",
           toStoreCode: "",
@@ -103,7 +103,7 @@ function AdminHome(props) {
       });
     } else {
       setImmediate(() => {
-        setAdminDeskboardInput((old) => {
+        setAdminDeskBoardInput((old) => {
           return {
             ...old,
             [name]: value,
@@ -135,13 +135,13 @@ function AdminHome(props) {
 
     if (triggerFrom === "copy") {
       if (
-        adminDeskboardInput.fromStoreCode &&
-        adminDeskboardInput.toStoreCode
+        adminDeskBoardInput.fromStoreCode &&
+        adminDeskBoardInput.toStoreCode
       ) {
         setTimeout(() => {
           axios
             .get(
-              `${HostManager.mailHostAdmin}/npim/store/response/copy/${adminDeskboardInput.fromStoreCode}/${adminDeskboardInput.toStoreCode}`
+              `${HostManager.mailHostAdmin}/npim/store/response/copy/${adminDeskBoardInput.fromStoreCode}/${adminDeskBoardInput.toStoreCode}`
             )
             .then((responce) => {
               console.log(responce.data);
@@ -203,10 +203,10 @@ function AdminHome(props) {
           });
       }, 1000);
     } else if (triggerFrom === "storeList") {
-      if (adminDeskboardInput.fromDate) {
+      if (adminDeskBoardInput.fromDate) {
         axios
           .get(
-            `${HostManager.mailHostAdmin}/npim/from/store/list/${adminDeskboardInput.fromDate}`
+            `${HostManager.mailHostAdmin}/npim/from/store/list/${adminDeskBoardInput.fromDate}`
           )
 
           .then(
@@ -266,7 +266,6 @@ function AdminHome(props) {
         }).then(
           (response) => {
             console.log(response.data);
-
             if (response.data.code === "1000") {
               setImmediate(() => {
                 setAlertState({
@@ -332,11 +331,11 @@ function AdminHome(props) {
           });
         });
     } else if (triggerFrom === "status") {
-      if (adminDeskboardInput.level && adminDeskboardInput.status) {
+      if (adminDeskBoardInput.level && adminDeskBoardInput.status) {
         axios
           .post(`${HostManager.mailHostAdmin}/npim/open/portal`, {
-            level: adminDeskboardInput.level,
-            mode: adminDeskboardInput.status,
+            level: adminDeskBoardInput.level,
+            mode: adminDeskBoardInput.status,
           })
           .then(
             (response) => {
@@ -388,6 +387,13 @@ function AdminHome(props) {
         setLoading(false);
       });
     }, 3000);
+  }
+
+  function FetchCredentials() {
+    console.log("labelValue==>", labelValue);
+    if (labelValue === "") {
+      alert("Please Select Level");
+    }
   }
 
   return (
@@ -459,7 +465,7 @@ function AdminHome(props) {
                               lable="From Date"
                               type="date"
                               textFieldHandlerChange={onChangeInputHandler}
-                              value={adminDeskboardInput.fromDate}
+                              value={adminDeskBoardInput.fromDate}
                               name="fromDate"
                               required={true}
                             />
@@ -471,7 +477,7 @@ function AdminHome(props) {
                                 (element) => element.strCode
                               )}
                               selectHandleChange={onChangeInputHandler}
-                              value={adminDeskboardInput.fromStoreCode}
+                              value={adminDeskBoardInput.fromStoreCode}
                               name="fromStoreCode"
                             />
                           </Grid>
@@ -480,7 +486,7 @@ function AdminHome(props) {
                               lable="To Store Code"
                               optionList={toStoreList}
                               selectHandleChange={onChangeInputHandler}
-                              value={adminDeskboardInput.toStoreCode}
+                              value={adminDeskBoardInput.toStoreCode}
                               name="toStoreCode"
                             />
                           </Grid>
@@ -548,7 +554,7 @@ function AdminHome(props) {
                                   lable="Master File"
                                   type="file"
                                   textFieldHandlerChange={OnFileChnage}
-                                  value={adminDeskboardInput.masterFile}
+                                  value={adminDeskBoardInput.masterFile}
                                   name="masterFile"
                                   required={true}
                                 />
@@ -608,7 +614,7 @@ function AdminHome(props) {
                               lable="Level"
                               optionList={["L1", "L2", "L3"]}
                               selectHandleChange={onChangeInputHandler}
-                              value={adminDeskboardInput.level}
+                              value={adminDeskBoardInput.level}
                               name="level"
                             />
                           </Grid>
@@ -617,7 +623,7 @@ function AdminHome(props) {
                               lable="Status"
                               optionList={["Open", "Close"]}
                               selectHandleChange={onChangeInputHandler}
-                              value={adminDeskboardInput.status}
+                              value={adminDeskBoardInput.status}
                               name="status"
                             />
                           </Grid>
@@ -703,6 +709,51 @@ function AdminHome(props) {
                           ""
                         )}
                       </Grid>
+                    </AccordionDetails>
+                  </Accordion>
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<AddSharpIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography
+                        color="secondary"
+                        variant="subtitle1"
+                        align="left"
+                      >
+                        Login Credentials
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Container maxWidth="sm">
+                        <Grid container spacing={3}>
+                          <Grid item xs={12} sm={12}>
+                            <SelectOfMUI
+                              lable="Level"
+                              optionList={["L1", "L2", "L3"]}
+                              selectHandleChange={(e) =>
+                                setLabelValue(e.target.value)
+                              }
+                              value={labelValue}
+                              name="level"
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={12}>
+                            <Button
+                              onClick={FetchCredentials}
+                              color="inherit"
+                              variant="contained"
+                              fullWidth
+                              style={{ minHeight: "100%" }}
+                            >
+                              Fetch Credentials
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </Container>
                     </AccordionDetails>
                   </Accordion>
                 </Grid>
