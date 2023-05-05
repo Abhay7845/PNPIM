@@ -676,7 +676,6 @@ function AdminHome(props) {
                                   ""
                                 )}
                               </Grid>
-
                               <Grid item xs={12} sm={12}>
                                 <Button
                                   onClick={() => {
@@ -695,7 +694,7 @@ function AdminHome(props) {
                             </Grid>
                           </Container>
                         </Grid>
-                        {masterExcels.rows[0] ? (
+                        {masterExcels.rows.length > 0 && (
                           <Grid item xs={12} sm={12}>
                             <Container maxWidth="xl">
                               <DataGridForAdmin
@@ -705,8 +704,6 @@ function AdminHome(props) {
                               />
                             </Container>
                           </Grid>
-                        ) : (
-                          ""
                         )}
                       </Grid>
                     </AccordionDetails>
@@ -728,7 +725,7 @@ function AdminHome(props) {
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Container maxWidth="sm">
+                      <Container maxWidth="xl">
                         <Grid container spacing={3}>
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
@@ -753,6 +750,11 @@ function AdminHome(props) {
                             </Button>
                           </Grid>
                         </Grid>
+                        <DataGridForAdmin
+                          col={masterExcels.cols}
+                          rows={masterExcels.rows}
+                          reportLable="Master Excel"
+                        />
                       </Container>
                     </AccordionDetails>
                   </Accordion>
