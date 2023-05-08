@@ -77,7 +77,7 @@ export default function DisplayValidationComponent(props) {
   const tagsTCategory = [
     "Single_Tag",
     "Separate_Tag",
-    "Only_Mangalsutra",
+    "Only_MANGALSUTRA",
     "Only_EARRING",
   ];
   useEffect(() => {
@@ -443,6 +443,11 @@ export default function DisplayValidationComponent(props) {
               ...old,
               [name]: value,
             };
+          case "Only_MANGALSUTRA":
+            return {
+              ...old,
+              [name]: value,
+            };
           case "Only_NECKWEAR_PENDANT":
             return {
               ...old,
@@ -468,7 +473,7 @@ export default function DisplayValidationComponent(props) {
               ...old,
               [name]: value,
             };
-          case "Only_Neckwear_or_Pendant":
+          case "Only_NECKWEAR_OR_PENDANT":
             return {
               ...old,
               [name]: value,
@@ -685,16 +690,6 @@ export default function DisplayValidationComponent(props) {
               typeName="number"
               onChangeHandler={quantityResHandler}
               allDataFromValidation={allDataFromValidation}
-            />
-          </Grid>
-        ) : null}
-        {tegQuantity ? (
-          <Grid item xs={12}>
-            <MultiSelectAndInput
-              labelName="Tags/Quantity"
-              optionsList={tegOfItemOption}
-              onChangeHandler={tegQuantityResHandler}
-              CategoryData={feedShowState}
             />
           </Grid>
         ) : null}
