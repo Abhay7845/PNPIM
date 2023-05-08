@@ -12,6 +12,9 @@ const useStyles = makeStyles({
     outline: "none",
     padding: "5px",
   },
+  inputArea: {
+    display: "none",
+  },
   formControl: {
     minWidth: "100%",
     "& .Mui-focused .MuiOutlinedInput-notchedOutline": {

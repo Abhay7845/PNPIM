@@ -20,7 +20,6 @@ export default function DisplayValidationComponent(props) {
   const [ChildNodeF, setChildNodeF] = useState([]);
   const [sizeRow, setSizeRow] = useState();
   const [option, setOption] = useState([]);
-  // const [selectedValue, setSelectedValue] = useState("");
 
   const {
     digit,
@@ -292,10 +291,8 @@ export default function DisplayValidationComponent(props) {
         lableValue: element,
       };
     });
-
     const findings = feedShowState.findings;
     const findingsOptions = !findings ? "" : findings.split(",");
-
     const enableRows = (name, value) => {
       setSizeRow((old) => {
         switch (name) {
@@ -497,17 +494,10 @@ export default function DisplayValidationComponent(props) {
     const onInternalSelectChange = (selectedList, selectedItem) => {
       console.log("lableValue1234==>", selectedItem.lableValue);
       enableRows(selectedItem.lableValue, true);
-      // setSelectedValue(selectedItem.lableValue);
     };
     const onInternalRemoveChange = (selectedList, removedItem) => {
       console.log("removedItem.lableValue==>", removedItem.lableValue);
       enableRows(removedItem.lableValue, false);
-    };
-
-    //FINGER SIZE
-    const selectFingerSize = (selectedList, selectedItem) => {
-      console.log("selectFingerSize==>", selectedItem.lableValue);
-      enableRows(selectedItem.lableValue, true);
     };
 
     const rowHandlerChange = (event) => {
@@ -567,7 +557,12 @@ export default function DisplayValidationComponent(props) {
                       maxlength="1"
                       id={`${row.lableValue}sq`}
                       name={`${row.lableValue}sq`}
-                      className={classes.inputField}
+                      className={
+                        row.lableValue === "Only_FINGER_RING" ||
+                        row.lableValue === "Only_BANGLE"
+                          ? classes.inputArea
+                          : classes.inputField
+                      }
                       placeholder={row.lableValue}
                     />
                   </tr>
@@ -650,36 +645,29 @@ export default function DisplayValidationComponent(props) {
             ))}
           </tbody>
         </table>
-        {childNodeV ? (
-          <table style={{ width: "100%", margin: 0 }}>
-            <tbody>
-              {optionV.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChange}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue)
-                      ? classes.showDropdown
-                      : classes.hide
-                  }
-                >
-                  <Grid item xs={12} sm={12} className="my-1">
-                    <MultiselectUomAndSize
-                      labelName="Size/UOM/Quantity"
-                      optionsList={ChildNodeV}
-                      sizeUomQuantityResHandler={sizeUomQuantityResHandler}
-                      CategoryData={feedShowState}
-                    />
-                  </Grid>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          ""
-        )}
-
+        <table style={{ width: "100%", margin: 0 }}>
+          <tbody>
+            {optionV.map((row, index) => (
+              <tr
+                key={index}
+                onChange={rowHandlerChange}
+                id={row.lableValue}
+                className={
+                  enableRow(row.lableValue)
+                    ? classes.showDropdown
+                    : classes.hide
+                }
+              >
+                <MultiselectUomAndSize
+                  labelName="Size/UOM/Quantity"
+                  optionsList={ChildNodeV}
+                  sizeUomQuantityResHandler={sizeUomQuantityResHandler}
+                  CategoryData={feedShowState}
+                />
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {setSelect && setSelectOptions[0] ? (
           <Grid item xs={12} sm={12}>
             <DynamicMultiSelectAndInput
@@ -723,7 +711,6 @@ export default function DisplayValidationComponent(props) {
     );
   } else {
     let findings, stoneQuality, Quantity;
-
     if (digit === "S" || digit === "D" || digit === "J" || digit === "T") {
       findings = true;
     }
