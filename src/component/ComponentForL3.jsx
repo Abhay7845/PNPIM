@@ -440,6 +440,7 @@ function MultiselectUomAndSize(props) {
       lableValue: element,
     };
   });
+
   const optionsOnlyE = ["Only_EARRING"];
   const optionE = optionsOnlyE.map((element) => {
     return {
@@ -457,7 +458,7 @@ function MultiselectUomAndSize(props) {
         onRemove={onInternalRemoveChange}
         showCheckbox={true}
         closeOnSelect={true}
-        placeholder={digit === "V" ? "Choose Size" : "Choose Tag"}
+        placeholder="Choose Size"
         disablePreSelectedValues={true}
       />
       {digit === "V" ||
@@ -594,7 +595,7 @@ function MultiselectUomAndSize(props) {
       ) : (
         ""
       )}
-      <table style={{ width: "100%", padding: 1, margin: 0 }}>
+      <table style={{ width: "100%", margin: 0 }}>
         <tbody>
           {optionM.map((row, index) => (
             <tr
@@ -647,8 +648,7 @@ function MultiselectUomAndSize(props) {
           ))}
         </tbody>
       </table>
-
-      <table style={{ width: "100%", padding: 1, margin: 0 }}>
+      <table style={{ width: "100%", margin: 0 }}>
         <tbody>
           {optionE.map((row, index) => (
             <tr
@@ -1102,52 +1102,45 @@ function MultiSelectAndInput(props) {
 
   return (
     <>
-      {CategoryData.category === "FINGER RING" ||
-      digit === "B" ||
-      digit === "M" ||
-      digit === "C" ? (
-        <div className={classes.drop_multi}>
-          <Typography align="center" color="primary">
-            {props.labelName}
-          </Typography>
-          <Multiselect
-            options={options}
-            displayValue="lableValue"
-            onSelect={onInternalSelectChange}
-            onRemove={onInternalRemoveChange}
-            showCheckbox={true}
-            closeOnSelect={true}
-            placeholder="Choose Size"
-            disablePreSelectedValues={true}
-          />
-          <table style={{ width: "100%", margin: 0 }}>
-            <tbody className="d-flex">
-              {options.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChange}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue) ? classes.show : classes.hide
-                  }
-                >
-                  <b style={{ fontSize: "12px" }}>Quantity</b>
-                  <input
-                    type="text"
-                    maxlength="1"
-                    id={`${row.lableValue}sq`}
-                    name={`${row.lableValue}sq`}
-                    className={classes.inputField}
-                    placeholder={row.lableValue}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        ""
-      )}
+      <div className={classes.drop_multi}>
+        <Typography align="center" color="primary">
+          {props.labelName}
+        </Typography>
+        <Multiselect
+          options={options}
+          displayValue="lableValue"
+          onSelect={onInternalSelectChange}
+          onRemove={onInternalRemoveChange}
+          showCheckbox={true}
+          closeOnSelect={true}
+          placeholder="Choose Size"
+          disablePreSelectedValues={true}
+        />
+        <table style={{ width: "100%", margin: 0 }}>
+          <tbody className="d-flex">
+            {options.map((row, index) => (
+              <tr
+                key={index}
+                onChange={rowHandlerChange}
+                id={row.lableValue}
+                className={
+                  enableRow(row.lableValue) ? classes.show : classes.hide
+                }
+              >
+                <b style={{ fontSize: "12px" }}>Quantity</b>
+                <input
+                  type="text"
+                  maxlength="1"
+                  id={`${row.lableValue}sq`}
+                  name={`${row.lableValue}sq`}
+                  className={classes.inputField}
+                  placeholder={row.lableValue}
+                />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <br />
       {CategoryData.category === "COUPLE BAND" ? (
         <div className="my-2">

@@ -42,7 +42,7 @@ export default function DisplayValidationComponent(props) {
     findingsResHandler,
   } = props;
 
-  const finger = !feedShowState.childNodeF ? "" : "Only_Finger_Ring";
+  const finger = !feedShowState.childNodeF ? "" : "Only_FINGER_RING";
   const harm = !feedShowState.childNodeH ? "" : "Only_HARAM";
   const Tikka = !feedShowState.childNodeK ? "" : "Only_TIKKA";
   const other = !feedShowState.childNodeO ? "" : "Only_OTHER";
@@ -150,7 +150,6 @@ export default function DisplayValidationComponent(props) {
       .then((res) => res)
       .then((result) => {
         if (result.data.code === "1000") {
-          console.log("result.data.value==>", result.data);
           setChildNodeF(result.data.value);
         }
         if (result.data.code === "1001") {
@@ -160,13 +159,6 @@ export default function DisplayValidationComponent(props) {
       .catch((error) => console.log("error==>", error));
   }, [childNodeV]);
 
-  const ChildNodeFOptions = ChildNodeF.map((element) => {
-    return {
-      valueData: element,
-      lableValue: element,
-    };
-  });
-  console.log("ChildNodeFOptions==>", ChildNodeFOptions);
   if (digit === "B" || digit === "C" || digit === "R" || digit === "V") {
     let sizeUomQuantity, sizeQuantity;
     if (digit === "V" && !cond) {
@@ -293,7 +285,7 @@ export default function DisplayValidationComponent(props) {
         lableValue: element,
       };
     });
-    const optionsOnlyF = ["Only_Finger_Ring"];
+    const optionsOnlyF = ["Only_FINGER_RING"];
     const optionF = optionsOnlyF.map((element) => {
       return {
         valueData: element,
@@ -494,7 +486,7 @@ export default function DisplayValidationComponent(props) {
               ...old,
               [name]: value,
             };
-          case "Only_Finger_Ring":
+          case "Only_FINGER_RING":
             return {
               ...old,
               [name]: value,
@@ -559,7 +551,7 @@ export default function DisplayValidationComponent(props) {
               displayValue="lableValue"
               placeholder="Choose Tag"
             />
-            <table style={{ width: "100%", padding: 1, margin: 0 }}>
+            <table style={{ width: "100%", margin: 0 }}>
               <tbody className="d-flex">
                 {options.map((row, index) => (
                   <tr
@@ -584,7 +576,29 @@ export default function DisplayValidationComponent(props) {
             </table>
           </Grid>
         ) : null}
-        <table style={{ width: "100%", padding: 1, margin: 0 }}>
+        <table style={{ width: "100%", margin: 0 }}>
+          <tbody>
+            {optionF.map((row, index) => (
+              <tr
+                key={index}
+                onChange={rowHandlerChange}
+                id={row.lableValue}
+                className={
+                  enableRow(row.lableValue)
+                    ? classes.showDropdown
+                    : classes.hide
+                }
+              >
+                <MultiSelectAndInput
+                  optionsList={ChildNodeF}
+                  onChangeHandler={sizeQuantityResHandler}
+                  CategoryData={feedShowState}
+                />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table style={{ width: "100%", margin: 0 }}>
           <tbody>
             {optionE.map((row, index) => (
               <tr
@@ -627,19 +641,17 @@ export default function DisplayValidationComponent(props) {
                     : classes.hide
                 }
               >
-                <Grid item xs={12} sm={12}>
-                  <DropDownMaterialUI
-                    labelName="Type Set-2"
-                    onChangeHandler={typeSet2ResHandler}
-                    optionsList={setType2option}
-                  />
-                </Grid>
+                <DropDownMaterialUI
+                  labelName="Type Set-2"
+                  onChangeHandler={typeSet2ResHandler}
+                  optionsList={setType2option}
+                />
               </tr>
             ))}
           </tbody>
         </table>
         {childNodeV ? (
-          <table style={{ width: "100%", padding: 1, margin: 0 }}>
+          <table style={{ width: "100%", margin: 0 }}>
             <tbody>
               {optionV.map((row, index) => (
                 <tr
