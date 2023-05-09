@@ -52,13 +52,13 @@ export default function DisplayValidationComponent(props) {
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
-    finger,
     earing,
     neckwear,
-    bangle,
     harm,
     Tikka,
     other,
+    finger,
+    bangle,
   ];
   console.log("feedShowState==>", feedShowState);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
