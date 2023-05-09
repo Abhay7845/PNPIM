@@ -772,7 +772,7 @@ function InputFieldMaterialUI(props) {
 
 function MultiSelectAndInput(props) {
   const classes = useStyles();
-  const { optionsList, onChangeHandler } = props;
+  const { optionsList, onChangeHandler, labelName } = props;
   const [sizeRow, setSizeRow] = useState({
     A: false,
     B: false,
@@ -1058,9 +1058,7 @@ function MultiSelectAndInput(props) {
   return (
     <>
       <div className={classes.drop_multi}>
-        <Typography align="center" color="primary">
-          {props.labelName}
-        </Typography>
+        <b className="text-primary">{labelName}</b>
         <Multiselect
           options={options}
           displayValue="lableValue"

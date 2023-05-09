@@ -815,11 +815,13 @@ export default function DisplayValidationComponent(props) {
               optionsList={CoupleGentsSize}
               onChangeHandler={sizeQuantityResHandler}
               CategoryData={feedShowState}
+              labelName="FOR GENTS"
             />
             <MultiSelectAndInput
               optionsList={CoupleLadiesSize}
               onChangeHandler={sizeQuantityResHandler}
               CategoryData={feedShowState}
+              labelName="FOR LADIES"
             />
           </>
         ) : (
