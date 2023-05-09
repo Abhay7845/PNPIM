@@ -18,8 +18,11 @@ export default function DisplayValidationComponent(props) {
   const [SizeState, setSizeState] = useState([]);
   const [ChildNodeV, setChildNodeV] = useState([]);
   const [ChildNodeF, setChildNodeF] = useState([]);
+  const [CoupleGentsSize, setCoupleGentsSize] = useState([]);
+  const [CoupleLadiesSize, setCoupleLadiesSize] = useState([]);
   const [sizeRow, setSizeRow] = useState();
   const [option, setOption] = useState([]);
+  const [tagOption, setTagOption] = useState("");
 
   const {
     digit,
@@ -48,6 +51,7 @@ export default function DisplayValidationComponent(props) {
   const bangle = !feedShowState.childNodeV ? "" : "Only_BANGLE";
   const earing = !feedShowState.childNodesE ? "" : "Only_EARRING";
   const neckwear = !feedShowState.childNodesN ? "" : "Only_NECKWEAR";
+  const chooseOption = ["Single_Tag", "Separate_Tag"];
 
   const optionForOtherAllSet = [
     "Single_Tag",
@@ -158,6 +162,32 @@ export default function DisplayValidationComponent(props) {
       .catch((error) => console.log("error==>", error));
   }, [childNodeV]);
 
+  // THIS IS FOR GENTS SIZE FETCH API
+  useEffect(() => {
+    axios
+      .get(
+        `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/L3/dropdown/couple/band/${itemCode}/COUPLE%20GENTS`
+      )
+      .then((res) => res)
+      .then((result) => {
+        setCoupleGentsSize(result.data.value);
+      })
+      .catch((error) => console.log("error==>", error));
+  }, [itemCode]);
+
+  // THIS IS FOR LADIES SIZE FETCH API
+  useEffect(() => {
+    axios
+      .get(
+        `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/L3/dropdown/couple/band/${itemCode}/COUPLE%20LADIES`
+      )
+      .then((res) => res)
+      .then((result) => {
+        setCoupleLadiesSize(result.data.value);
+      })
+      .catch((error) => console.log("error==>", error));
+  }, [itemCode]);
+
   if (digit === "B" || digit === "C" || digit === "R" || digit === "V") {
     let sizeUomQuantity, sizeQuantity;
     if (digit === "V" && !cond) {
@@ -200,6 +230,7 @@ export default function DisplayValidationComponent(props) {
               optionsList={SizeState}
               onChangeHandler={sizeQuantityResHandler}
               CategoryData={feedShowState}
+              tagOption={tagOption}
             />
           </Grid>
         ) : null}
@@ -754,6 +785,43 @@ export default function DisplayValidationComponent(props) {
               ""
             )}
           </Grid>
+        ) : (
+          ""
+        )}
+        {feedShowState.category === "COUPLE BAND" ? (
+          <div className="my-2 w-100">
+            <DropDownMaterialUI
+              labelName="Choose Tag"
+              onChangeHandler={(e) => setTagOption(e.target.value)}
+              optionsList={chooseOption}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+
+        {tagOption === "Single_Tag" ? (
+          <MultiSelectAndInput
+            optionsList={SizeState}
+            onChangeHandler={sizeQuantityResHandler}
+            CategoryData={feedShowState}
+          />
+        ) : (
+          ""
+        )}
+        {tagOption === "Separate_Tag" ? (
+          <>
+            <MultiSelectAndInput
+              optionsList={CoupleGentsSize}
+              onChangeHandler={sizeQuantityResHandler}
+              CategoryData={feedShowState}
+            />
+            <MultiSelectAndInput
+              optionsList={CoupleLadiesSize}
+              onChangeHandler={sizeQuantityResHandler}
+              CategoryData={feedShowState}
+            />
+          </>
         ) : (
           ""
         )}

@@ -118,7 +118,7 @@ function DropDownMaterialUI(props) {
           // value={valueData}
         >
           <MenuItem value="">
-            <em>None here</em>
+            <em>None</em>
           </MenuItem>
           {generateOptions(optionsList)}
         </Select>
@@ -772,11 +772,7 @@ function InputFieldMaterialUI(props) {
 
 function MultiSelectAndInput(props) {
   const classes = useStyles();
-  const [tagOption, setTagOption] = useState("");
-  const [CoupleGentsSize, setCoupleGentsSize] = useState([]);
-  const [CoupleLadiesSize, setCoupleLadiesSize] = useState([]);
-  const { CategoryData, optionsList, onChangeHandler } = props;
-  const digit = CategoryData.itemCode[6];
+  const { optionsList, onChangeHandler } = props;
   const [sizeRow, setSizeRow] = useState({
     A: false,
     B: false,
@@ -811,20 +807,7 @@ function MultiSelectAndInput(props) {
     Only_EARRING: false,
     Only_NECKWEAR_OR_PENDANT: false,
   });
-  const chooseOption = ["Single_Tag", "Separate_Tag"];
 
-  const GentsSize = CoupleGentsSize.map((element) => {
-    return {
-      valueData: element,
-      lableValue: element,
-    };
-  });
-  const LadiesSize = CoupleLadiesSize.map((element) => {
-    return {
-      valueData: element,
-      lableValue: element,
-    };
-  });
   const options = optionsList.map((element) => {
     return {
       valueData: element,
@@ -1071,34 +1054,6 @@ function MultiSelectAndInput(props) {
     }
     return false;
   };
-  const itemCode = CategoryData.itemCode;
-
-  // THIS IS FOR GENTS SIZE FETCH API
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/L3/dropdown/couple/band/${itemCode}/COUPLE%20GENTS`
-      )
-      .then((res) => res)
-      .then((result) => {
-        setCoupleGentsSize(result.data.value);
-      })
-      .catch((error) => console.log("error==>", error));
-  }, [itemCode]);
-
-  // THIS IS FOR LADIES SIZE FETCH API
-  useEffect(() => {
-    axios
-      .get(
-        `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIML3/npim/L3/dropdown/couple/band/${itemCode}/COUPLE%20LADIES`
-      )
-      .then((res) => res)
-      .then((result) => {
-        setCoupleLadiesSize(result.data.value);
-      })
-      .catch((error) => console.log("error==>", error));
-  }, [itemCode]);
 
   return (
     <>
@@ -1141,140 +1096,6 @@ function MultiSelectAndInput(props) {
           </tbody>
         </table>
       </div>
-      <br />
-      {CategoryData.category === "COUPLE BAND" ? (
-        <div className="my-2">
-          <DropDownMaterialUI
-            labelName="Choose Tag"
-            onChangeHandler={(e) => setTagOption(e.target.value)}
-            optionsList={chooseOption}
-          />
-        </div>
-      ) : (
-        ""
-      )}
-
-      {tagOption === "Single_Tag" ? (
-        <div className={classes.drop_multi}>
-          <Typography align="center" color="primary">
-            {props.labelName}
-          </Typography>
-          <Multiselect
-            options={options}
-            displayValue="lableValue"
-            onSelect={onInternalSelectChange}
-            onRemove={onInternalRemoveChange}
-            showCheckbox={true}
-            closeOnSelect={true}
-            placeholder="Choose Size"
-            disablePreSelectedValues={true}
-          />
-          <table style={{ width: "100%", margin: 0 }}>
-            <tbody className="d-flex">
-              {options.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChange}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue) ? classes.show : classes.hide
-                  }
-                >
-                  <b style={{ fontSize: "12px" }}>Quantity</b>
-                  <input
-                    type="text"
-                    maxlength="1"
-                    id={`${row.lableValue}sq`}
-                    name={`${row.lableValue}sq`}
-                    className={classes.inputField}
-                    placeholder={row.lableValue}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        ""
-      )}
-      {tagOption === "Separate_Tag" ? (
-        <div className={classes.drop_multi}>
-          <Multiselect
-            options={GentsSize}
-            displayValue="lableValue"
-            onSelect={onInternalSelectChange}
-            onRemove={onInternalRemoveChange}
-            showCheckbox={true}
-            closeOnSelect={true}
-            placeholder="For Gents"
-            disablePreSelectedValues={true}
-          />
-          <table style={{ width: "100%", margin: 0 }}>
-            <tbody className="d-flex">
-              {GentsSize.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChange}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue) ? classes.show : classes.hide
-                  }
-                >
-                  <input
-                    type="text"
-                    maxlength="1"
-                    id={`${row.lableValue}sq`}
-                    name={`${row.lableValue}sq`}
-                    className={classes.inputField}
-                    placeholder={`${row.lableValue} Enter Size`}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        ""
-      )}
-      {tagOption === "Separate_Tag" ? (
-        <div className={classes.drop_multi}>
-          <Multiselect
-            options={LadiesSize}
-            displayValue="lableValue"
-            onSelect={onInternalSelectChange}
-            onRemove={onInternalRemoveChange}
-            showCheckbox={true}
-            closeOnSelect={true}
-            placeholder="For Ladies"
-            disablePreSelectedValues={true}
-          />
-          <table style={{ width: "100%", margin: 0 }}>
-            <tbody className="d-flex">
-              {LadiesSize.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChange}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue) ? classes.show : classes.hide
-                  }
-                >
-                  <input
-                    type="text"
-                    maxlength="1"
-                    id={`${row.lableValue}sq`}
-                    name={`${row.lableValue}sq`}
-                    className={classes.inputField}
-                    placeholder={`${row.lableValue} Enter Size`}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        ""
-      )}
     </>
   );
 }
