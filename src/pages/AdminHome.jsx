@@ -16,9 +16,9 @@ import ReportsAppBar from "../component/ReportsAppBar";
 import UpperHeader from "../component/UpperHeader";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import {
+  AdminLoginCredentials,
   DataGridForAdmin,
   SelectOfMUI,
-  TableForMasterSKU,
   TextFieldOfMUI,
 } from "../component/ComponentFroAdmin";
 import { useParams } from "react-router-dom";
@@ -708,7 +708,7 @@ function AdminHome(props) {
                         {masterExcels.rows.length > 0 && (
                           <Grid item xs={12} sm={12}>
                             <Container maxWidth="xl">
-                              <TableForMasterSKU
+                              <DataGridForAdmin
                                 col={masterExcels.cols}
                                 rows={masterExcels.rows}
                               />
@@ -760,7 +760,7 @@ function AdminHome(props) {
                           </Grid>
                         </Grid>
                         {adminLoginData.length > 0 && (
-                          <DataGridForAdmin
+                          <AdminLoginCredentials
                             col={AdminLoginHeading}
                             rows={adminLoginData}
                           />

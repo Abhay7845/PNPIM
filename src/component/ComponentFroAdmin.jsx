@@ -121,10 +121,9 @@ function CustomToolbar(props) {
   );
 }
 
-function TableForMasterSKU(props) {
+function DataGridForAdmin(props) {
   const classes = useStyles();
   const { col, rows, reportLabel } = props;
-  const [loginValue, SetLoginValue] = useState("");
   const column = col.map((element) => {
     return {
       field: element,
@@ -155,7 +154,7 @@ function TableForMasterSKU(props) {
     </>
   );
 }
-function DataGridForAdmin(props) {
+function AdminLoginCredentials(props) {
   const classes = useStyles();
   const { col, rows, reportLabel } = props;
   const [loginValue, SetLoginValue] = useState("");
@@ -257,5 +256,5 @@ export {
   SelectOfMUI,
   DataGridForAdmin,
   MultiSelectFroAdmin,
-  TableForMasterSKU,
+  AdminLoginCredentials,
 };
