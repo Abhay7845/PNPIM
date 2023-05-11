@@ -850,7 +850,7 @@ export default function DisplayValidationComponent(props) {
         digit === "H" ||
         digit === "S" ||
         digit === "O" ||
-        feedShowState.category.toUpperCase() === "OTHER" ||
+        feedShowState.category.toUpperCase() === "OTHERS" ||
         digit === "G" ||
         digit === "W" ||
         digit === "Y" ||
