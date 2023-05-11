@@ -764,7 +764,11 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-        {digit === "L" || feedShowState.category === "TOE RING" ? (
+        {digit === "L" ||
+        feedShowState.category
+          .toUpperCase()
+          .replace(/\s{2,}/g, " ")
+          .trim() === "TOE RING" ? (
           <Grid item xs={12} sm={12} className="my-3">
             <MultiSelectAndInput
               optionsList={SizeState}
@@ -775,7 +779,10 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-        {feedShowState.category === "FINGER RING" ? (
+        {feedShowState.category
+          .toUpperCase()
+          .replace(/\s{2,}/g, " ")
+          .trim() === "FINGER RING" ? (
           <Grid item xs={12} sm={12} className="my-3">
             <MultiSelectAndInput
               optionsList={SizeState}
@@ -797,7 +804,8 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-        {feedShowState.category === "COUPLE BAND" ? (
+        {feedShowState.category.toUpperCase().replace(/\s{2,}/g, " ") ===
+        "COUPLE BAND" ? (
           <div className="my-2 w-100">
             <DropDownMaterialUI
               labelName="Choose Tag"
@@ -842,7 +850,7 @@ export default function DisplayValidationComponent(props) {
         digit === "H" ||
         digit === "S" ||
         digit === "O" ||
-        feedShowState.category === "OTHER" ||
+        feedShowState.category.toUpperCase() === "OTHER" ||
         digit === "G" ||
         digit === "W" ||
         digit === "Y" ||
@@ -867,6 +875,7 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
+
         {cond ? (
           <Grid item xs={12} sm={12} className="my-3">
             <DropDownMaterialUI
