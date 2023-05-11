@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FormControl,
   Grid,
@@ -124,6 +124,7 @@ function CustomToolbar(props) {
 function DataGridForAdmin(props) {
   const classes = useStyles();
   const { col, rows, reportLabel } = props;
+  const [loginValue, SetLoginValue] = useState("");
   const column = col.map((element) => {
     return {
       field: element,
@@ -131,6 +132,10 @@ function DataGridForAdmin(props) {
       flex: 150,
     };
   });
+  const DataRows = rows.filter((eachRow) =>
+    eachRow.loginId.includes(loginValue.toUpperCase())
+  );
+
   return (
     <>
       <Container maxWidth="xl" className={classes.report}>
@@ -145,17 +150,21 @@ function DataGridForAdmin(props) {
             type="text"
             placeholder="Search By Login ID"
             className={classes.search}
-            value={props.searchValue}
-            onChange={props.handelSearch}
+            onChange={(e) => SetLoginValue(e.target.value)}
           />
         </Grid>
         <DataGrid
-          rows={rows}
+          rows={DataRows}
           columns={column}
           autoHeight={true}
           pageSize={50}
           components={{
             Toolbar: CustomToolbar,
+          }}
+          componentsProps={{
+            toolbar: {
+              rows: rows,
+            },
           }}
         />
       </Container>
