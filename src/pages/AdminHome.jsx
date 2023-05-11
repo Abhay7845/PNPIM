@@ -28,6 +28,7 @@ import SideAppBar from "../component/SideAppBar";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import UpdateIcon from "@material-ui/icons/Update";
+import { AdminData, AdminLoginHeading } from "../DataCenter/DataList";
 const useStyle = makeStyles({
   root: {
     margin: "0%",
@@ -39,6 +40,7 @@ function AdminHome(props) {
   const classes = useStyle();
   const { storeCode, rsoName } = useParams();
   const [barOpener, setBarOpener] = useState(false);
+  const [adminLoginData, setAdminLoginData] = useState([]);
   const [adminDeskBoardInput, setAdminDeskBoardInput] = useState({
     fromDate: "",
     fromStoreCode: "",
@@ -59,11 +61,11 @@ function AdminHome(props) {
   const [loading, setLoading] = useState(false);
   const [storeList, setStoreList] = useState([]);
   const [toStoreList, setToStoreList] = useState([]);
-  const [masterExcels, setmasterExcels] = useState({
+  const [masterExcels, setMasterExcels] = useState({
     rows: [],
     cols: [],
   });
-
+  console.log("masterExcels.rows==>", masterExcels);
   useEffect(() => {
     if (adminDeskBoardInput.fromDate) {
       restServicesCaller("storeList");
@@ -113,7 +115,7 @@ function AdminHome(props) {
     }
   }
 
-  function OnFileChnage(event) {
+  function OnFileChange(event) {
     setImmediate(() => {
       setMasterFile(event.target.files[0]);
     });
@@ -305,7 +307,7 @@ function AdminHome(props) {
           console.log("responseMaster==>", responce.data);
           if (responce.data.code === "1000") {
             setImmediate(() => {
-              setmasterExcels({
+              setMasterExcels({
                 rows: responce.data.value,
                 cols: responce.data.col,
               });
@@ -390,12 +392,25 @@ function AdminHome(props) {
   }
 
   function FetchCredentials() {
-    console.log("labelValue==>", labelValue);
     if (labelValue === "") {
       alert("Please Select Level");
+    } else {
+      setLoading(true);
+      axios
+        .get(
+          `https://tanishqdigitalnpim.titan.in:8443/PNPIM/NPIMADMIN/get/login/data/admin/${labelValue}`
+        )
+        .then((res) => res)
+        .then((response) => {
+          if (response.data.code === "1000") {
+            setAdminLoginData(response.data.value);
+          }
+          setLoading(false);
+        })
+        .catch((error) => console.log("error==>", error));
     }
   }
-
+  console.log("adminLoginData==>", adminLoginData);
   return (
     <>
       <CssBaseline />
@@ -553,7 +568,7 @@ function AdminHome(props) {
                                 <TextFieldOfMUI
                                   lable="Master File"
                                   type="file"
-                                  textFieldHandlerChange={OnFileChnage}
+                                  textFieldHandlerChange={OnFileChange}
                                   value={adminDeskBoardInput.masterFile}
                                   name="masterFile"
                                   required={true}
@@ -682,11 +697,9 @@ function AdminHome(props) {
                                     restServicesCaller("getMaster");
                                     setLoading(true);
                                   }}
-                                  color="inherit"
                                   variant="contained"
                                   fullWidth
-                                  style={{ minHeight: "100%" }}
-                                  endIcon="*"
+                                  color="primary"
                                 >
                                   See Master
                                 </Button>
@@ -725,7 +738,7 @@ function AdminHome(props) {
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Container maxWidth="xl">
+                      <Container maxWidth="sm">
                         <Grid container spacing={3}>
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
@@ -741,20 +754,20 @@ function AdminHome(props) {
                           <Grid item xs={12} sm={12}>
                             <Button
                               onClick={FetchCredentials}
-                              color="inherit"
                               variant="contained"
+                              color="primary"
                               fullWidth
-                              style={{ minHeight: "100%" }}
                             >
                               Fetch Credentials
                             </Button>
                           </Grid>
                         </Grid>
-                        <DataGridForAdmin
-                          col={masterExcels.cols}
-                          rows={masterExcels.rows}
-                          reportLable="Master Excel"
-                        />
+                        {adminLoginData.length > 0 && (
+                          <DataGridForAdmin
+                            col={AdminLoginHeading}
+                            rows={AdminData}
+                          />
+                        )}
                       </Container>
                     </AccordionDetails>
                   </Accordion>

@@ -120,16 +120,16 @@ function DataGridForAdmin(props) {
     return {
       field: element,
       sortable: false,
-      width: 135,
+      flex: 150,
     };
   });
   return (
     <>
       <Container maxWidth="xl" className={classes.report}>
-        <Typography align="center" variant="h6" color="secondary">
+        <Typography variant="h6" color="secondary">
           {reportLabel}
         </Typography>
-        <Typography align="center" variant="h6" color="primary">
+        <Typography color="primary" className="my-2">
           COUNT: {rows.length}
         </Typography>
         <DataGrid
@@ -137,7 +137,6 @@ function DataGridForAdmin(props) {
           columns={column}
           autoHeight={true}
           pageSize={50}
-          disableColumnSelector
           components={{
             Toolbar: CustomToolbar,
           }}
