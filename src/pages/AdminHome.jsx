@@ -606,7 +606,7 @@ function AdminHome(props) {
                         variant="subtitle1"
                         align="left"
                       >
-                        Update Status
+                        Update Portal Status
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
