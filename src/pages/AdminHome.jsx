@@ -18,6 +18,7 @@ import AddSharpIcon from "@material-ui/icons/AddSharp";
 import {
   DataGridForAdmin,
   SelectOfMUI,
+  TableForMasterSKU,
   TextFieldOfMUI,
 } from "../component/ComponentFroAdmin";
 import { useParams } from "react-router-dom";
@@ -65,7 +66,6 @@ function AdminHome(props) {
     rows: [],
     cols: [],
   });
-  console.log("masterExcels.rows==>", masterExcels);
   useEffect(() => {
     if (adminDeskBoardInput.fromDate) {
       restServicesCaller("storeList");
@@ -304,7 +304,6 @@ function AdminHome(props) {
       axios
         .get(`${HostManager.mailHostAdmin}/npim/get/sku/master`)
         .then((responce) => {
-          console.log("responseMaster==>", responce.data);
           if (responce.data.code === "1000") {
             setImmediate(() => {
               setMasterExcels({
@@ -410,7 +409,6 @@ function AdminHome(props) {
         .catch((error) => console.log("error==>", error));
     }
   }
-  console.log("adminLoginData==>", adminLoginData);
   return (
     <>
       <CssBaseline />
@@ -710,10 +708,9 @@ function AdminHome(props) {
                         {masterExcels.rows.length > 0 && (
                           <Grid item xs={12} sm={12}>
                             <Container maxWidth="xl">
-                              <DataGridForAdmin
+                              <TableForMasterSKU
                                 col={masterExcels.cols}
                                 rows={masterExcels.rows}
-                                reportLable="Master Excel"
                               />
                             </Container>
                           </Grid>
@@ -762,10 +759,10 @@ function AdminHome(props) {
                             </Button>
                           </Grid>
                         </Grid>
-                        {AdminData.length > 0 && (
+                        {adminLoginData.length > 0 && (
                           <DataGridForAdmin
                             col={AdminLoginHeading}
-                            rows={AdminData}
+                            rows={adminLoginData}
                           />
                         )}
                       </Container>

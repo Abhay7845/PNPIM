@@ -121,6 +121,40 @@ function CustomToolbar(props) {
   );
 }
 
+function TableForMasterSKU(props) {
+  const classes = useStyles();
+  const { col, rows, reportLabel } = props;
+  const [loginValue, SetLoginValue] = useState("");
+  const column = col.map((element) => {
+    return {
+      field: element,
+      sortable: false,
+      flex: 150,
+    };
+  });
+
+  return (
+    <>
+      <Container maxWidth="xl" className={classes.report}>
+        <Typography variant="h6" color="secondary">
+          {reportLabel}
+        </Typography>
+        <Typography color="primary" className="my-2">
+          COUNT: {rows.length}
+        </Typography>
+        <DataGrid
+          rows={rows}
+          columns={column}
+          autoHeight={true}
+          pageSize={50}
+          components={{
+            Toolbar: CustomToolbar,
+          }}
+        />
+      </Container>
+    </>
+  );
+}
 function DataGridForAdmin(props) {
   const classes = useStyles();
   const { col, rows, reportLabel } = props;
@@ -135,7 +169,6 @@ function DataGridForAdmin(props) {
   const DataRows = rows.filter((eachRow) =>
     eachRow.loginId.includes(loginValue.toUpperCase())
   );
-
   return (
     <>
       <Container maxWidth="xl" className={classes.report}>
@@ -219,4 +252,10 @@ function MultiSelectFroAdmin(props) {
 }
 
 export default ComponentFroAdmin;
-export { TextFieldOfMUI, SelectOfMUI, DataGridForAdmin, MultiSelectFroAdmin };
+export {
+  TextFieldOfMUI,
+  SelectOfMUI,
+  DataGridForAdmin,
+  MultiSelectFroAdmin,
+  TableForMasterSKU,
+};
