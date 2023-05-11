@@ -26,6 +26,14 @@ const useStyles = makeStyles({
     margin: "0%",
     padding: "0%",
   },
+  search: {
+    border: 0,
+    outline: "none",
+    background: "none",
+    borderBottom: "1px solid #000000",
+    marginLeft: "-15px",
+    marginBottom: "10px",
+  },
 });
 
 const ComponentFroAdmin = () => {
@@ -132,6 +140,15 @@ function DataGridForAdmin(props) {
         <Typography color="primary" className="my-2">
           COUNT: {rows.length}
         </Typography>
+        <Grid item className="mx-3">
+          <input
+            type="text"
+            placeholder="Search By Login ID"
+            className={classes.search}
+            value={props.searchValue}
+            onChange={props.handelSearch}
+          />
+        </Grid>
         <DataGrid
           rows={rows}
           columns={column}

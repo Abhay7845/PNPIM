@@ -764,7 +764,17 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-
+        {digit === "L" || feedShowState.category === "TOE RING" ? (
+          <Grid item xs={12} sm={12} className="my-3">
+            <MultiSelectAndInput
+              optionsList={SizeState}
+              onChangeHandler={sizeQuantityResHandler}
+              CategoryData={feedShowState}
+            />
+          </Grid>
+        ) : (
+          ""
+        )}
         {feedShowState.category === "FINGER RING" ? (
           <Grid item xs={12} sm={12} className="my-3">
             <MultiSelectAndInput
@@ -778,7 +788,6 @@ export default function DisplayValidationComponent(props) {
                   labelName="Findings"
                   onChangeHandler={findingsResHandler}
                   optionsList={findingsOptions}
-                  // valueData=""
                 />
               </Grid>
             ) : (
@@ -833,7 +842,7 @@ export default function DisplayValidationComponent(props) {
         digit === "H" ||
         digit === "S" ||
         digit === "O" ||
-        digit === "X" ||
+        feedShowState.category === "OTHER" ||
         digit === "G" ||
         digit === "W" ||
         digit === "Y" ||
@@ -849,7 +858,6 @@ export default function DisplayValidationComponent(props) {
                   labelName="Findings"
                   onChangeHandler={findingsResHandler}
                   optionsList={findingsOptions}
-                  // valueData=""
                 />
               </Grid>
             ) : (
@@ -865,7 +873,6 @@ export default function DisplayValidationComponent(props) {
               labelName="Stone Quality"
               onChangeHandler={stoneQualityResHandler}
               optionsList={stoneOptionList}
-              // valueData=""
             />
           </Grid>
         ) : null}

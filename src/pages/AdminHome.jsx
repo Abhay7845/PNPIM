@@ -762,7 +762,7 @@ function AdminHome(props) {
                             </Button>
                           </Grid>
                         </Grid>
-                        {adminLoginData.length > 0 && (
+                        {AdminData.length > 0 && (
                           <DataGridForAdmin
                             col={AdminLoginHeading}
                             rows={AdminData}
