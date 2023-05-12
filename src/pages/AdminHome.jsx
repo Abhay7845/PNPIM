@@ -49,7 +49,6 @@ function AdminHome(props) {
     level: "",
     status: "",
   });
-
   const [masterFile, setMasterFile] = useState("");
   const [labelValue, setLabelValue] = useState("");
   const [alertState, setAlertState] = useState({
@@ -188,7 +187,7 @@ function AdminHome(props) {
             } else {
               setImmediate(() => {
                 setAlertState({
-                  lertFlag1: true,
+                  alertFlag1: true,
                   alertSeverity: "error",
                   alertMessage: response.data.value,
                 });
@@ -280,7 +279,6 @@ function AdminHome(props) {
           },
           (error) => {
             console.log(error);
-            alert(error);
           }
         );
       } else {
@@ -292,37 +290,6 @@ function AdminHome(props) {
           });
         });
       }
-    } else if (triggerFrom === "getMaster") {
-      axios
-        .get(`${HostManager.mailHostAdmin}/npim/get/sku/master`)
-        .then((response) => {
-          if (response.data.code === "1000") {
-            setImmediate(() => {
-              setMasterExcels({
-                rows: response.data.value,
-                cols: response.data.col,
-              });
-            });
-          } else {
-            setImmediate(() => {
-              setAlertState({
-                alertFlag4: true,
-                alertSeverity: "error",
-                alertMessage: response.data.value,
-              });
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setImmediate(() => {
-            setAlertState({
-              alertFlag4: true,
-              alertSeverity: "error",
-              alertMessage: error,
-            });
-          });
-        });
     } else if (triggerFrom === "status") {
       if (adminDeskBoardInput.level && adminDeskBoardInput.status) {
         axios
@@ -333,7 +300,6 @@ function AdminHome(props) {
           .then(
             (response) => {
               console.log(response.data);
-
               if (response.data.code === "1000") {
                 setImmediate(() => {
                   setAlertState({
@@ -373,13 +339,30 @@ function AdminHome(props) {
         });
       }
     }
-
     setTimeout(() => {
       setImmediate(() => {
         setLoading(false);
       });
     }, 3000);
   }
+
+  // GET SKU MASTER DATA
+  const GetSKUMasterData = () => {
+    setLoading(true);
+    axios
+      .get(`${HostManager.mailHostAdmin}/npim/get/sku/master`)
+      .then((res) => res)
+      .then((response) => {
+        if (response.data.code === "1000") {
+          setMasterExcels({
+            rows: response.data.value,
+            cols: response.data.col,
+          });
+          setLoading(false);
+        }
+      })
+      .catch((error) => console.log("error==>", error));
+  };
 
   function FetchCredentials() {
     if (labelValue === "") {
@@ -498,7 +481,6 @@ function AdminHome(props) {
                             <Button
                               onClick={() => {
                                 restServicesCaller("copy");
-                                setLoading(true);
                               }}
                               color="inherit"
                               variant="contained"
@@ -575,9 +557,10 @@ function AdminHome(props) {
                                   If you want to master SKU template then please
                                   click &nbsp;
                                   <a
-                                    href={`${HostManager.mailHostAdmin}/npim/master/template/export`}
+                                    href="https://docs.google.com/spreadsheets/d/1AoThWIV-h0xRdn1ONW_qABM_CvIsVicBx2JiehwODeA/edit#gid=0"
+                                    target="_blank"
                                   >
-                                    MasterTemplate
+                                    Master Template
                                   </a>
                                 </Typography>
                                 <br />
@@ -707,16 +690,20 @@ function AdminHome(props) {
                                 )}
                               </Grid>
                               <Grid item xs={12} sm={12}>
-                                <Button
-                                  onClick={() => {
-                                    restServicesCaller("getMaster");
-                                  }}
-                                  variant="contained"
-                                  fullWidth
-                                  color="primary"
+                                <button
+                                  className="btn btn-primary w-100"
+                                  onClick={GetSKUMasterData}
                                 >
-                                  See Master
-                                </Button>
+                                  {loading ? (
+                                    <span
+                                      className="spinner-border spinner-border-sm text-light"
+                                      role="status"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <span>SEE MASTER</span>
+                                  )}
+                                </button>
                               </Grid>
                             </Grid>
                           </Container>
