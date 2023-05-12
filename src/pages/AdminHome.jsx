@@ -29,7 +29,7 @@ import SideAppBar from "../component/SideAppBar";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import UpdateIcon from "@material-ui/icons/Update";
-import { AdminData, AdminLoginHeading } from "../DataCenter/DataList";
+import { AdminLoginHeading } from "../DataCenter/DataList";
 const useStyle = makeStyles({
   root: {
     margin: "0%",
@@ -82,7 +82,7 @@ function AdminHome(props) {
     {
       id: 2,
       name: "Day End Report",
-      link: `/dayEndreportForAdmin/${storeCode}/${rsoName}`,
+      link: `/dayEndReportForAdmin/${storeCode}/${rsoName}`,
       icon: "ReportIcon",
     },
     {
@@ -233,7 +233,6 @@ function AdminHome(props) {
             },
             (error) => {
               console.log(error);
-              alert(error);
             }
           );
         restServicesCaller("toStoreList");
@@ -362,7 +361,6 @@ function AdminHome(props) {
                   alertMessage: error,
                 });
               });
-              // alert(error);
             }
           );
       } else {
