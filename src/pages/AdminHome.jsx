@@ -286,7 +286,7 @@ function AdminHome(props) {
           setAlertState({
             alertFlag2: true,
             alertSeverity: "error",
-            alertMessage: "Invalid Input Passing...!",
+            alertMessage: "Please Upload File",
           });
         });
       }
