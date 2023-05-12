@@ -544,7 +544,7 @@ function AdminHome(props) {
                               <h6 className="text-justify">
                                 <b className="text-dark">2.</b> **Please make
                                 sure that GENDER & SHAPE column is not blank for
-                                BANGLE Category.
+                                BANGLE CATEGORY.
                               </h6>
                               <h6 className="text-justify">
                                 <b className="text-dark">3.</b> **Please make
@@ -555,8 +555,8 @@ function AdminHome(props) {
                               <h6 className="text-justify">
                                 <b className="text-dark">4.</b> **Please make
                                 sure that ChildNodes_N & ChildNodes_E column is
-                                not blank for Categories like G CATEGORY, SET0,
-                                SET1, SET2 & T-Category.
+                                not blank for Categories like G-CATEGORY, SET0,
+                                SET1, SET2 & T-CATEGORY.
                               </h6>
                               <hr />
                             </Grid>
