@@ -296,12 +296,12 @@ function AdminHome(props) {
     } else if (triggerFrom === "getMaster") {
       axios
         .get(`${HostManager.mailHostAdmin}/npim/get/sku/master`)
-        .then((responce) => {
-          if (responce.data.code === "1000") {
+        .then((response) => {
+          if (response.data.code === "1000") {
             setImmediate(() => {
               setMasterExcels({
-                rows: responce.data.value,
-                cols: responce.data.col,
+                rows: response.data.value,
+                cols: response.data.col,
               });
             });
           } else {
@@ -309,7 +309,7 @@ function AdminHome(props) {
               setAlertState({
                 alertFlag4: true,
                 alertSeverity: "error",
-                alertMessage: responce.data.value,
+                alertMessage: response.data.value,
               });
             });
           }
