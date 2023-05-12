@@ -642,7 +642,6 @@ function AdminHome(props) {
                             <Button
                               onClick={() => {
                                 restServicesCaller("status");
-                                setLoading(true);
                               }}
                               color="inherit"
                               variant="contained"
