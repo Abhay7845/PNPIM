@@ -693,7 +693,6 @@ function AdminHome(props) {
                                 <Button
                                   onClick={() => {
                                     restServicesCaller("getMaster");
-                                    setLoading(true);
                                   }}
                                   variant="contained"
                                   fullWidth
@@ -739,7 +738,7 @@ function AdminHome(props) {
                         <Grid container spacing={3}>
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
-                              lable="Level"
+                              label="Level"
                               optionList={["L1", "L2", "L3"]}
                               selectHandleChange={(e) =>
                                 setLabelValue(e.target.value)
@@ -749,14 +748,20 @@ function AdminHome(props) {
                             />
                           </Grid>
                           <Grid item xs={12} sm={12}>
-                            <Button
+                            <button
+                              className="btn btn-primary w-100"
                               onClick={FetchCredentials}
-                              variant="contained"
-                              color="primary"
-                              fullWidth
                             >
-                              Fetch Credentials
-                            </Button>
+                              {loading ? (
+                                <span
+                                  className="spinner-border spinner-border-sm text-light"
+                                  role="status"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <span>FETCH CREDENTIALS</span>
+                              )}
+                            </button>
                           </Grid>
                         </Grid>
                         {adminLoginData.length > 0 && (

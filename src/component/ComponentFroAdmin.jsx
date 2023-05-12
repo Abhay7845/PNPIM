@@ -87,18 +87,18 @@ const TextFieldOfMUI = (props) => {
 };
 
 const SelectOfMUI = (props) => {
-  const { lable, optionList, selectHandleChange, value, name } = props;
+  const { label, optionList, selectHandleChange, value, name } = props;
   return (
     <>
       <FormControl variant="outlined" fullWidth>
-        <InputLabel id="demo-simple-select-outlined-label">{lable} </InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={value}
           onChange={selectHandleChange}
           name={name}
-          label={lable}
+          label={label}
         >
           {optionList.map((element) => {
             return (
@@ -113,10 +113,10 @@ const SelectOfMUI = (props) => {
   );
 };
 
-function CustomToolbar(props) {
+function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarExport csvOptions={{ fileName: "DayEndReport" }} />
+      <GridToolbarExport csvOptions={{ fileName: "Table Data" }} />
     </GridToolbarContainer>
   );
 }
@@ -156,7 +156,7 @@ function DataGridForAdmin(props) {
 }
 function AdminLoginCredentials(props) {
   const classes = useStyles();
-  const { col, rows, reportLabel } = props;
+  const { col, rows } = props;
   const [loginValue, SetLoginValue] = useState("");
   const column = col.map((element) => {
     return {
@@ -171,20 +171,23 @@ function AdminLoginCredentials(props) {
   return (
     <>
       <Container maxWidth="xl" className={classes.report}>
-        <Typography variant="h6" color="secondary">
-          {reportLabel}
-        </Typography>
-        <Typography color="primary" className="my-2">
-          COUNT: {rows.length}
-        </Typography>
-        <Grid item className="mx-3">
+        <br />
+        <div className="d-flex justify-content-between my-1 mx-3">
           <input
             type="text"
             placeholder="Search By Login ID"
             className={classes.search}
             onChange={(e) => SetLoginValue(e.target.value)}
           />
-        </Grid>
+          <Typography>
+            COUNT:-
+            {DataRows.length === 0 ? (
+              <b className="text-danger">DATA NOT FOUND</b>
+            ) : (
+              <b className="text-success"> {DataRows.length}</b>
+            )}
+          </Typography>
+        </div>
         <DataGrid
           rows={DataRows}
           columns={column}
