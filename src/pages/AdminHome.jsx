@@ -134,42 +134,38 @@ function AdminHome(props) {
     setImmediate(() => {
       setLoading(true);
     });
-
     if (triggerFrom === "copy") {
       if (
         adminDeskBoardInput.fromStoreCode &&
         adminDeskBoardInput.toStoreCode
       ) {
-        setTimeout(() => {
-          axios
-            .get(
-              `${HostManager.mailHostAdmin}/npim/store/response/copy/${adminDeskBoardInput.fromStoreCode}/${adminDeskBoardInput.toStoreCode}`
-            )
-            .then((responce) => {
-              console.log(responce.data);
-              if (responce.data.code === "1000") {
-                setImmediate(() => {
-                  setAlertState({
-                    alertFlag1: true,
-                    alertSeverity: "success",
-                    alertMessage: responce.data.value,
-                  });
+        axios
+          .get(
+            `${HostManager.mailHostAdmin}/npim/store/response/copy/${adminDeskBoardInput.fromStoreCode}/${adminDeskBoardInput.toStoreCode}`
+          )
+          .then((response) => {
+            console.log("response==>", response.data);
+            if (response.data.code === "1000") {
+              setImmediate(() => {
+                setAlertState({
+                  alertFlag1: true,
+                  alertSeverity: "success",
+                  alertMessage: response.data.value,
                 });
-              } else {
-                setImmediate(() => {
-                  setAlertState({
-                    alertFlag1: true,
-                    alertSeverity: "error",
-                    alertMessage: responce.data.value,
-                  });
+              });
+            } else {
+              setImmediate(() => {
+                setAlertState({
+                  alertFlag1: true,
+                  alertSeverity: "error",
+                  alertMessage: response.data.value,
                 });
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-              alert(error);
-            });
-        }, 1000);
+              });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       } else {
         setImmediate(() => {
           setAlertState({
@@ -183,25 +179,24 @@ function AdminHome(props) {
       setTimeout(() => {
         axios
           .get(`${HostManager.mailHostAdmin}/npim/to/store/list`)
-          .then((responce) => {
-            console.log(responce.data);
-            if (responce.data.code === "1000") {
+          .then((response) => {
+            console.log("response==>", response.data);
+            if (response.data.code === "1000") {
               setImmediate(() => {
-                setToStoreList(responce.data.value);
+                setToStoreList(response.data.value);
               });
             } else {
               setImmediate(() => {
                 setAlertState({
                   lertFlag1: true,
                   alertSeverity: "error",
-                  alertMessage: responce.data.value,
+                  alertMessage: response.data.value,
                 });
               });
             }
           })
           .catch((error) => {
             console.log(error);
-            alert(error);
           });
       }, 1000);
     } else if (triggerFrom === "storeList") {
@@ -210,11 +205,9 @@ function AdminHome(props) {
           .get(
             `${HostManager.mailHostAdmin}/npim/from/store/list/${adminDeskBoardInput.fromDate}`
           )
-
           .then(
             (response) => {
               console.log(response.data);
-
               if (response.data.code === "1000") {
                 setImmediate(() => {
                   setStoreList(response.data.value);
@@ -475,7 +468,7 @@ function AdminHome(props) {
                           </Grid>
                           <Grid item xs={12} sm={12}>
                             <TextFieldOfMUI
-                              lable="From Date"
+                              label="From Date"
                               type="date"
                               textFieldHandlerChange={onChangeInputHandler}
                               value={adminDeskBoardInput.fromDate}
@@ -485,7 +478,7 @@ function AdminHome(props) {
                           </Grid>
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
-                              lable="From Store Code"
+                              label="From Store Code"
                               optionList={storeList.map(
                                 (element) => element.strCode
                               )}
@@ -496,7 +489,7 @@ function AdminHome(props) {
                           </Grid>
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
-                              lable="To Store Code"
+                              label="To Store Code"
                               optionList={toStoreList}
                               selectHandleChange={onChangeInputHandler}
                               value={adminDeskBoardInput.toStoreCode}
@@ -542,6 +535,33 @@ function AdminHome(props) {
                       <Grid container spacing={4}>
                         <Grid item xs={12} sm={12}>
                           <Container maxWidth="sm">
+                            <Grid className="text-danger">
+                              <h6 className="text-justify">
+                                <b className="text-dark">1.</b> **Please make
+                                sure that GENDER column is not blank for
+                                Categories like BRACELET, COUPLE BAND, FINGER
+                                RING, ANKLETS, TOE RING, MANGALSUTRA, CHAIN &
+                                WAIST BELT.
+                              </h6>
+                              <h6 className="text-justify">
+                                <b className="text-dark">2.</b> **Please make
+                                sure that GENDER & SHAPE column is not blank for
+                                BANGLE Category.
+                              </h6>
+                              <h6 className="text-justify">
+                                <b className="text-dark">3.</b> **Please make
+                                sure that FINDINGS column is not blank for
+                                Categories like DROP EARRING JHUMKA, & STUD
+                                EARRING.
+                              </h6>
+                              <h6 className="text-justify">
+                                <b className="text-dark">4.</b> **Please make
+                                sure that ChildNodes_N & ChildNodes_E column is
+                                not blank for Categories like G CATEGORY, SET0,
+                                SET1, SET2 & T-Category.
+                              </h6>
+                              <hr />
+                            </Grid>
                             <Grid container spacing={3}>
                               <Grid item xs={12} sm={12}>
                                 {alertState.alertFlag2 ? (
@@ -564,7 +584,7 @@ function AdminHome(props) {
                                 </Typography>
                                 <br />
                                 <TextFieldOfMUI
-                                  lable="Master File"
+                                  label="Master File"
                                   type="file"
                                   textFieldHandlerChange={OnFileChange}
                                   value={adminDeskBoardInput.masterFile}
@@ -576,7 +596,6 @@ function AdminHome(props) {
                                 <Button
                                   onClick={() => {
                                     restServicesCaller("master");
-                                    setLoading(true);
                                   }}
                                   color="inherit"
                                   variant="contained"
@@ -624,7 +643,7 @@ function AdminHome(props) {
 
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
-                              lable="Level"
+                              label="Level"
                               optionList={["L1", "L2", "L3"]}
                               selectHandleChange={onChangeInputHandler}
                               value={adminDeskBoardInput.level}
@@ -633,7 +652,7 @@ function AdminHome(props) {
                           </Grid>
                           <Grid item xs={12} sm={12}>
                             <SelectOfMUI
-                              lable="Status"
+                              label="Status"
                               optionList={["Open", "Close"]}
                               selectHandleChange={onChangeInputHandler}
                               value={adminDeskBoardInput.status}

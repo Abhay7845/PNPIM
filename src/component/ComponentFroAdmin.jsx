@@ -53,7 +53,7 @@ const ComponentFroAdmin = () => {
 
 const TextFieldOfMUI = (props) => {
   const {
-    lable,
+    label,
     type,
     textFieldHandlerChange,
     value,
@@ -68,7 +68,7 @@ const TextFieldOfMUI = (props) => {
       <TextField
         fullWidth
         id="date"
-        label={lable}
+        label={label}
         type={type}
         variant="outlined"
         onChange={textFieldHandlerChange}
