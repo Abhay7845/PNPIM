@@ -114,6 +114,44 @@ function AdminHome(props) {
     }
   }
 
+  const copyIndentsStore = () => {
+    if (
+      !adminDeskBoardInput.fromStoreCode ||
+      !adminDeskBoardInput.toStoreCode
+    ) {
+      setAlertState({
+        alertFlag1: true,
+        alertSeverity: "error",
+        alertMessage: "Please Select Valid Input",
+      });
+    } else {
+      setLoading(true);
+      axios
+        .get(
+          `${HostManager.mailHostAdmin}/npim/store/response/copy/${adminDeskBoardInput.fromStoreCode}/${adminDeskBoardInput.toStoreCode}`
+        )
+        .then((res) => res)
+        .then((response) => {
+          if (response.data.code === "1000") {
+            setAlertState({
+              alertFlag1: true,
+              alertSeverity: "success",
+              alertMessage: response.data.value,
+            });
+            setLoading(false);
+          } else if (response.data.code === "1001") {
+            setAlertState({
+              alertFlag1: true,
+              alertSeverity: "error",
+              alertMessage: response.data.value,
+            });
+            setLoading(false);
+          }
+        })
+        .catch((error) => console.log("error==>", error));
+    }
+  };
+
   function restServicesCaller(triggerFrom) {
     setImmediate(() => {
       setAlertState({
@@ -127,48 +165,7 @@ function AdminHome(props) {
     setImmediate(() => {
       setLoading(true);
     });
-    if (triggerFrom === "copy") {
-      if (
-        adminDeskBoardInput.fromStoreCode &&
-        adminDeskBoardInput.toStoreCode
-      ) {
-        axios
-          .get(
-            `${HostManager.mailHostAdmin}/npim/store/response/copy/${adminDeskBoardInput.fromStoreCode}/${adminDeskBoardInput.toStoreCode}`
-          )
-          .then((response) => {
-            console.log("response==>", response.data);
-            if (response.data.code === "1000") {
-              setImmediate(() => {
-                setAlertState({
-                  alertFlag1: true,
-                  alertSeverity: "success",
-                  alertMessage: response.data.value,
-                });
-              });
-            } else {
-              setImmediate(() => {
-                setAlertState({
-                  alertFlag1: true,
-                  alertSeverity: "error",
-                  alertMessage: response.data.value,
-                });
-              });
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        setImmediate(() => {
-          setAlertState({
-            alertFlag1: true,
-            alertSeverity: "error",
-            alertMessage: "Invalid Input Passing...!",
-          });
-        });
-      }
-    } else if (triggerFrom === "toStoreList") {
+    if (triggerFrom === "toStoreList") {
       setTimeout(() => {
         axios
           .get(`${HostManager.mailHostAdmin}/npim/to/store/list`)
@@ -462,18 +459,26 @@ function AdminHome(props) {
                             />
                           </Grid>
                           <Grid item xs={12} sm={12}>
-                            <Button
-                              onClick={() => {
-                                restServicesCaller("copy");
-                              }}
-                              color="inherit"
-                              variant="contained"
-                              fullWidth
-                              style={{ minHeight: "100%" }}
-                              endIcon={<FileCopyIcon />}
+                            <button
+                              className="btn btn-primary w-100"
+                              onClick={copyIndentsStore}
                             >
-                              Copy
-                            </Button>
+                              {loading ? (
+                                <span
+                                  className="spinner-border spinner-border-sm text-light"
+                                  role="status"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <span>
+                                  COPY
+                                  <FileCopyIcon
+                                    className="mx-1 "
+                                    style={{ fontSize: "18px" }}
+                                  />
+                                </span>
+                              )}
+                            </button>
                           </Grid>
                         </Grid>
                       </Container>
@@ -572,7 +577,7 @@ function AdminHome(props) {
                                     />
                                   ) : (
                                     <span>
-                                      UPLOAD{" "}
+                                      UPLOAD
                                       <CloudUploadIcon
                                         style={{ marginTop: "-5px" }}
                                       />
