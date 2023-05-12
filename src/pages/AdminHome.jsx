@@ -298,6 +298,7 @@ function AdminHome(props) {
     if (!masterFile) {
       alert("Please Choose File");
     } else {
+      setLoading(true);
       let formData = new FormData();
       formData.append("masterFile", masterFile);
       axios({
@@ -315,12 +316,14 @@ function AdminHome(props) {
               alertSeverity: "success",
               alertMessage: response.data.value,
             });
+            setLoading(false);
           } else if (response.data.code === "1001") {
             setAlertState({
               alertFlag2: true,
               alertSeverity: "error",
               alertMessage: response.data.value,
             });
+            setLoading(false);
           }
         })
         .catch((error) => console.log("error==>", error));
@@ -557,16 +560,25 @@ function AdminHome(props) {
                                 />
                               </Grid>
                               <Grid item xs={12} sm={12}>
-                                <Button
+                                <button
+                                  className="btn btn-primary w-100"
                                   onClick={uploadFileData}
-                                  color="inherit"
-                                  variant="contained"
-                                  fullWidth
-                                  style={{ minHeight: "100%" }}
-                                  endIcon={<CloudUploadIcon />}
                                 >
-                                  Upload here
-                                </Button>
+                                  {loading ? (
+                                    <span
+                                      className="spinner-border spinner-border-sm text-light"
+                                      role="status"
+                                      aria-hidden="true"
+                                    />
+                                  ) : (
+                                    <span>
+                                      UPLOAD{" "}
+                                      <CloudUploadIcon
+                                        style={{ marginTop: "-5px" }}
+                                      />
+                                    </span>
+                                  )}
+                                </button>
                               </Grid>
                             </Grid>
                           </Container>
