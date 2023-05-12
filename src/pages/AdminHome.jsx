@@ -339,11 +339,9 @@ function AdminHome(props) {
         });
       }
     }
-    setTimeout(() => {
-      setImmediate(() => {
-        setLoading(false);
-      });
-    }, 3000);
+    setImmediate(() => {
+      setLoading(false);
+    });
   }
 
   // GET SKU MASTER DATA
