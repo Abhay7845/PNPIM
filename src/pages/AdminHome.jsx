@@ -114,12 +114,6 @@ function AdminHome(props) {
     }
   }
 
-  function OnFileChange(event) {
-    setImmediate(() => {
-      setMasterFile(event.target.files[0]);
-    });
-  }
-
   function restServicesCaller(triggerFrom) {
     setImmediate(() => {
       setAlertState({
@@ -244,52 +238,6 @@ function AdminHome(props) {
           });
         });
       }
-    } else if (triggerFrom === "master") {
-      if (masterFile) {
-        let formData = new FormData();
-        console.log(masterFile, "master");
-        formData.append("masterFile", masterFile);
-        axios({
-          method: "post",
-          url: `${HostManager.mailHostAdmin}npim/insert/sku/master`,
-          data: formData,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }).then(
-          (response) => {
-            console.log(response.data);
-            if (response.data.code === "1000") {
-              setImmediate(() => {
-                setAlertState({
-                  alertFlag2: true,
-                  alertSeverity: "success",
-                  alertMessage: response.data.value,
-                });
-              });
-            } else {
-              setImmediate(() => {
-                setAlertState({
-                  alertFlag2: true,
-                  alertSeverity: "error",
-                  alertMessage: response.data.value,
-                });
-              });
-            }
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      } else {
-        setImmediate(() => {
-          setAlertState({
-            alertFlag2: true,
-            alertSeverity: "error",
-            alertMessage: "Please Upload File",
-          });
-        });
-      }
     } else if (triggerFrom === "status") {
       if (adminDeskBoardInput.level && adminDeskBoardInput.status) {
         axios
@@ -343,6 +291,41 @@ function AdminHome(props) {
       setLoading(false);
     });
   }
+
+  // UPLOAD FILE DATA
+
+  const uploadFileData = () => {
+    if (!masterFile) {
+      alert("Please Choose File");
+    } else {
+      let formData = new FormData();
+      formData.append("masterFile", masterFile);
+      axios({
+        method: "post",
+        url: `${HostManager.mailHostAdmin}npim/insert/sku/master`,
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((response) => {
+          if (response.data.code === "1000") {
+            setAlertState({
+              alertFlag2: true,
+              alertSeverity: "success",
+              alertMessage: response.data.value,
+            });
+          } else if (response.data.code === "1001") {
+            setAlertState({
+              alertFlag2: true,
+              alertSeverity: "error",
+              alertMessage: response.data.value,
+            });
+          }
+        })
+        .catch((error) => console.log("error==>", error));
+    }
+  };
 
   // GET SKU MASTER DATA
   const GetSKUMasterData = () => {
@@ -565,7 +548,9 @@ function AdminHome(props) {
                                 <TextFieldOfMUI
                                   label="Master File"
                                   type="file"
-                                  textFieldHandlerChange={OnFileChange}
+                                  textFieldHandlerChange={(e) =>
+                                    setMasterFile(e.target.files[0])
+                                  }
                                   value={adminDeskBoardInput.masterFile}
                                   name="masterFile"
                                   required={true}
@@ -573,16 +558,14 @@ function AdminHome(props) {
                               </Grid>
                               <Grid item xs={12} sm={12}>
                                 <Button
-                                  onClick={() => {
-                                    restServicesCaller("master");
-                                  }}
+                                  onClick={uploadFileData}
                                   color="inherit"
                                   variant="contained"
                                   fullWidth
                                   style={{ minHeight: "100%" }}
                                   endIcon={<CloudUploadIcon />}
                                 >
-                                  Upload
+                                  Upload here
                                 </Button>
                               </Grid>
                             </Grid>
