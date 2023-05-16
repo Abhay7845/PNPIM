@@ -18,6 +18,7 @@ export default function DisplayValidationComponent(props) {
   const [SizeState, setSizeState] = useState([]);
   const [ChildNodeV, setChildNodeV] = useState([]);
   const [ChildNodeF, setChildNodeF] = useState([]);
+  const [ChildNodeN, setChildNodeN] = useState([]);
   const [CoupleGentsSize, setCoupleGentsSize] = useState([]);
   const [CoupleLadiesSize, setCoupleLadiesSize] = useState([]);
   const [sizeRow, setSizeRow] = useState();
@@ -112,7 +113,6 @@ export default function DisplayValidationComponent(props) {
       lableValue: element,
     };
   });
-
   useEffect(() => {
     axios
       .get(`${HostManager.mainHostL3}/npim/size/dropdown/${itemCode}`)
@@ -131,6 +131,7 @@ export default function DisplayValidationComponent(props) {
   //FETCH CHILD NODE ITEM CODE
   const childNodeV = feedShowState.childNodeV;
   const childNodeF = feedShowState.childNodeF;
+  const childNodeN = feedShowState.childNodesN;
 
   useEffect(() => {
     axios
@@ -145,7 +146,7 @@ export default function DisplayValidationComponent(props) {
         }
       })
       .catch((error) => console.log("error==>", error));
-  }, []);
+  }, [ChildNodeV]);
 
   useEffect(() => {
     axios
@@ -160,7 +161,21 @@ export default function DisplayValidationComponent(props) {
         }
       })
       .catch((error) => console.log("error==>", error));
-  }, [childNodeV]);
+  }, [childNodeF]);
+  useEffect(() => {
+    axios
+      .get(`${HostManager.mainHostL3}/npim/size/dropdown/${childNodeN}`)
+      .then((res) => res)
+      .then((result) => {
+        if (result.data.code === "1000") {
+          setChildNodeN(result.data.value);
+        }
+        if (result.data.code === "1001") {
+          console.log("Size Not Available");
+        }
+      })
+      .catch((error) => console.log("error==>", error));
+  }, [childNodeN]);
 
   // THIS IS FOR GENTS SIZE FETCH API
   useEffect(() => {
@@ -649,7 +664,7 @@ export default function DisplayValidationComponent(props) {
                 }
               >
                 <MultiSelectAndInput
-                  optionsList={ChildNodeF}
+                  optionsList={ChildNodeN}
                   onChangeHandler={sizeQuantityResHandler}
                   CategoryData={feedShowState}
                 />
