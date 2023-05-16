@@ -300,7 +300,7 @@ function AdminHome(props) {
       formData.append("masterFile", masterFile);
       axios({
         method: "post",
-        url: `${HostManager.mailHostAdmin}npim/insert/sku/master`,
+        url: `${HostManager.mailHostAdmin}/npim/insert/sku/master`,
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -323,7 +323,15 @@ function AdminHome(props) {
             setLoading(false);
           }
         })
-        .catch((error) => console.log("error==>", error));
+        .catch((error) => {
+          setAlertState({
+            alertFlag2: true,
+            alertSeverity: "error",
+            alertMessage: "File Not Uploaded",
+          });
+          console.log("error==>", error);
+          setLoading(false);
+        });
     }
   };
 
@@ -579,7 +587,10 @@ function AdminHome(props) {
                                     <span>
                                       UPLOAD
                                       <CloudUploadIcon
-                                        style={{ marginTop: "-5px" }}
+                                        style={{
+                                          marginTop: "-5px",
+                                          marginLeft: "5px",
+                                        }}
                                       />
                                     </span>
                                   )}

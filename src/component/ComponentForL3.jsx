@@ -565,36 +565,6 @@ function MultiselectUomAndSize(props) {
       ) : (
         ""
       )}
-      {digit === "T" ? (
-        <>
-          <table style={{ width: "100%", margin: 0 }}>
-            <tbody className="d-flex">
-              {options.map((row, index) => (
-                <tr
-                  key={index}
-                  onChange={rowHandlerChanges}
-                  id={row.lableValue}
-                  className={
-                    enableRow(row.lableValue) ? classes.show : classes.hide
-                  }
-                >
-                  <b style={{ fontSize: "12px" }}>Quantity</b>
-                  <input
-                    type="text"
-                    maxlength="1"
-                    id={`${row.lableValue}sq`}
-                    name={`${row.lableValue}sq`}
-                    className={classes.inputField}
-                    placeholder={row.lableValue}
-                  />
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      ) : (
-        ""
-      )}
       <table style={{ width: "100%", margin: 0 }}>
         <tbody>
           {optionM.map((row, index) => (

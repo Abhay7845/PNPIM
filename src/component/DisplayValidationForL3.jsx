@@ -81,8 +81,8 @@ export default function DisplayValidationComponent(props) {
   const tagsTCategory = [
     "Single_Tag",
     "Separate_Tag",
-    "Only_MANGALSUTRA",
     "Only_EARRING",
+    "Only_MANGALSUTRA",
   ];
   useEffect(() => {
     if (digit === "0" || digit === "G") {
@@ -193,11 +193,7 @@ export default function DisplayValidationComponent(props) {
     if (digit === "V" && !cond) {
       sizeUomQuantity = true;
     } else if (
-      (digit === "V" ||
-        digit === "C" ||
-        digit === "F" ||
-        digit === "Y" ||
-        digit === "B") &&
+      (digit === "C" || digit === "F" || digit === "Y" || digit === "B") &&
       cond
     ) {
       sizeQuantity = true;
@@ -223,7 +219,7 @@ export default function DisplayValidationComponent(props) {
           ""
         )}
 
-        {sizeQuantity && SizeState[0] ? (
+        {sizeQuantity ? (
           <Grid item xs={12} sm={12}>
             <MultiSelectAndInput
               labelName="Size/Quantity"
@@ -235,7 +231,7 @@ export default function DisplayValidationComponent(props) {
           </Grid>
         ) : null}
         {cond ? (
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={12} className="my-2">
             <DropDownMaterialUI
               labelName="Stone Quality"
               onChangeHandler={stoneQualityResHandler}
@@ -250,6 +246,7 @@ export default function DisplayValidationComponent(props) {
     digit === "N" ||
     digit === "G" ||
     digit === "P" ||
+    digit === "T" ||
     digit === "2" ||
     digit === "3" ||
     digit === "0" ||
@@ -285,6 +282,7 @@ export default function DisplayValidationComponent(props) {
       digit === "5" ||
       digit === "6" ||
       digit === "7" ||
+      digit === "T" ||
       digit === "G"
     ) {
       tegSelect = true;
@@ -317,6 +315,13 @@ export default function DisplayValidationComponent(props) {
     });
     const optionsOnlyF = ["Only_FINGER_RING"];
     const optionF = optionsOnlyF.map((element) => {
+      return {
+        valueData: element,
+        lableValue: element,
+      };
+    });
+    const optionsOnlyM = ["Only_MANGALSUTRA"];
+    const optionM = optionsOnlyM.map((element) => {
       return {
         valueData: element,
         lableValue: element,
@@ -595,7 +600,8 @@ export default function DisplayValidationComponent(props) {
                       name={`${row.lableValue}sq`}
                       className={
                         row.lableValue === "Only_FINGER_RING" ||
-                        row.lableValue === "Only_BANGLE"
+                        row.lableValue === "Only_BANGLE" ||
+                        row.lableValue === "Only_MANGALSUTRA"
                           ? classes.inputArea
                           : classes.inputField
                       }
@@ -610,6 +616,28 @@ export default function DisplayValidationComponent(props) {
         <table style={{ width: "100%", margin: 0 }}>
           <tbody>
             {optionF.map((row, index) => (
+              <tr
+                key={index}
+                onChange={rowHandlerChange}
+                id={row.lableValue}
+                className={
+                  enableRow(row.lableValue)
+                    ? classes.showDropdown
+                    : classes.hide
+                }
+              >
+                <MultiSelectAndInput
+                  optionsList={ChildNodeF}
+                  onChangeHandler={sizeQuantityResHandler}
+                  CategoryData={feedShowState}
+                />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table style={{ width: "100%", margin: 0 }}>
+          <tbody>
+            {optionM.map((row, index) => (
               <tr
                 key={index}
                 onChange={rowHandlerChange}
@@ -749,21 +777,6 @@ export default function DisplayValidationComponent(props) {
 
     return (
       <>
-        {digit === "T" ? (
-          <Grid sx={12} sm={12} className="w-100">
-            <MultiselectUomAndSize
-              optionsList={option}
-              sizeUomQuantityResHandler={sizeUomQuantityResHandler}
-              CategoryData={feedShowState}
-              onChangeHandler={quantityResHandler}
-              allDataFromValidation={allDataFromValidation}
-              tegQuantityRes={tegQuantityResHandler}
-              findingsResHandler={findingsResHandler}
-            />
-          </Grid>
-        ) : (
-          ""
-        )}
         {digit === "L" ||
         feedShowState.category
           .toUpperCase()
@@ -779,7 +792,8 @@ export default function DisplayValidationComponent(props) {
         ) : (
           ""
         )}
-        {feedShowState.category
+        {digit === "Y" ||
+        feedShowState.category
           .toUpperCase()
           .replace(/\s{2,}/g, " ")
           .trim() === "FINGER RING" ? (
@@ -853,7 +867,6 @@ export default function DisplayValidationComponent(props) {
         feedShowState.category.toUpperCase() === "OTHERS" ||
         digit === "G" ||
         digit === "W" ||
-        digit === "Y" ||
         digit === "K" ? (
           <Grid item xs={12} sm={12} className="my-3">
             <InputFieldMaterialUI

@@ -301,7 +301,7 @@ const DayEndReportAdmin = () => {
       <Grid className="ReportGenerateStyle">
         <Grid item xs={6} sm={3} className="mx-2 Level_Style">
           <SelectOfMUI
-            lable="Level"
+            label="Level"
             optionList={levelDropDown}
             selectHandleChange={onChangeInputHandler}
             value={endDayReportInput.level}
