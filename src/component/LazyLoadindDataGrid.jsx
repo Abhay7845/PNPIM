@@ -9,7 +9,7 @@ import {
 import * as Icon from "react-bootstrap-icons";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import AlertPopup, { ModelPopup } from "./AlertPopup";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import UrlManager from "../HostManager/UrlManager";
 import { useStyles } from "../Style/LazyLoadingDataGrid";

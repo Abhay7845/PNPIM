@@ -1,6 +1,6 @@
 import { Button, Container, makeStyles } from "@material-ui/core";
 import React from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import Nodata from "../images/nodata.jpg";
 
 const useStyle = makeStyles({
@@ -17,9 +17,9 @@ const useStyle = makeStyles({
 
 const NoData = () => {
   const classes = useStyle();
-  const history = useHistory();
+  const navigate = useNavigate();
   const onBackHandler = () => {
-    history.goBack();
+    navigate.goBack();
   };
 
   return (

@@ -5,18 +5,18 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function WarningPopup(props) {
   const { flag, reportLink, headerSms, subSms } = props;
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClose = () => {
-    history.push("/");
+    navigate("/");
   };
 
   const goHandler = () => {
-    history.push(reportLink);
+    navigate(reportLink);
   };
 
   return (

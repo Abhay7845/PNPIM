@@ -8,7 +8,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import Logo from "../images/Tanishq_Logo1.png";
 import axios from "axios";
 import { Button, Container, Typography } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import HostManager from "../HostManager/HostManager";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -19,7 +19,7 @@ import useStyles from "../Style/Login";
 
 const Login = () => {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [errorSms, setErrorSms] = useState("");
   const [ValidUser, setValidUser] = useState(false);
   const [passwordShown, setPasswordShown] = useState(false);
@@ -32,7 +32,6 @@ const Login = () => {
   const [level, setLevel] = useState("");
   const OnChangeInput = (event) => {
     const { name, value } = event.target;
-
     setImmediate(() => {
       setLoginData(function (preData) {
         switch (name) {
@@ -68,14 +67,14 @@ const Login = () => {
   };
   const OnClickHandler = (inputFrom) => {
     let inputData = {
-      userID: fieldValidator(loginData.uname, "Username"),
+      userID: fieldValidator(loginData.uname, "Useranme"),
       password: fieldValidator(loginData.pwd, "Password"),
       region: fieldValidator(loginData.rso, "RSO name"),
       role: "",
       status: "",
       validInvalid: "",
     };
-    console.log("inputData-->", inputData);
+
     if (inputData.userID && inputData.password && inputData.region) {
       setValidUser(true);
       axios
@@ -86,21 +85,22 @@ const Login = () => {
           setImmediate(() => {
             setLevel(response.data.value.role);
           });
+
           if (response.data.value.status === "open") {
             if (inputFrom === "DNPIM") {
               if (
                 response.data.value.role === "L1" ||
                 response.data.value.role === "L2"
               ) {
-                history.push(
+                navigate(
                   `/feedbackL1andL2/${response.data.value.userID}/${loginData.rso}`
                 );
               } else if (response.data.value.role === "L3") {
-                history.push(
+                navigate(
                   `/indentL3/${response.data.value.userID}/${loginData.rso}`
                 );
               } else if (response.data.value.role === "Admin") {
-                history.push(
+                navigate(
                   `/AdminHome/${response.data.value.userID}/${loginData.rso}`
                 );
               }
@@ -109,15 +109,15 @@ const Login = () => {
                 response.data.value.role === "L1" ||
                 response.data.value.role === "L2"
               ) {
-                history.push(
+                navigate(
                   `/FeedbackL1AndL2/${response.data.value.userID}/${loginData.rso}`
                 );
               } else if (response.data.value.role === "L3") {
-                history.push(
+                navigate(
                   `/indentL3/${response.data.value.userID}/${loginData.rso}`
                 );
               } else if (response.data.value.role === "Admin") {
-                history.push(
+                navigate(
                   `/AdminHome/${response.data.value.userID}/${loginData.rso}`
                 );
               }
@@ -130,9 +130,9 @@ const Login = () => {
           setValidUser(false);
         })
         .catch((error) => {
-          console.log("error==>", error);
-          setValidUser(false);
+          console.log("login page==>", error);
           setErrorSms("Please Enter Valid Username and Password!");
+          setValidUser(false);
         });
     }
   };
@@ -143,9 +143,7 @@ const Login = () => {
     });
   };
   const goHandler = () => {
-    history.push(
-      `/PortelCloseReport/${loginData.uname}/${loginData.rso}/${level}`
-    );
+    navigate(`/PortelCloseReport/${loginData.uname}/${loginData.rso}/${level}`);
   };
 
   // SHOW AND HIDE PASSWORD
@@ -153,7 +151,7 @@ const Login = () => {
     setPasswordShown(!passwordShown);
   };
   return (
-    <>
+    <React.Fragment>
       <div>
         <Dialog
           open={flag}
@@ -178,10 +176,12 @@ const Login = () => {
               </Typography>
             </DialogContentText>
           </DialogContent>
+
           <DialogActions>
             <Button onClick={handleClose} color="primary" autoFocus>
               OK
             </Button>
+
             <Button onClick={goHandler} color="primary" autoFocus>
               Go TO Report
             </Button>
@@ -247,7 +247,6 @@ const Login = () => {
                 onHendler={OnChangeInput}
                 type="text"
               />
-
               <button
                 className="btn btn-warning w-100"
                 onClick={() => OnClickHandler("PNPIM")}
@@ -266,7 +265,7 @@ const Login = () => {
           </div>
         </Container>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 export default Login;

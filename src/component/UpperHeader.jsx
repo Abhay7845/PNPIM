@@ -8,7 +8,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Logo from "../images/Tanishq_Logo.png";
 import { Tooltip } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -27,12 +27,12 @@ const useStyles = makeStyles({
 
 export default function UpperHeader(props) {
   const classes = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
   const storeCODE = localStorage.getItem("store_code");
 
   const signOutHandler = (event) => {
-    localStorage.removeItem("store_value");
-    history.push("/");
+    localStorage.removeItem("store_code");
+    navigate("/PNpimPortal");
   };
   return (
     <div className={classes.root}>

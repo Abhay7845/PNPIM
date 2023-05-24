@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Error404 from "../images/404.jpg";
 
 const useStyle = makeStyles({
@@ -17,9 +17,9 @@ const useStyle = makeStyles({
 
 const Error = () => {
   const classes = useStyle();
-  const history = useHistory();
+  const navigate = useNavigate();
   const onBackHandler = () => {
-    history.goBack();
+    navigate.goBack();
   };
 
   return (
