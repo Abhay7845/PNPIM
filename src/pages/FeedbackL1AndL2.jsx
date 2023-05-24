@@ -3,10 +3,10 @@ import Rating from "@mui/material/Rating";
 import StarIcon from "@material-ui/icons/Star";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Style/CssStyle/FeedbackL1AndL2.css";
-import UpperHeader from "../component/UpperHeader";
-import LowerHeader from "../component/LowerHeader";
+import UpperHeader from "../Components/UpperHeader";
+import LowerHeader from "../Components/LowerHeader";
 import axios from "axios";
-import NpimDataDisplay from "../component/NpimDataDisplay";
+import NpimDataDisplay from "../Components/NpimDataDisplay";
 import {
   FormGroup,
   FormControlLabel,
@@ -19,14 +19,14 @@ import {
 } from "@material-ui/core";
 import { useParams } from "react-router";
 import HostManager from "../HostManager/HostManager";
-import Loading from "../component/Loading";
-import StaticTabularInformation from "../component/StaticTabularInformation";
-import WarningPopup from "../component/WarningPopup";
-import AlertPopup from "../component/AlertPopup";
-import ImgShow from "../component/ImgShow";
+import Loading from "../Components/Loading";
+import StaticTabularInformation from "../Components/StaticTabularInformation";
+import WarningPopup from "../Components/WarningPopup";
+import AlertPopup from "../Components/AlertPopup";
+import ImgShow from "../Components/ImgShow";
 import MuliSelectDropdownField, {
   MuliSelectDropdownFieldQualityFeedback,
-} from "../component/MuliSelectDropdownField";
+} from "../Components/MuliSelectDropdownField";
 import { useStyles } from "../Style/FeedBackL1AndL2";
 
 const FeedbacL1AndL2 = () => {

@@ -12,11 +12,11 @@ import {
   DataGridForAdmin,
   SelectOfMUI,
   TextFieldOfMUI,
-} from "../component/ComponentFroAdmin";
-import Loading from "../component/Loading";
-import ReportsAppBar from "../component/ReportsAppBar";
-import SideAppBar from "../component/SideAppBar";
-import UpperHeader from "../component/UpperHeader";
+} from "../Components/ComponentFroAdmin";
+import Loading from "../Components/Loading";
+import ReportsAppBar from "../Components/ReportsAppBar";
+import SideAppBar from "../Components/SideAppBar";
+import UpperHeader from "../Components/UpperHeader";
 import UrlManager from "../HostManager/UrlManager";
 import { Alert } from "@material-ui/lab";
 import "../Style/CssStyle/DayEndReportAdmin.css";

@@ -10,17 +10,17 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import DropdownField from "../component/DropdownField";
-import TableComponent from "../component/TableComponent";
+import DropdownField from "../Components/DropdownField";
+import TableComponent from "../Components/TableComponent";
 import MenuIcon from "@material-ui/icons/Menu";
-import UpperHeader from "../component/UpperHeader";
-import SideAppBar from "../component/SideAppBar";
+import UpperHeader from "../Components/UpperHeader";
+import SideAppBar from "../Components/SideAppBar";
 import { useParams } from "react-router-dom";
-import ProductInfo from "../component/ProductInfo";
-import NpimDataDisplay from "../component/NpimDataDisplay";
+import ProductInfo from "../Components/ProductInfo";
+import NpimDataDisplay from "../Components/NpimDataDisplay";
 import HostManager from "../HostManager/HostManager";
-import StatusTabular from "../component/StatusTabular";
-import Loading from "../component/Loading";
+import StatusTabular from "../Components/StatusTabular";
+import Loading from "../Components/Loading";
 // import gifLoading from "../images/Loading_icon.gif";
 
 const useStyles = makeStyles({

@@ -1,21 +1,24 @@
 /*eslint no-restricted-globals: ["error", "event", "fdescribe"]*/
 import { Container, Grid, Typography, CssBaseline } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
-import ImgShow from "../component/ImgShow";
-import LowerHeader from "../component/LowerHeader";
-import ProductDetailsTabular from "../component/ProductDetailsTabular";
-import UpperHeader from "../component/UpperHeader";
+import ImgShow from "../Components/ImgShow";
+import LowerHeader from "../Components/LowerHeader";
+import ProductDetailsTabular from "../Components/ProductDetailsTabular";
+import UpperHeader from "../Components/UpperHeader";
 import { Button } from "@material-ui/core";
-import StaticTabularInformation from "../component/StaticTabularInformation";
-import NpimDataDisplay from "../component/NpimDataDisplay";
+import StaticTabularInformation from "../Components/StaticTabularInformation";
+import NpimDataDisplay from "../Components/NpimDataDisplay";
 import { useParams } from "react-router-dom";
-import Loading from "../component/Loading";
+import Loading from "../Components/Loading";
 import axios from "axios";
 import HostManager from "../HostManager/HostManager";
-import DisplayValidationComponent from "../component/DisplayValidationForL3";
-import AlertPopup from "../component/AlertPopup";
-import { BlinkingComponent, SmallDataTable } from "../component/ComponentForL3";
-import Error from "../component/Notification";
+import DisplayValidationComponent from "../Components/DisplayValidationForL3";
+import AlertPopup from "../Components/AlertPopup";
+import {
+  BlinkingComponent,
+  SmallDataTable,
+} from "../Components/ComponentForL3";
+import Error from "../Components/Notification";
 import { useStyles } from "../Style/IndentL3";
 
 const IndentL3 = () => {

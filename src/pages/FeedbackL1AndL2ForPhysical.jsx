@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Style/CssStyle/FeedbackL1AndL2.css";
-import UpperHeader from "../component/UpperHeader";
-import LowerHeader from "../component/LowerHeader";
-import MuliSelectDropdownField from "../component/MuliSelectDropdownField";
+import UpperHeader from "../Components/UpperHeader";
+import LowerHeader from "../Components/LowerHeader";
+import MuliSelectDropdownField from "../Components/MuliSelectDropdownField";
 import axios from "axios";
-import NpimDataDisplay from "../component/NpimDataDisplay";
+import NpimDataDisplay from "../Components/NpimDataDisplay";
 import {
   FormGroup,
   FormControlLabel,
@@ -18,11 +18,11 @@ import {
 } from "@material-ui/core";
 import { useParams } from "react-router";
 import HostManager from "../HostManager/HostManager";
-import Loading from "../component/Loading";
-import StaticTabularInformation from "../component/StaticTabularInformation";
-import WarningPopup from "../component/WarningPopup";
-import ImgShow from "../component/ImgShow";
-import AlertPopup from "../component/AlertPopup";
+import Loading from "../Components/Loading";
+import StaticTabularInformation from "../Components/StaticTabularInformation";
+import WarningPopup from "../Components/WarningPopup";
+import ImgShow from "../Components/ImgShow";
+import AlertPopup from "../Components/AlertPopup";
 import { useStyles } from "../Style/FeedbackL1AndL2ForPhysical";
 
 const FeedbacL1AndL2ForPhysical = () => {

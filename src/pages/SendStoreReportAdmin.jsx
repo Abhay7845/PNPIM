@@ -12,21 +12,21 @@ import {
 } from "@material-ui/core";
 import { CssBaseline } from "@material-ui/core";
 import React, { useState } from "react";
-import Loading from "../component/Loading";
-import ReportsAppBar from "../component/ReportsAppBar";
-import UpperHeader from "../component/UpperHeader";
+import Loading from "../Components/Loading";
+import ReportsAppBar from "../Components/ReportsAppBar";
+import UpperHeader from "../Components/UpperHeader";
 import AddSharpIcon from "@material-ui/icons/AddSharp";
 import {
   MultiSelectFroAdmin,
   TextFieldOfMUI,
-} from "../component/ComponentFroAdmin";
+} from "../Components/ComponentFroAdmin";
 import SaveIcon from "@material-ui/icons/Save";
 import SendIcon from "@material-ui/icons/Send";
 import { useParams } from "react-router-dom";
 import { Alert } from "@material-ui/lab";
 import axios from "axios";
 import HostManager from "../HostManager/HostManager";
-import SideAppBar from "../component/SideAppBar";
+import SideAppBar from "../Components/SideAppBar";
 
 const useStyle = makeStyles({
   root: {

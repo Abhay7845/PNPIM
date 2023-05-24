@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import InputField from "../component/InputField";
+import InputField from "../Components/InputField";
 import PersonIcon from "@material-ui/icons/Person";
 import PublicIcon from "@material-ui/icons/Public";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
