@@ -86,7 +86,7 @@ export default function DisplayValidationComponent(props) {
     "Only_MANGALSUTRA",
   ];
   useEffect(() => {
-    if (digit === "0" || digit === "G") {
+    if (digit === "0") {
       setOption(optionForSet0);
     }
     if (digit === "1") {
@@ -259,7 +259,6 @@ export default function DisplayValidationComponent(props) {
   } else if (
     digit === "E" ||
     digit === "N" ||
-    digit === "G" ||
     digit === "P" ||
     digit === "T" ||
     digit === "2" ||
@@ -279,7 +278,6 @@ export default function DisplayValidationComponent(props) {
       digit === "2" ||
       digit === "P" ||
       digit === "E" ||
-      digit === "G" ||
       digit === "N"
     ) {
       //CHECK THE CONDITION AND CHILD CODE ABD ADD THE DATA IN DROPDOWN
@@ -297,13 +295,11 @@ export default function DisplayValidationComponent(props) {
       digit === "5" ||
       digit === "6" ||
       digit === "7" ||
-      digit === "T" ||
-      digit === "G"
+      digit === "T"
     ) {
       tegSelect = true;
       setSelect = true;
       Quantity = false;
-      // stoneQuality = false;
     }
 
     const optionsOnlyE = ["Only_EARRING"];
@@ -595,7 +591,7 @@ export default function DisplayValidationComponent(props) {
               onRemove={onInternalRemoveChange}
               showCheckbox={true}
               displayValue="lableValue"
-              placeholder="Choose Tag"
+              placeholder="Choose Tag here"
             />
             <table style={{ width: "100%", margin: 0 }}>
               <tbody className="d-flex">
