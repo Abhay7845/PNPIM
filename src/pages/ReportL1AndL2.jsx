@@ -21,7 +21,6 @@ import NpimDataDisplay from "../Components/NpimDataDisplay";
 import HostManager from "../HostManager/HostManager";
 import StatusTabular from "../Components/StatusTabular";
 import Loading from "../Components/Loading";
-// import gifLoading from "../images/Loading_icon.gif";
 
 const useStyles = makeStyles({
   root: {
@@ -61,7 +60,7 @@ const ReportL1AndL2 = (props) => {
   const [editState, setEditState] = useState(false);
   const [productInfo, setProductInfo] = useState(NpimDataDisplay);
   const selectReportList = ["yet to submit", "submitted"];
-  const [selectReport, setSelectReport] = useState("yet to submit");
+  const [selectReport, setSelectReport] = useState("submitted");
   const [showInfo, setShowInfo] = useState(false);
   const [switchEnable, setSwitchEnable] = useState(true);
   const [statusData, setStatusData] = useState({});
@@ -173,11 +172,7 @@ const ReportL1AndL2 = (props) => {
   };
 
   const getResponseFormChild = (input) => {
-    console.log("input==>", input);
-    setImmediate(() => {
-      setLoading(true);
-    });
-
+    setLoading(true);
     if (!input.switchData && input.multiSelectDrop.toString().length === 0) {
       alert("Please select Reason for NO");
       return;
@@ -212,28 +207,29 @@ const ReportL1AndL2 = (props) => {
       old.quality_Rating = input.qualityRating.toString();
       return old;
     });
-
-    setTimeout(() => {
-      axios
-        .post(`${HostManager.mainHostL3}/npim/update/responses`, productInfo)
-        .then((response) => {
-          console.log("response==>", response.data);
-          setSelectReport(selectReport);
-          setShowInfo(false);
-        })
-        .catch((error) => {
-          console.log("error==>", error);
-        });
-      setImmediate(() => {
-        setLoading(false);
-      });
-      setImmediate(() => {
+    console.log("productInfo==>", productInfo);
+    axios
+      .post(`${HostManager.mainHostL3}/npim/update/responses`, productInfo)
+      .then((response) => {
+        console.log("response==>", response.data);
         setSelectReport(selectReport);
+        setShowInfo(false);
+        if (response.data.code === "1000") {
+          alert("Data Updated Successfully");
+        }
+      })
+      .catch((error) => {
+        console.log("error==>", error);
       });
-      setImmediate(() => {
-        setEditState(!editState);
-      });
-    }, 1500);
+    setImmediate(() => {
+      setLoading(false);
+    });
+    setImmediate(() => {
+      setSelectReport(selectReport);
+    });
+    setImmediate(() => {
+      setEditState(!editState);
+    });
   };
 
   return (
