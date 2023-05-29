@@ -59,78 +59,72 @@ const ReportL1AndL2 = (props) => {
   const [barOpener, setBarOpener] = useState(false);
   const [editState, setEditState] = useState(false);
   const [productInfo, setProductInfo] = useState(NpimDataDisplay);
-  const selectReportList = ["yet to submit", "submitted"];
   const [selectReport, setSelectReport] = useState("submitted");
   const [showInfo, setShowInfo] = useState(false);
   const [switchEnable, setSwitchEnable] = useState(true);
   const [statusData, setStatusData] = useState({});
   const [statusCloserOpener, setStatusCloserOpener] = useState(false);
+  const selectReportList = ["yet to submit", "submitted"];
 
   useEffect(() => {
-    setImmediate(() => {
-      setLoading(true);
-    });
+    setLoading(true);
 
-    setTimeout(() => {
-      let reportUrl = "/npim/unscanned/report/L1/";
-      switch (selectReport) {
-        case "yet to submit":
-          reportUrl = "/npim/unscanned/report/L1/";
-          break;
-        case "submitted":
-          reportUrl = "/npim/scanned/report/L1/";
-          break;
-        case "groupwise":
-          reportUrl = "/npim/groupwise/report/L1/";
-          break;
-        case "consumerbase":
-          reportUrl = "/npim/consumerbase/report/L1/";
-          break;
-        case "collection":
-          reportUrl = "/npim/collection/report/L1/";
-          break;
-        case "category":
-          reportUrl = "/npim/category/report/L1/";
-          break;
+    let reportUrl = "/npim/unscanned/report/L1/";
+    switch (selectReport) {
+      case "yet to submit":
+        reportUrl = "/npim/unscanned/report/L1/";
+        break;
+      case "submitted":
+        reportUrl = "/npim/scanned/report/L1/";
+        break;
+      case "groupwise":
+        reportUrl = "/npim/groupwise/report/L1/";
+        break;
+      case "consumerbase":
+        reportUrl = "/npim/consumerbase/report/L1/";
+        break;
+      case "collection":
+        reportUrl = "/npim/collection/report/L1/";
+        break;
+      case "category":
+        reportUrl = "/npim/category/report/L1/";
+        break;
 
-        default:
-          reportUrl = "/npim/unscanned/report/L1/";
-          break;
+      default:
+        reportUrl = "/npim/unscanned/report/L1/";
+        break;
+    }
+
+    axios.get(`${HostManager.mainHost}${reportUrl}${storeCode}`).then(
+      (response) => {
+        if (response.data.code === "1000") {
+          let data = response.data;
+          setReport(data.value);
+          setColumn(data.coloum);
+        } else {
+          console.log("response.data.value==>", response.data.value);
+        }
+      },
+      (error) => {
+        console.log("error==>", error);
       }
-
-      axios.get(`${HostManager.mainHost}${reportUrl}${storeCode}`).then(
-        (response) => {
-          if (response.data.code === "1000") {
-            let data = response.data;
-            setReport(data.value);
-            setColumn(data.coloum);
-          } else {
-            console.log("response.data.value==>", response.data.value);
-          }
-        },
-        (error) => {
-          console.log("error==>", error);
-        }
-      );
-
-      axios.get(`${HostManager.mainHost}/npim/status/L1/${storeCode}`).then(
-        (response) => {
-          if (response.data.code === "1001") {
-            console.log("Data Not Found");
-          } else {
-            setStatusData(response.data);
-          }
-        },
-        (error) => {
-          console.log("error==>", error);
-        }
-      );
-      setShowInfo(false);
-      setImmediate(() => {
-        setLoading(false);
-      });
-    }, 1500);
+    );
+    setShowInfo(false);
+    setLoading(false);
   }, [selectReport, editState, storeCode]);
+
+  useEffect(() => {
+    axios
+      .get(`${HostManager.mainHost}/npim/status/L1/${storeCode}`)
+      .then((response) => {
+        if (response.data.code === "1000") {
+          setStatusData(response.data);
+        } else if ((response.data.code = "1001")) {
+          console.log("No Data Found");
+        }
+      })
+      .catch((error) => console.log("error==>", error));
+  }, []);
 
   const navBarList = [
     {
@@ -161,6 +155,7 @@ const ReportL1AndL2 = (props) => {
   };
 
   const getProductData = (data) => {
+    console.log("DATA==>", data);
     scrollTop();
     setProductInfo(data);
     setShowInfo(true);
@@ -172,6 +167,7 @@ const ReportL1AndL2 = (props) => {
   };
 
   const getResponseFormChild = (input) => {
+    console.log("input==>", input);
     setLoading(true);
     if (!input.switchData && input.multiSelectDrop.toString().length === 0) {
       alert("Please select Reason for NO");
@@ -190,30 +186,102 @@ const ReportL1AndL2 = (props) => {
       return;
     }
 
-    setProductInfo((old) => {
-      if (!input.switchData) {
-        old.reasons = input.multiSelectDrop.toString();
-        old.saleable = "NO";
-        old.rsoName = rsoName;
-      } else {
-        old.reasons = "";
-        old.saleable = "YES";
-        old.rsoName = rsoName;
-      }
-      old.submitStatus = "report";
-      old.strCode = storeCode;
-      old.reasons = input.multiSelectQtyFeed.toString();
-      old.quality_Reasons = input.multiSelectQtyFeed.toString();
-      old.quality_Rating = input.qualityRating.toString();
-      return old;
-    });
-    console.log("productInfo==>", productInfo);
+    // setProductInfo((old) => {
+    //   if (!input.switchData) {
+    //     old.reasons = input.multiSelectDrop.toString();
+    //     old.saleable = "NO";
+    //     old.rsoName = rsoName;
+    //   } else {
+    //     old.reasons = "";
+    //     old.saleable = "YES";
+    //     old.rsoName = rsoName;
+    //   }
+    //   old.submitStatus = "report";
+    //   old.strCode = storeCode;
+    //   old.reasons = input.multiSelectDrop.toString();
+    //   old.quality_Reasons = input.multiSelectQtyFeed.toString();
+    //   old.quality_Rating = input.qualityRating.toString();
+    //   return old;
+    // });
+
+    const UpdateInput = {
+      activity: productInfo.activity,
+      adVariant: productInfo.adVariant,
+      btqCount: productInfo.btqCount,
+      catPB: productInfo.catPB,
+      category: productInfo.category,
+      childNodeF: productInfo.childNodeF,
+      childNodeH: productInfo.childNodeH,
+      childNodeK: productInfo.childNodeK,
+      childNodeO: productInfo.childNodeO,
+      childNodeV: productInfo.childNodeV,
+      childNodesE: productInfo.childNodesE,
+      childNodesN: productInfo.childNodesN,
+      collection: productInfo.collection,
+      colourWt: productInfo.colourWt,
+      complexity: productInfo.complexity,
+      consumerBase: productInfo.consumerBase,
+      diamondWt: productInfo.diamondWt,
+      doe: productInfo.doe,
+      findings: productInfo.findings,
+      gender: productInfo.gender,
+      i2Gh: productInfo.i2Gh,
+      id: productInfo.id,
+      indCategory: productInfo.indCategory,
+      indQty: productInfo.indQty,
+      indentLevelType: productInfo.indentLevelType,
+      itGroup: productInfo.itGroup,
+      itemCode: productInfo.itemCode,
+      itemLevelType: productInfo.itemLevelType,
+      karatageRange: productInfo.karatageRange,
+      metalColor: productInfo.metalColor,
+      metalWt: productInfo.metalWt,
+      npimEventNo: productInfo.npimEventNo,
+      parentItemCode: productInfo.parentItemCode,
+      quality_Rating: input.qualityRating,
+      quality_Reasons: input.multiSelectQtyFeed.toString(),
+      reasons: input.multiSelectDrop.toString(),
+      region: productInfo.region,
+      rsoName: rsoName,
+      saleable: !switchEnable ? "YES" : "NO",
+      scannedCount: "N/A",
+      set2Type: productInfo.set2Type,
+      shape: productInfo.shape,
+      si2Gh: productInfo.si2Gh,
+      si2Ij: productInfo.si2Ij,
+      size: productInfo.size,
+      stdUCP: productInfo.stdUCP,
+      stdUcpE: productInfo.stdUCP,
+      stdUcpF: productInfo.stdUcpF,
+      stdUcpH: productInfo.stdUcpH,
+      stdUcpK: productInfo.stdUcpK,
+      stdUcpN: productInfo.stdUcpN,
+      stdUcpO: productInfo.stdUcpO,
+      stdUcpV: productInfo.stdUcpV,
+      stdWt: productInfo.stdWt,
+      stdWtE: productInfo.stdWtE,
+      stdWtF: productInfo.stdWtF,
+      stdWtH: productInfo.stdWtH,
+      stdWtK: productInfo.stdWtK,
+      stdWtN: productInfo.stdWtN,
+      stdWtO: productInfo.stdWtO,
+      stdWtV: productInfo.stdWtV,
+      stoneQuality: productInfo.stoneQuality,
+      stoneQualityVal: productInfo.stoneQualityVal,
+      strCode: storeCode,
+      submitStatus: productInfo.submitStatus,
+      unscannedCount: productInfo.unscannedCount,
+      uom: productInfo.uom,
+      videoLink: productInfo.videoLink,
+      vsGh: productInfo.vsGh,
+      vvs1: productInfo.vvs1,
+    };
+
+    console.log("productInfo==>", UpdateInput);
     axios
-      .post(`${HostManager.mainHostL3}/npim/update/responses`, productInfo)
+      .post(`${HostManager.mainHostL3}/npim/update/responses`, UpdateInput)
       .then((response) => {
         console.log("response==>", response.data);
-        setSelectReport(selectReport);
-        setShowInfo(false);
         if (response.data.code === "1000") {
           alert("Data Updated Successfully");
         }
@@ -223,11 +291,7 @@ const ReportL1AndL2 = (props) => {
       });
     setImmediate(() => {
       setLoading(false);
-    });
-    setImmediate(() => {
       setSelectReport(selectReport);
-    });
-    setImmediate(() => {
       setEditState(!editState);
     });
   };
