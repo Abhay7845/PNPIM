@@ -165,7 +165,7 @@ const ProductInfo = (props) => {
                     ""
                   )}
                   <div className="text-center">
-                    {value > 0 && value <= 3 && (
+                    {value > 0 && value <= 4 && (
                       <div className="mutli_select_drop">
                         <MuliSelectDropdownFieldQualityFeedback
                           onMultiSelectQlty={onMultiSelectQtyFeedback}

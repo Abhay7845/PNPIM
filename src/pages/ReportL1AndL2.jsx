@@ -191,14 +191,13 @@ const ReportL1AndL2 = (props) => {
       input.qualityRating <= 4 &&
       input.multiSelectQtyFeed.toString().length === 0
     ) {
-      alert("Please Select Reason for Low Quality Rating");
+      alert("Please Select Reason For Low Quality Rating");
       return;
     }
 
     setProductInfo((old) => {
       if (!input.switchData) {
         old.reasons = input.multiSelectDrop.toString();
-
         old.saleable = "NO";
         old.rsoName = rsoName;
       } else {
@@ -216,7 +215,7 @@ const ReportL1AndL2 = (props) => {
 
     setTimeout(() => {
       axios
-        .post(`${HostManager.mainHost}/npim/insert/responses`, productInfo)
+        .post(`${HostManager.mainHostL3}/npim/update/responses`, productInfo)
         .then((response) => {
           console.log("response==>", response.data);
           setSelectReport(selectReport);
@@ -228,11 +227,9 @@ const ReportL1AndL2 = (props) => {
       setImmediate(() => {
         setLoading(false);
       });
-
       setImmediate(() => {
         setSelectReport(selectReport);
       });
-
       setImmediate(() => {
         setEditState(!editState);
       });

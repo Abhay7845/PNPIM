@@ -5,7 +5,6 @@ import { Multiselect } from "multiselect-react-dropdown";
 
 const MuliSelectDropdownField = (props) => {
   const multiselectRef = useRef();
-
   const resetSelectField = () => {
     multiselectRef.current.resetSelectedValues();
   };
@@ -97,23 +96,19 @@ export const MuliSelectDropdownFieldQualityFeedback = (props) => {
 
   return (
     <>
-      <div>
-        <label>Choose Reasons</label>
-        <div className="drop_multi">
-          <Multiselect
-            options={dataQlty}
-            displayValue="lableValue"
-            onSelect={onInternalSelectChange}
-            onRemove={onInternalRemoveChange}
-            showCheckbox={true}
-            // selectedValues={[]}
-            closeOnSelect={true}
-            selectionLimit={3}
-            placeholder="Reason for Low Quality Rating"
-            className="searchbox"
-            //hidePlaceholder={true}
-          />
-        </div>
+      <label>Choose Reasons</label>
+      <div className="drop_multi">
+        <Multiselect
+          options={dataQlty}
+          displayValue="lableValue"
+          onSelect={onInternalSelectChange}
+          onRemove={onInternalRemoveChange}
+          showCheckbox={true}
+          closeOnSelect={true}
+          selectionLimit={3}
+          placeholder="Reason For Low Quality Rating"
+          className="searchbox"
+        />
       </div>
     </>
   );
