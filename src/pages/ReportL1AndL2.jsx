@@ -66,9 +66,9 @@ const ReportL1AndL2 = (props) => {
   const [statusCloserOpener, setStatusCloserOpener] = useState(false);
   const selectReportList = ["yet to submit", "submitted"];
 
+  console.log("report==>", report);
   useEffect(() => {
     setLoading(true);
-
     let reportUrl = "/npim/unscanned/report/L1/";
     switch (selectReport) {
       case "yet to submit":
