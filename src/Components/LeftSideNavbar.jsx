@@ -27,65 +27,65 @@ const LeftSideNavbar = (props) => {
           <li>
             <NavLink
               className="menu_text"
-              activeClassName="active_class"
-              exact
+              activeclassname="active_class"
+              exact="true"
               to="#"
             >
               <span>
                 <FindInPageIcon />
-              </span>{" "}
+              </span>
               Indent
             </NavLink>
           </li>
           <li>
             <NavLink
               className="menu_text"
-              activeClassName="active_class"
-              exact
+              activeclassname="active_class"
+              exact="true"
               to="/indent"
             >
               <span>
                 <ReportIcon />
-              </span>{" "}
+              </span>
               Indent
             </NavLink>
           </li>
           <li>
             <NavLink
               className="menu_text"
-              activeClassName="active_class"
-              exact
+              activeclassname="active_class"
+              exact="true"
               to="/login"
             >
               <span>
                 <MenuBookIcon />
-              </span>{" "}
+              </span>
               Login
             </NavLink>
           </li>
           <li>
             <NavLink
               className="menu_text"
-              activeClassName="active_class"
-              exact
+              activeclassname="active_class"
+              exact="true"
               to="/feedback"
             >
               <span>
                 <FeedbackIcon />
-              </span>{" "}
+              </span>
               Feedback
             </NavLink>
           </li>
           <li>
             <NavLink
               className="menu_text"
-              activeClassName="active_class"
-              exact
+              activeclassname="active_class"
+              exact="true"
               to="/contact"
             >
               <span>
                 <ContactsIcon />
-              </span>{" "}
+              </span>
               Contact Us
             </NavLink>
           </li>

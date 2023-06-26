@@ -58,8 +58,8 @@ const SideAppBar = (props) => {
               <ListItemText
                 primary={
                   <NavLink
-                    activeClassName={classes.active}
-                    exact
+                    activeclassname={classes.active}
+                    exact="true"
                     to={navBar.link}
                   >
                     <Typography variant="body1">
