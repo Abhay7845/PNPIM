@@ -154,7 +154,6 @@ const ReportL1AndL2 = (props) => {
   };
 
   const getProductData = (data) => {
-    console.log("DATA==>", data);
     scrollTop();
     setProductInfo(data);
     setShowInfo(true);
