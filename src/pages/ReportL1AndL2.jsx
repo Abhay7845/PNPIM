@@ -166,7 +166,7 @@ const ReportL1AndL2 = (props) => {
   };
 
   const getSubmitFormChild = (input) => {
-    console.log("inputInsert==>", input);
+    console.log("inputInsertL1L2==>", input);
     setLoading(true);
     if (!input.switchData && input.multiSelectDrop.toString().length === 0) {
       alert("Please select Reason for NO");
@@ -258,11 +258,9 @@ const ReportL1AndL2 = (props) => {
       vvs1: productInfo.vvs1,
     };
 
-    console.log("InsertInput==>", InsertInput);
     axios
       .post(`${HostManager.mainHost}/npim/insert/responses`, InsertInput)
       .then((response) => {
-        console.log("response==>", response.data);
         if (response.data.code === "1000") {
           alert("Data Has Been Inserted Successfully");
         }
@@ -371,11 +369,9 @@ const ReportL1AndL2 = (props) => {
       reasons: input.multiSelectDrop.toString(),
       indentLevelType: productInfo.indentLevelType,
     };
-    console.log("UpdateInput==>", UpdateInput);
     axios
       .post(`${HostManager.mainHostL3}/npim/update/responses`, UpdateInput)
       .then((response) => {
-        console.log("response==>", response.data);
         if (response.data.code === "1000") {
           alert("Data Updated Successfully");
         }
