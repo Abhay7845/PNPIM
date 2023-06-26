@@ -344,8 +344,10 @@ const ReportL1AndL2 = (props) => {
       indCategory: productInfo.indCategory,
       submitStatus: "report",
       set2Type: productInfo.set2Type,
-      stoneQuality: productInfo.stoneQuality,
-      stoneQualityVal: productInfo.stoneQualityVal,
+      stoneQuality: !productInfo.stoneQuality ? "" : productInfo.stoneQuality,
+      stoneQualityVal: !productInfo.stoneQualityVal
+        ? ""
+        : productInfo.stoneQualityVal,
       scannedCount: productInfo.scannedCount,
       unscannedCount: productInfo.unscannedCount,
       adVariant: productInfo.adVariant,
