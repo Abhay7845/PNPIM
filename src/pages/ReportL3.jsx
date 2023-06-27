@@ -454,7 +454,7 @@ const ReportL3 = () => {
       stoneQualityVal: "0",
       rsoName: rsoName,
       npimEventNo: dataRowInformation.npimEventNo,
-      IndentLevelType: dataRowInformation.indentLevelType,
+      IndentLevelType: "L3",
       exSize: dataRowInformation.size,
       exUOM: dataRowInformation.uom,
       exIndCategory: dataRowInformation.indCategory,

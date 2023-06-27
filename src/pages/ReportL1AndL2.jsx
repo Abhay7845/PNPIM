@@ -366,7 +366,7 @@ const ReportL1AndL2 = (props) => {
       qualityRating: input.qualityRating,
       qualityReasons: input.multiSelectQtyFeed.toString(),
       reasons: input.multiSelectDrop.toString(),
-      indentLevelType: productInfo.indentLevelType,
+      indentLevelType: "L1L2",
     };
     axios
       .post(`${HostManager.mainHostL3}/npim/update/responses`, UpdateInput)
@@ -429,7 +429,6 @@ const ReportL1AndL2 = (props) => {
             </Toolbar>
           </AppBar>
         </Grid>
-
         <Grid item xs={12} className={showInfo ? classes.show : classes.hidden}>
           {report.length > 0 && column.length > 0 ? (
             <ProductInfo
