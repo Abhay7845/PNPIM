@@ -57,7 +57,7 @@ export default function DisplayValidationComponent(props) {
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
-    "Set2_Tag",
+    "Set2Tag",
     earing,
     neckwear,
     harm,
@@ -483,7 +483,7 @@ export default function DisplayValidationComponent(props) {
               ...old,
               [name]: value,
             };
-          case "Set2_Tag":
+          case "Set2Tag":
             return {
               ...old,
               [name]: value,
