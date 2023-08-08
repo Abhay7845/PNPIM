@@ -123,7 +123,7 @@ const ReportL1AndL2 = (props) => {
         }
       })
       .catch((error) => console.log("error==>", error));
-  }, []);
+  }, [storeCode]);
 
   const navBarList = [
     {

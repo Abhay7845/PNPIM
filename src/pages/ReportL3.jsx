@@ -78,79 +78,63 @@ const ReportL3 = () => {
       console.log("error==>", error);
     }
   };
+
   useEffect(() => {
-    setImmediate(() => {
-      setLoading(true);
-    });
-
-    setTimeout(() => {
-      let urlReport;
-      switch (reportLabel) {
-        case "Item_Wise_Report":
-          urlReport = `${UrlManager.itemWiseReportL3}${storeCode}`;
-          break;
-        case "NeedState":
-          urlReport = `${UrlManager.SummaryReportL3}${storeCode}/NeedState`;
-          break;
-        case "Collection":
-          urlReport = `${UrlManager.SummaryReportL3}${storeCode}/Collection`;
-          break;
-        case "ItGroup":
-          urlReport = `${UrlManager.SummaryReportL3}${storeCode}/ItGroup`;
-          break;
-        case "Category":
-          urlReport = `${UrlManager.SummaryReportL3}${storeCode}/Category`;
-          break;
-        case "Cancel_Item_List":
-          urlReport = `${UrlManager.canceledItemReportL3}${storeCode}`;
-          break;
-        default:
-          urlReport = urlReport = `${UrlManager.itemWiseReportL3}${storeCode}`;
-          break;
-      }
-
-      axios.get(urlReport).then(
-        (response) => {
-          console.log("response==>", response.data);
-          setImmediate(() => {
-            if (response.data.code === "1000") {
-              setCol(response.data.coloum);
-              setRows(response.data.value);
-              setSwitchEnable(true);
-            } else {
-              setCol([]);
-              setRows([]);
-              setSwitchEnable(true);
-            }
-          });
-        },
-        (error) => {
-          console.log("error==>", error);
+    setLoading(true);
+    let urlReport;
+    switch (reportLabel) {
+      case "Item_Wise_Report":
+        urlReport = `${UrlManager.itemWiseReportL3}${storeCode}`;
+        break;
+      case "NeedState":
+        urlReport = `${UrlManager.SummaryReportL3}${storeCode}/NeedState`;
+        break;
+      case "Collection":
+        urlReport = `${UrlManager.SummaryReportL3}${storeCode}/Collection`;
+        break;
+      case "ItGroup":
+        urlReport = `${UrlManager.SummaryReportL3}${storeCode}/ItGroup`;
+        break;
+      case "Category":
+        urlReport = `${UrlManager.SummaryReportL3}${storeCode}/Category`;
+        break;
+      case "Cancel_Item_List":
+        urlReport = `${UrlManager.canceledItemReportL3}${storeCode}`;
+        break;
+      default:
+        urlReport = urlReport = `${UrlManager.itemWiseReportL3}${storeCode}`;
+        break;
+    }
+    axios
+      .get(urlReport)
+      .then((response) => {
+        if (response.data.code === "1000") {
+          setCol(response.data.coloum);
+          setRows(response.data.value);
+        } else if (response.data.code === "1001") {
+          setCol([]);
+          setRows([]);
         }
-      );
-      axios
-        .get(`${HostManager.mainHostL3}/npim/get/status/L3/${storeCode}`)
-        .then(
-          (response) => {
-            if (response.data.code === "1001") {
-              console.log("response DATA==>", response.data.value);
-            } else {
-              setImmediate(() => {
-                setStatusData(response.data);
-              });
-            }
-          },
-          (error) => {
-            console.log("error==>", error);
-          }
-        );
-    });
-
-    setTimeout(() => {
-      setImmediate(() => {
+        setSwitchEnable(true);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error==>", error);
+      });
+    axios
+      .get(`${HostManager.mainHostL3}/npim/get/status/L3/${storeCode}`)
+      .then((response) => {
+        if (response.data.code === "1000") {
+          setStatusData(response.data);
+        } else if (response.data.code === "1001") {
+          console.log("Data Not Found");
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error==>", error);
         setLoading(false);
       });
-    });
   }, [statusCloserOpener, reportLabel, modification, popupOpen, storeCode]);
 
   const navBarList = [
@@ -178,7 +162,6 @@ const ReportL3 = () => {
     setImmediate(() => {
       setReportLabel(input);
     });
-
     setImmediate(() => {
       setLoading(false);
     });

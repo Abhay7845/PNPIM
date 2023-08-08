@@ -102,7 +102,7 @@ function CustomToolbar(props) {
     }
   };
   return (
-    <>
+    <div>
       <GridToolbarContainer>
         <GridToolbarExport csvOptions={{ fileName: `Npim-${new Date()}` }} />
         <Grid item container className="mx-3">
@@ -169,7 +169,7 @@ function CustomToolbar(props) {
           onyes={props.handelYes}
         />
       </GridToolbarContainer>
-    </>
+    </div>
   );
 }
 const LazyLoadindDataGrid = (props) => {
@@ -217,7 +217,7 @@ const LazyLoadindDataGrid = (props) => {
               ) : (
                 ""
               )}
-              {reportLabel === "Cancel_Item_List" ? (
+              {reportLabel === "Cancel_Item_List" && (
                 <div className="mx-3">
                   <Icon.PencilSquare
                     onClick={() => {
@@ -227,8 +227,6 @@ const LazyLoadindDataGrid = (props) => {
                     className="EditButton"
                   />
                 </div>
-              ) : (
-                ""
               )}
             </>
           );
@@ -281,21 +279,21 @@ const LazyLoadindDataGrid = (props) => {
   const handelSearch = (e) => {
     setSearchValue(e.target.value);
   };
-  console.log("searchValue==>", searchValue);
+
   const DataRows = rows?.filter((eachRow) =>
     eachRow?.itemCode?.includes(searchValue.toUpperCase())
   );
+  const FilttredRows = DataRows.length > 0 ? DataRows : rows;
 
-  console.log("DataRows==>", DataRows);
   return (
-    <>
+    <div>
       <Container maxWidth="xl">
         <Typography align="center" variant="h6" color="secondary">
           {reportLabel.toUpperCase()}
         </Typography>
         <Box className="w-100">
           <DataGrid
-            rows={DataRows}
+            rows={FilttredRows}
             columns={column}
             autoHeight={true}
             rowsPerPageOptions={[50]}
@@ -319,7 +317,7 @@ const LazyLoadindDataGrid = (props) => {
           />
         </Box>
       </Container>
-    </>
+    </div>
   );
 };
 
