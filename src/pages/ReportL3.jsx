@@ -39,7 +39,6 @@ const ReportL3 = () => {
   const [dataRowInformation, setDataRowInformation] = useState({});
   const [showInfo, setShowInfo] = useState(false);
   const [digit, setDigit] = useState(false);
-  const [sizeOption, setSizeOption] = useState([]);
   const [modification, setModification] = useState(true);
   const [switchEnable, setSwitchEnable] = useState(false);
   const [setSelectState, setSetSelectState] = useState([]);
@@ -157,7 +156,6 @@ const ReportL3 = () => {
       setLoading(true);
       setShowInfo(false);
     });
-
     DisplayValidationRunner();
     setImmediate(() => {
       setReportLabel(input);
@@ -166,24 +164,6 @@ const ReportL3 = () => {
       setLoading(false);
     });
   };
-
-  useEffect(() => {
-    axios
-      .get(
-        `https://tanishqdigitalnpim.titan.in:8443/Npim/getSize/502783VWQR1A02`
-      )
-      .then(
-        (response) => {
-          setImmediate(() => {
-            setSizeOption(response.data.data);
-          });
-          console.log(sizeOption);
-        },
-        (error) => {
-          console.log("error==>", error);
-        }
-      );
-  }, [sizeOption]);
 
   function scrollTop() {
     window.scrollTo({ top: "0", behavior: "smooth" });
@@ -277,7 +257,6 @@ const ReportL3 = () => {
       ) {
         TypeSet2 = true;
       }
-
       if (
         digitt === "3" ||
         digitt === "4" ||
@@ -288,16 +267,13 @@ const ReportL3 = () => {
         tegSelect = true;
         setSelect = true;
         Quantity = false;
-        // stoneQuality = false;
       }
-
       return {
         tagSelect: tegSelect ? true : false,
         setSelect: setSelect && setSelectState[0] ? true : false,
         Quantity: Quantity ? true : false,
         tegQuantityRes: tegQuantity ? true : false,
         typeSet2Res: TypeSet2 ? true : false,
-        // findingsRes:findings?true:false,
         stoneQuality: stoneQualityCheck(dataRowInformation) ? true : false,
       };
     } else {
@@ -308,7 +284,6 @@ const ReportL3 = () => {
       if (stoneQualityCheck(dataRowInformation)) {
         stoneQuality = true;
       }
-
       Quantity = true;
       return {
         quantityRes: Quantity ? true : false,
