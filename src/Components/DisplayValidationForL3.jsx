@@ -57,6 +57,7 @@ export default function DisplayValidationComponent(props) {
   const optionForOtherAllSet = [
     "Single_Tag",
     "Separate_Tag",
+    "Set2_Tag",
     earing,
     neckwear,
     harm,
@@ -65,7 +66,6 @@ export default function DisplayValidationComponent(props) {
     finger,
     bangle,
   ];
-  console.log("feedShowState==>", feedShowState);
   const tagsOptions = optionForOtherAllSet.filter((item) => !item === false);
   const optionForSet0 = [
     "Single_Tag",
@@ -221,7 +221,7 @@ export default function DisplayValidationComponent(props) {
 
     return (
       <>
-        {digit === "V" ? (
+        {digit === "V" && (
           <Grid item xs={12} sm={12}>
             <MultiselectUomAndSize
               labelName="Size/UOM/Quantity"
@@ -230,11 +230,9 @@ export default function DisplayValidationComponent(props) {
               CategoryData={feedShowState}
             />
           </Grid>
-        ) : (
-          ""
         )}
 
-        {sizeQuantity ? (
+        {sizeQuantity && (
           <Grid item xs={12} sm={12}>
             <MultiSelectAndInput
               labelName="Size/Quantity"
@@ -244,8 +242,8 @@ export default function DisplayValidationComponent(props) {
               tagOption={tagOption}
             />
           </Grid>
-        ) : null}
-        {cond ? (
+        )}
+        {cond && (
           <Grid item xs={12} sm={12} className="my-2">
             <DropDownMaterialUI
               labelName="Stone Quality"
@@ -253,7 +251,7 @@ export default function DisplayValidationComponent(props) {
               optionsList={stoneOptionList}
             />
           </Grid>
-        ) : null}
+        )}
       </>
     );
   } else if (
@@ -485,6 +483,11 @@ export default function DisplayValidationComponent(props) {
               ...old,
               [name]: value,
             };
+          case "Set2_Tag":
+            return {
+              ...old,
+              [name]: value,
+            };
           case "Only_EARRING":
             return {
               ...old,
@@ -591,9 +594,9 @@ export default function DisplayValidationComponent(props) {
               onRemove={onInternalRemoveChange}
               showCheckbox={true}
               displayValue="lableValue"
-              placeholder="Choose Tag here"
+              placeholder="Choose Tag"
             />
-            <table style={{ width: "100%", margin: 0 }}>
+            <table className="w-100">
               <tbody className="d-flex">
                 {options.map((row, index) => (
                   <tr
@@ -884,7 +887,7 @@ export default function DisplayValidationComponent(props) {
               onChangeHandler={quantityResHandler}
               allDataFromValidation={allDataFromValidation}
             />
-            {feedShowState.findings ? (
+            {feedShowState.findings && (
               <Grid item xs={12} sm={12}>
                 <DropDownMaterialUI
                   labelName="Findings"
@@ -892,8 +895,6 @@ export default function DisplayValidationComponent(props) {
                   optionsList={findingsOptions}
                 />
               </Grid>
-            ) : (
-              ""
             )}
           </Grid>
         ) : (

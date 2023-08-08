@@ -1026,7 +1026,7 @@ function MultiSelectAndInput(props) {
   };
 
   return (
-    <>
+    <div>
       <div className={classes.drop_multi}>
         <b className="text-primary">{labelName}</b>
         <Multiselect
@@ -1064,14 +1064,14 @@ function MultiSelectAndInput(props) {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
 
 function ProductDetailsTabularL3(props) {
   const classes = useStyles();
   return (
-    <>
+    <div>
       <h5 className="text-center my-1">
         <b>Product Specification</b>
       </h5>
@@ -1189,7 +1189,7 @@ function ProductDetailsTabularL3(props) {
           ) : null}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
 
@@ -1213,14 +1213,11 @@ function SmallDataTable(props) {
     ) {
       if (props.childNodesE || props.childNodesN) {
         return (
-          <>
-            <table
-              className="table table-bordered"
-              style={{ marginLeft: "-5px" }}
-            >
+          <div>
+            <table className="table table-bordered mt-3">
               <thead>
                 <tr>
-                  <th scope="col">CATEGORY</th>
+                  <th scope="col">CATEGORY HERE</th>
                   <th scope="col">StdWt</th>
                   <th scope="col">UCP</th>
                 </tr>
@@ -1291,7 +1288,7 @@ function SmallDataTable(props) {
                 )}
               </tbody>
             </table>
-          </>
+          </div>
         );
       } else {
         return null;
@@ -1354,8 +1351,7 @@ function DynamicMultiSelectAndInput(props) {
         };
       }
     }
-    console.log("get data ", getData);
-
+    console.log("get data==>", getData);
     return props.onChangeHandler(getData);
   };
 

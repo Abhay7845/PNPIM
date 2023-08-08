@@ -20,7 +20,7 @@ const ProductDetailsTabular = (props) => {
   console.log("propsInfo==>", props.information);
   const classes = useStyles();
   return (
-    <>
+    <div>
       <table className="w-100">
         <tbody>
           <tr>
@@ -79,7 +79,7 @@ const ProductDetailsTabular = (props) => {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 
