@@ -130,7 +130,7 @@ function CustomToolbar(props) {
                 </span>
               </h6>
             </Grid>
-            <Grid item container justify="flex-end">
+            <Grid item container justifyContent="flex-end">
               <Button
                 variant="contained"
                 color="primary"

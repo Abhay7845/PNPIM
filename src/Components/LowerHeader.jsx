@@ -162,7 +162,7 @@ const LowerHeader = (props) => {
                   direction="column"
                   alignItems="center"
                   maxWidth="xs"
-                  justify="center"
+                  justifyContent="center"
                   className={classes.projectLogo}
                 >
                   <TextField
