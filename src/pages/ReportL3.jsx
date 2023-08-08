@@ -111,14 +111,14 @@ const ReportL3 = () => {
 
       axios.get(urlReport).then(
         (response) => {
-          console.log("responseReport==>", response);
+          console.log("response==>", response.data);
           setImmediate(() => {
             if (response.data.code === "1000") {
               setCol(response.data.coloum);
               setRows(response.data.value);
               setSwitchEnable(true);
             } else {
-              setCol(response.data.coloum);
+              setCol([]);
               setRows([]);
               setSwitchEnable(true);
             }

@@ -281,18 +281,12 @@ const LazyLoadindDataGrid = (props) => {
   const handelSearch = (e) => {
     setSearchValue(e.target.value);
   };
-  const DataRows =
-    reportLabel === "Item_Wise_Report" ||
-    "NeedState" ||
-    "Collection" ||
-    "ItGroup" ||
-    "Category" ||
-    "Cancel_Item_List"
-      ? rows?.filter((eachRow) =>
-          eachRow?.itemCode?.includes(searchValue.toUpperCase())
-        )
-      : rows;
+  console.log("searchValue==>", searchValue);
+  const DataRows = rows?.filter((eachRow) =>
+    eachRow?.itemCode?.includes(searchValue.toUpperCase())
+  );
 
+  console.log("DataRows==>", DataRows);
   return (
     <>
       <Container maxWidth="xl">

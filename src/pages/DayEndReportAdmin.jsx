@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useState } from "react";
 import {
   Container,
@@ -270,15 +272,14 @@ const DayEndReportAdmin = () => {
     <>
       <CssBaseline />
       <Drawer
-        anchor="left"
+        anchor='left'
         open={barOpener}
         onClose={() => {
           setImmediate(() => {
             setBarOpener(false);
           });
-        }}
-      >
-        <SideAppBar navBarList={navBarList} pageName="admin" />
+        }}>
+        <SideAppBar navBarList={navBarList} pageName='admin' />
       </Drawer>
       <Grid item xs={12} sm={12}>
         <UpperHeader itemCode={123} storeCode={storeCode} />
@@ -298,63 +299,62 @@ const DayEndReportAdmin = () => {
       ) : (
         ""
       )}
-      <Grid className="ReportGenerateStyle">
-        <Grid item xs={6} sm={3} className="mx-2 Level_Style">
+      <Grid className='ReportGenerateStyle'>
+        <Grid item xs={6} sm={3} className='mx-2 Level_Style'>
           <SelectOfMUI
-            label="Level"
+            label='Level'
             optionList={levelDropDown}
             selectHandleChange={onChangeInputHandler}
             value={endDayReportInput.level}
-            name="level"
+            name='level'
           />
         </Grid>
         <br />
         {endDayReportInput.level === "HitRate Report" ? (
-          <Grid item xs={6} sm={3} className="mx-2 Parameter_style">
+          <Grid item xs={6} sm={3} className='mx-2 Parameter_style'>
             <SelectOfMUI
-              lable="Parameter"
+              label='Parameter'
               optionList={parameterOption}
               selectHandleChange={onChangeInputHandler}
               value={endDayReportInput.parameter}
-              name="parameter"
+              name='parameter'
             />
           </Grid>
         ) : (
           <>
-            <Grid item xs={6} sm={3} className="Parameter_style">
+            <Grid item xs={6} sm={3} className='Parameter_style'>
               <TextFieldOfMUI
-                lable="From"
-                type="date"
+                lable='From'
+                type='date'
                 textFieldHandlerChange={onChangeInputHandler}
                 value={endDayReportInput.fromDate}
-                name="fromDate"
-                placeholder="Select Date"
+                name='fromDate'
+                placeholder='Select Date'
               />
             </Grid>
             <br />
-            <Grid item xs={6} sm={3} className="mx-2 Parameter_style">
+            <Grid item xs={6} sm={3} className='mx-2 Parameter_style'>
               <TextFieldOfMUI
-                lable="To"
-                type="date"
+                lable='To'
+                type='date'
                 textFieldHandlerChange={onChangeInputHandler}
                 value={endDayReportInput.toDate}
-                name="toDate"
+                name='toDate'
               />
             </Grid>
           </>
         )}
         <br />
-        <Grid className="d-flex mx-1">
+        <Grid className='d-flex mx-1'>
           {endDayReportInput.level === "HitRate Report" ? (
             <Button
-              color="primary"
-              variant="contained"
-              onClick={validateParameter}
-            >
+              color='primary'
+              variant='contained'
+              onClick={validateParameter}>
               GENERATE REPORT
             </Button>
           ) : (
-            <Button color="primary" variant="contained" onClick={validateFiled}>
+            <Button color='primary' variant='contained' onClick={validateFiled}>
               GENERATE REPORT
             </Button>
           )}
@@ -362,12 +362,12 @@ const DayEndReportAdmin = () => {
       </Grid>
       {endDayReportInput.level === "L1/L2" ||
       endDayReportInput.level === "L3" ? (
-        <Container maxWidth="xl" className="my-3">
+        <Container maxWidth='xl' className='my-3'>
           {endDayReport.col[0] && endDayReport.rows[0] ? (
             <DataGridForAdmin
               col={endDayReport.col}
               rows={endDayReport.rows}
-              reportLable="END DAY REPORTS"
+              reportLable='END DAY REPORTS'
             />
           ) : null}
         </Container>
@@ -381,51 +381,50 @@ const DayEndReportAdmin = () => {
       ) : (
         <>
           {ParameterData ? (
-            <div className="container my-4">
+            <div className='container my-4'>
               <TableContainer>
                 <Table
-                  id="table-to-xls"
-                  className="table-bordered ml-0"
-                  style={{ marginTop: "-1%", marginBottom: "8px" }}
-                >
-                  <TableHead className="bg-primary">
+                  id='table-to-xls'
+                  className='table-bordered ml-0'
+                  style={{ marginTop: "-1%", marginBottom: "8px" }}>
+                  <TableHead className='bg-primary'>
                     {endDayReportInput.parameter === "Region" ? (
                       <TableRow>
                         <TableCell>
-                          <b className="text-light">REGION</b>
+                          <b className='text-light'>REGION</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">ITEM CODE</b>
+                          <b className='text-light'>ITEM CODE</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">SALEABLE</b>
+                          <b className='text-light'>SALEABLE</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">NOT SALEABLE</b>
+                          <b className='text-light'>NOT SALEABLE</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">TOTAL COUNT</b>
+                          <b className='text-light'>TOTAL COUNT</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">HIT RATE</b>
+                          <b className='text-light'>HIT RATE</b>
                         </TableCell>
                       </TableRow>
                     ) : (
                       <TableRow>
                         <TableCell>
-                          <b className="text-light">ITEM CODE</b>
+                          <b className='text-light'>ITEM CODE</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">SALEABLE</b>
+                          <b className='text-light'>SALEABLE</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">NOT SALEABLE</b>
+                          <b className='text-light'>NOT SALEABLE</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">TOTAL COUNT</b>
+                          <b className='text-light'>TOTAL COUNT</b>
                         </TableCell>
                         <TableCell>
-                          <b className="text-light">HIT RATE</b>
+                          <b className='text-light'>HIT RATE</b>
                         </TableCell>
                       </TableRow>
                     )}
@@ -461,18 +460,18 @@ const DayEndReportAdmin = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
-              <div className="d-flex justify-content-end my-2">
+              <div className='d-flex justify-content-end my-2'>
                 <ReactHTMLTableToExcel
-                  id="test-table-xls-button"
-                  className="excelButton"
-                  table="table-to-xls"
+                  id='test-table-xls-button'
+                  className='excelButton'
+                  table='table-to-xls'
                   filename={endDayReportInput.parameter}
-                  sheet="tablexls"
-                  buttonText="DOWNLOAD"
+                  sheet='tablexls'
+                  buttonText='DOWNLOAD'
                 />
                 <TablePagination
                   rowsPerPageOptions={[50, 100, 150, ParameterData.length]}
-                  component="div"
+                  component='div'
                   count={ParameterData.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
