@@ -295,7 +295,6 @@ const IndentL3 = () => {
     //   }
     // }
     let stdUcpNotSelectData;
-    ////API HITTING START//
     if (!msg.status && Object.keys(msg).length > 0) {
       Error(msg.message);
     } else {
@@ -336,9 +335,7 @@ const IndentL3 = () => {
       console.log("inputData==>", inputData);
       DisplayValidationRunner();
       setTimeout(() => {
-        setImmediate(() => {
-          setLoading(true);
-        });
+        setLoading(true);
         axios
           .post(
             `${HostManager.mainHostL3}/npim/insert/responses/from/L3`,
@@ -874,7 +871,7 @@ const IndentL3 = () => {
                           aria-hidden="true"
                         />
                       ) : (
-                        <span>Submit</span>
+                        <span>Submit here</span>
                       )}
                     </Button>
                   </div>
