@@ -24,6 +24,18 @@ export default function DisplayValidationComponent(props) {
   const [sizeRow, setSizeRow] = useState();
   const [option, setOption] = useState([]);
   const [tagOption, setTagOption] = useState("");
+  const [tagName, setTagName] = useState([]);
+  const tagNameValue = tagName.map((tag) => {
+    return {
+      size: tag,
+      quantity: "",
+    };
+  });
+  useEffect(() => {
+    if (tagName.length > 0) {
+      tegQuantityResHandler(tagNameValue);
+    }
+  }, [tagName.length]);
 
   const {
     digit,
@@ -45,7 +57,7 @@ export default function DisplayValidationComponent(props) {
     findingsResHandler,
   } = props;
 
-  const finger = !feedShowState.childNodeF ? "" : "Only_FINGER_RING";
+  const finger = !feedShowState.childNodeF ? "" : "Only_FINGERRING";
   const harm = !feedShowState.childNodeH ? "" : "Only_HARAM";
   const Tikka = !feedShowState.childNodeK ? "" : "Only_TIKKA";
   const other = !feedShowState.childNodeO ? "" : "Only_OTHER";
@@ -228,6 +240,7 @@ export default function DisplayValidationComponent(props) {
               optionsList={SizeState}
               sizeUomQuantityResHandler={sizeUomQuantityResHandler}
               CategoryData={feedShowState}
+              tegQuantityResHandler={tegQuantityResHandler}
             />
           </Grid>
         )}
@@ -322,7 +335,7 @@ export default function DisplayValidationComponent(props) {
         lableValue: element,
       };
     });
-    const optionsOnlyF = ["Only_FINGER_RING"];
+    const optionsOnlyF = ["Only_FINGERRING"];
     const optionF = optionsOnlyF.map((element) => {
       return {
         valueData: element,
@@ -538,7 +551,7 @@ export default function DisplayValidationComponent(props) {
               ...old,
               [name]: value,
             };
-          case "Only_FINGER_RING":
+          case "Only_FINGERRING":
             return {
               ...old,
               [name]: value,
@@ -548,6 +561,7 @@ export default function DisplayValidationComponent(props) {
     };
     const onInternalSelectChange = (selectedList, selectedItem) => {
       console.log("lableValue1234==>", selectedItem.lableValue);
+      setTagName([...tagName, selectedItem.lableValue]);
       enableRows(selectedItem.lableValue, true);
     };
     const onInternalRemoveChange = (selectedList, removedItem) => {
@@ -582,7 +596,7 @@ export default function DisplayValidationComponent(props) {
     };
 
     return (
-      <>
+      <div className="w-100">
         {tegSelect ? (
           <Grid item xs={12} sm={12}>
             <Typography align="center" color="primary" className="my-1">
@@ -613,7 +627,7 @@ export default function DisplayValidationComponent(props) {
                       id={`${row.lableValue}sq`}
                       name={`${row.lableValue}sq`}
                       className={
-                        row.lableValue === "Only_FINGER_RING" ||
+                        row.lableValue === "Only_FINGERRING" ||
                         row.lableValue === "Only_BANGLE" ||
                         row.lableValue === "Only_MANGALSUTRA"
                           ? classes.inputArea
@@ -741,6 +755,7 @@ export default function DisplayValidationComponent(props) {
                   optionsList={ChildNodeV}
                   sizeUomQuantityResHandler={sizeUomQuantityResHandler}
                   CategoryData={feedShowState}
+                  tegQuantityResHandler={tegQuantityResHandler}
                 />
               </tr>
             ))}
@@ -775,7 +790,7 @@ export default function DisplayValidationComponent(props) {
             />
           </Grid>
         ) : null}
-      </>
+      </div>
     );
   } else {
     let findings, stoneQuality, Quantity;

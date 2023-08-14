@@ -47,6 +47,7 @@ const IndentL3 = () => {
     quantityRes: "",
     findingsRes: "",
   });
+
   const [productDetails, setProductDetails] = useState({
     storeCode: storeCode,
     collection: "ALL",
@@ -499,7 +500,6 @@ const IndentL3 = () => {
   }
 
   function sizeUomQuantityResHandler(sizeUomQuantityData) {
-    allDataChangeHandler();
     setImmediate(() => {
       setAllDataFromValidation({
         sizeQuantityRes: allDataFromValidation.sizeQuantityRes,
@@ -871,7 +871,7 @@ const IndentL3 = () => {
                           aria-hidden="true"
                         />
                       ) : (
-                        <span>Submit here</span>
+                        <span>Submit</span>
                       )}
                     </Button>
                   </div>
