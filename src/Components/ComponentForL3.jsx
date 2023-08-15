@@ -411,7 +411,6 @@ function MultiselectUomAndSize(props) {
         };
       }
     }
-    tegQuantityResHandler();
     return sizeUomQuantityResHandler(getData);
   };
 
