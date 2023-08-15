@@ -115,10 +115,8 @@ export default function DisplayValidationComponent(props) {
   }, []);
 
   useEffect(() => {
-    if (tagName.length > 0) {
-      tegQuantityResHandler(tagNameValue);
-    }
-  }, [tagName.length]);
+    tegQuantityResHandler(tagNameValue);
+  }, [tagNameValue.length]);
   const options = option.map((element) => {
     return {
       valueData: element,
@@ -583,8 +581,8 @@ export default function DisplayValidationComponent(props) {
           };
         }
       }
-      console.log("tegQuantityResHandler==>", getData);
-      return tegQuantityResHandler(getData);
+      const tagData = [...tagNameValue, ...getData];
+      return tegQuantityResHandler(tagData);
     };
     const enableRow = (lableValue) => {
       for (let rowName in sizeRow) {

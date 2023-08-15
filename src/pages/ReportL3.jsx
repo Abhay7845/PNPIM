@@ -56,6 +56,8 @@ const ReportL3 = () => {
     quantityRes: "",
     findingsRes: "",
   });
+  console.log("allDataFromValidation==>", allDataFromValidation);
+
   let seventhDigits;
   const [popupOpen, setPopupOpen] = useState(false);
   const [isConfirmed, setsConfirmed] = useState(false);

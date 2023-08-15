@@ -169,7 +169,6 @@ function MultiselectUomAndSize(props) {
     sizeUomQuantityResHandler,
     findingsResHandler,
     tegQuantityRes,
-    tegQuantityResHandler,
   } = props;
   const digit = CategoryData.itemCode[6];
   const options = optionsList.map((element, index) => {
@@ -411,6 +410,7 @@ function MultiselectUomAndSize(props) {
         };
       }
     }
+    console.log("getData==>", getData);
     return sizeUomQuantityResHandler(getData);
   };
 
