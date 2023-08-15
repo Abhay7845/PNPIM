@@ -47,7 +47,7 @@ const IndentL3 = () => {
     quantityRes: "",
     findingsRes: "",
   });
-
+  console.log("allDataFromValidation==>", allDataFromValidation);
   const [productDetails, setProductDetails] = useState({
     storeCode: storeCode,
     collection: "ALL",

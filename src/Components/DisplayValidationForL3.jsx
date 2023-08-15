@@ -31,11 +31,6 @@ export default function DisplayValidationComponent(props) {
       quantity: "",
     };
   });
-  useEffect(() => {
-    if (tagName.length > 0) {
-      tegQuantityResHandler(tagNameValue);
-    }
-  }, [tagName.length]);
 
   const {
     digit,
@@ -119,6 +114,11 @@ export default function DisplayValidationComponent(props) {
     }
   }, []);
 
+  useEffect(() => {
+    if (tagName.length > 0) {
+      tegQuantityResHandler(tagNameValue);
+    }
+  }, [tagName.length]);
   const options = option.map((element) => {
     return {
       valueData: element,
