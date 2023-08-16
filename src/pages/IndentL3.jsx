@@ -346,7 +346,6 @@ const IndentL3 = () => {
           .then((response) => {
             let mailSms = "";
             if (response.data.code === "1001") {
-              console.log("responseData==>", response.data);
               if (
                 productDetails.collection === "ALL" ||
                 productDetails.consumerBase === "ALL" ||
@@ -372,7 +371,6 @@ const IndentL3 = () => {
               });
             } else {
               if (response.data.code === "1000") {
-                console.log("responseData==>", response.data);
                 document.getElementById("result").style.visibility = "hidden";
                 setAlertPopupStatus({
                   status: true,

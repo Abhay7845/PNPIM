@@ -581,8 +581,7 @@ export default function DisplayValidationComponent(props) {
           };
         }
       }
-      const tagData = [...tagNameValue, ...getData];
-      return tegQuantityResHandler(tagData);
+      return tegQuantityResHandler(getData);
     };
     const enableRow = (lableValue) => {
       for (let rowName in sizeRow) {
